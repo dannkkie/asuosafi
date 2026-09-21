@@ -8,7 +8,6 @@ import {
   UserCheck,
   Shield,
   CheckCircle,
-  AlertTriangle,
   ArrowRight,
   ArrowLeft,
   Lock,
@@ -108,20 +107,20 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-[#0E1524] border border-white/[0.1] rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-100 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
+      <div className="bg-white border border-slate-200 rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
-        <div className="bg-[#0B0F17] border-b border-white/[0.08] p-4 sm:p-5 flex items-center justify-between">
+        <div className="bg-slate-50 border-b border-slate-200 p-4 sm:p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
               <Droplet className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base sm:text-lg text-white font-sans">
+              <h3 className="font-bold text-base sm:text-lg text-slate-900 font-sans">
                 {t.reportWaterIssue}
               </h3>
-              <p className="text-xs text-slate-400 font-mono">
+              <p className="text-xs text-slate-500 font-mono">
                 Step {step} of 4 • Decentralized Field Audit
               </p>
             </div>
@@ -129,33 +128,33 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Step Progress Bar */}
-        <div className="grid grid-cols-4 h-1 bg-[#141D2D]">
-          <div className={`h-full transition-all ${step >= 1 ? 'bg-emerald-500' : 'bg-transparent'}`} />
-          <div className={`h-full transition-all ${step >= 2 ? 'bg-emerald-500' : 'bg-transparent'}`} />
-          <div className={`h-full transition-all ${step >= 3 ? 'bg-emerald-500' : 'bg-transparent'}`} />
-          <div className={`h-full transition-all ${step >= 4 ? 'bg-emerald-500' : 'bg-transparent'}`} />
+        <div className="grid grid-cols-4 h-1 bg-slate-100">
+          <div className={`h-full transition-all ${step >= 1 ? 'bg-emerald-600' : 'bg-transparent'}`} />
+          <div className={`h-full transition-all ${step >= 2 ? 'bg-emerald-600' : 'bg-transparent'}`} />
+          <div className={`h-full transition-all ${step >= 3 ? 'bg-emerald-600' : 'bg-transparent'}`} />
+          <div className={`h-full transition-all ${step >= 4 ? 'bg-emerald-600' : 'bg-transparent'}`} />
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-200 bg-[#06090F]/90">
+        <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-700 bg-white">
           
           {/* STEP 1: Water Location & Source Type */}
           {step === 1 && (
             <div className="space-y-4 animate-in fade-in duration-150">
-              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-800 flex items-center gap-1.5">
                 <MapPin className="h-4 w-4" />
                 1. Water Source Identification
               </h4>
 
               <div>
-                <label className="text-xs text-slate-300 font-medium block mb-1.5">
+                <label className="text-xs text-slate-700 font-medium block mb-1.5">
                   Water Body / Source Name *
                 </label>
                 <input
@@ -164,13 +163,13 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                   placeholder="e.g. Pra River - Dunkwa Upper Crossing"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#141D2D] border border-white/[0.08] rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-300 font-medium block mb-1.5">
+                  <label className="text-xs text-slate-700 font-medium block mb-1.5">
                     Town / Settlement *
                   </label>
                   <input
@@ -179,18 +178,18 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                     placeholder="e.g. Dunkwa-on-Offin"
                     value={community}
                     onChange={(e) => setCommunity(e.target.value)}
-                    className="w-full bg-[#141D2D] border border-white/[0.08] rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                    className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-slate-300 font-medium block mb-1.5">
+                  <label className="text-xs text-slate-700 font-medium block mb-1.5">
                     District Assembly
                   </label>
                   <select
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
-                    className="w-full bg-[#141D2D] border border-white/[0.08] rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 cursor-pointer"
+                    className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-400 cursor-pointer"
                   >
                     <option value="Upper Denkyira East">Upper Denkyira East (Central)</option>
                     <option value="Abuakwa South">Abuakwa South (Eastern)</option>
@@ -202,7 +201,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
               </div>
 
               <div>
-                <label className="text-xs text-slate-300 font-medium block mb-1.5">
+                <label className="text-xs text-slate-700 font-medium block mb-1.5">
                   Source Infrastructure Type
                 </label>
                 <div className="grid grid-cols-3 gap-2">
@@ -213,8 +212,8 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                       onClick={() => setSourceType(type)}
                       className={`p-2 rounded-lg text-xs font-mono uppercase tracking-wider border transition-all cursor-pointer ${
                         sourceType === type
-                          ? 'bg-emerald-600 text-white border-emerald-500 font-semibold shadow-sm'
-                          : 'bg-[#141D2D] text-slate-400 border-white/[0.06] hover:bg-[#1B263B]'
+                          ? 'bg-slate-900 text-white border-slate-900 font-bold shadow-sm'
+                          : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
                       }`}
                     >
                       {type}
@@ -228,13 +227,13 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
           {/* STEP 2: Physical & Chemical Sensory Parameters */}
           {step === 2 && (
             <div className="space-y-4 animate-in fade-in duration-150">
-              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-800 flex items-center gap-1.5">
                 <Droplet className="h-4 w-4" />
                 2. Physical Clarity & Chemical Sensors
               </h4>
 
               <div>
-                <label className="text-xs text-slate-300 font-medium block mb-1.5">
+                <label className="text-xs text-slate-700 font-medium block mb-1.5">
                   Observed Water Color
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -250,8 +249,8 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                       onClick={() => setVisualColor(c.id as any)}
                       className={`p-2.5 rounded-lg text-xs font-medium border transition-all text-center cursor-pointer ${
                         visualColor === c.id
-                          ? 'bg-amber-600 text-white border-amber-500 font-semibold shadow-sm'
-                          : 'bg-[#141D2D] text-slate-400 border-white/[0.06] hover:bg-[#1B263B]'
+                          ? 'bg-amber-800 text-white border-amber-900 font-bold shadow-sm'
+                          : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
                       }`}
                     >
                       {c.label}
@@ -262,9 +261,9 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
 
               <div>
                 <div className="flex justify-between items-center mb-1.5">
-                  <label className="text-xs text-slate-300 font-medium">
+                  <label className="text-xs text-slate-700 font-medium">
                     Estimated Turbidity:{' '}
-                    <span className="text-amber-400 font-mono font-bold">{turbidityNtu} NTU</span>
+                    <span className="text-amber-800 font-mono font-bold">{turbidityNtu} NTU</span>
                   </label>
                   <span className="text-[10px] font-mono text-slate-500">WHO Safe: &lt;5 NTU</span>
                 </div>
@@ -275,24 +274,24 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                   step="10"
                   value={turbidityNtu}
                   onChange={(e) => setTurbidityNtu(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                 />
                 <div className="flex justify-between text-[10px] font-mono text-slate-500 mt-1">
                   <span>Potable (&lt;5 NTU)</span>
                   <span>Moderate (50–200)</span>
-                  <span className="text-red-400 font-bold">Critical Toxic (&gt;800)</span>
+                  <span className="text-red-700 font-bold">Critical Hazard (&gt;800)</span>
                 </div>
               </div>
 
-              <div className="space-y-2 pt-2 border-t border-white/[0.06]">
+              <div className="space-y-2 pt-2 border-t border-slate-200">
                 <label className="flex items-center gap-2.5 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={chemicalOdor}
                     onChange={(e) => setChemicalOdor(e.target.checked)}
-                    className="rounded bg-[#141D2D] border-white/[0.1] text-emerald-500 focus:ring-0 cursor-pointer"
+                    className="rounded bg-white border-slate-300 text-emerald-700 focus:ring-0 cursor-pointer"
                   />
-                  <span className="text-xs text-slate-300">
+                  <span className="text-xs text-slate-700">
                     Chemical smell or fuel odor detected near water surface
                   </span>
                 </label>
@@ -302,9 +301,9 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                     type="checkbox"
                     checked={upstreamExcavators}
                     onChange={(e) => setUpstreamExcavators(e.target.checked)}
-                    className="rounded bg-[#141D2D] border-white/[0.1] text-emerald-500 focus:ring-0 cursor-pointer"
+                    className="rounded bg-white border-slate-300 text-emerald-700 focus:ring-0 cursor-pointer"
                   />
-                  <span className="text-xs text-slate-300">
+                  <span className="text-xs text-slate-700">
                     Active mining excavators or Changfa wash plants observed upstream
                   </span>
                 </label>
@@ -315,41 +314,41 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
           {/* STEP 3: Photo Evidence Upload & EXIF Verification */}
           {step === 3 && (
             <div className="space-y-4 animate-in fade-in duration-150">
-              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-800 flex items-center gap-1.5">
                 <Camera className="h-4 w-4" />
                 3. Photo Evidence & EXIF Verification
               </h4>
 
-              <div className="border border-dashed border-white/[0.15] hover:border-emerald-500/50 rounded-xl p-6 text-center bg-[#141D2D]/40 transition-colors">
+              <div className="border border-dashed border-slate-300 hover:border-slate-400 rounded-xl p-6 text-center bg-slate-50/50 transition-colors">
                 {photoPreview ? (
                   <div className="space-y-3">
                     <img
                       src={photoPreview}
                       alt="Water preview"
-                      className="max-h-40 mx-auto rounded-lg object-cover border border-white/[0.1]"
+                      className="max-h-40 mx-auto rounded-lg object-cover border border-slate-200"
                     />
-                    <p className="text-[11px] text-emerald-400 font-mono font-medium flex items-center justify-center gap-1">
+                    <p className="text-[11px] text-emerald-700 font-mono font-medium flex items-center justify-center gap-1">
                       <CheckCircle className="h-3.5 w-3.5" />
                       Client-side compressed & verified
                     </p>
                     <button
                       type="button"
                       onClick={() => setPhotoPreview(null)}
-                      className="text-xs text-red-400 hover:underline cursor-pointer"
+                      className="text-xs text-red-700 hover:underline cursor-pointer"
                     >
                       Remove and re-upload
                     </button>
                   </div>
                 ) : (
                   <div>
-                    <Camera className="h-8 w-8 text-slate-500 mx-auto mb-2" />
-                    <p className="text-xs font-medium text-slate-200">
+                    <Camera className="h-8 w-8 text-slate-400 mx-auto mb-2" />
+                    <p className="text-xs font-medium text-slate-800">
                       Snap or upload photo of the water point
                     </p>
                     <p className="text-[10px] text-slate-500 mt-1">
                       GPS coordinates and timestamps are automatically verified to prevent false reporting
                     </p>
-                    <label className="mt-3 inline-block px-4 py-1.5 rounded-lg text-xs font-semibold bg-[#141D2D] hover:bg-[#1B263B] text-slate-200 cursor-pointer border border-white/[0.08] transition-colors">
+                    <label className="mt-3 inline-block px-4 py-1.5 rounded-lg text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 cursor-pointer border border-slate-200 shadow-sm transition-colors">
                       Browse File
                       <input
                         type="file"
@@ -367,21 +366,21 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
           {/* STEP 4: Multi-Witness Attestation & Whistleblower Privacy */}
           {step === 4 && (
             <div className="space-y-4 animate-in fade-in duration-150">
-              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <h4 className="font-bold text-xs uppercase font-mono tracking-wider text-emerald-800 flex items-center gap-1.5">
                 <Shield className="h-4 w-4" />
                 4. Multi-Witness Attestation & Whistleblower Privacy
               </h4>
 
               {/* Anonymous Whistleblower Switch */}
-              <div className="bg-[#141D2D] border border-white/[0.06] rounded-xl p-3.5">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Lock className="h-4 w-4 text-amber-400 shrink-0" />
+                    <Lock className="h-4 w-4 text-amber-700 shrink-0" />
                     <div>
-                      <span className="text-xs font-semibold text-white block">
+                      <span className="text-xs font-semibold text-slate-900 block">
                         {t.anonymousToggle}
                       </span>
-                      <span className="text-[10px] text-slate-400 block">
+                      <span className="text-[10px] text-slate-500 block">
                         Protects your identity under Ghana Whistleblower Protection Act, 2006 (Act 720)
                       </span>
                     </div>
@@ -390,13 +389,13 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                     type="checkbox"
                     checked={isAnonymous}
                     onChange={(e) => setIsAnonymous(e.target.checked)}
-                    className="h-4 w-4 rounded bg-slate-900 border-white/[0.1] text-emerald-500 focus:ring-0 cursor-pointer"
+                    className="h-4 w-4 rounded bg-white border-slate-300 text-emerald-700 focus:ring-0 cursor-pointer"
                   />
                 </div>
 
                 {!isAnonymous && (
-                  <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                    <label className="text-[11px] text-slate-400 block mb-1">
+                  <div className="mt-3 pt-3 border-t border-slate-200">
+                    <label className="text-[11px] text-slate-600 block mb-1">
                       Observer Name & Official Role
                     </label>
                     <input
@@ -404,19 +403,19 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                       value={reporterName}
                       onChange={(e) => setReporterName(e.target.value)}
                       placeholder="e.g. Kwabena Mensah (Clinic Nurse)"
-                      className="w-full bg-[#0B0F17] border border-white/[0.08] rounded-lg p-2 text-xs text-white"
+                      className="w-full bg-white border border-slate-200 rounded-lg p-2 text-xs text-slate-900"
                     />
                   </div>
                 )}
               </div>
 
               {/* Co-Witness Attestation */}
-              <div className="bg-[#141D2D] border border-white/[0.06] rounded-xl p-3.5 space-y-2">
-                <span className="text-xs font-semibold text-slate-200 flex items-center gap-1.5">
-                  <UserCheck className="h-4 w-4 text-emerald-400" />
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2">
+                <span className="text-xs font-semibold text-slate-800 flex items-center gap-1.5">
+                  <UserCheck className="h-4 w-4 text-emerald-700" />
                   Independent Corroborating Witness (Consensus Gate)
                 </span>
-                <p className="text-[10px] text-slate-400">
+                <p className="text-[10px] text-slate-500">
                   Required to prevent false alerts: add an Assembly member, local elder, teacher, or water committee member who observed this condition.
                 </p>
                 <div className="grid grid-cols-2 gap-2 mt-2">
@@ -426,7 +425,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                     placeholder="Witness Name"
                     value={witness1Name}
                     onChange={(e) => setWitness1Name(e.target.value)}
-                    className="bg-[#0B0F17] border border-white/[0.08] rounded-lg p-2 text-xs text-white"
+                    className="bg-white border border-slate-200 rounded-lg p-2 text-xs text-slate-900"
                   />
                   <input
                     type="text"
@@ -434,7 +433,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
                     placeholder="Organization / Office"
                     value={witness1Org}
                     onChange={(e) => setWitness1Org(e.target.value)}
-                    className="bg-[#0B0F17] border border-white/[0.08] rounded-lg p-2 text-xs text-white"
+                    className="bg-white border border-slate-200 rounded-lg p-2 text-xs text-slate-900"
                   />
                 </div>
               </div>
@@ -442,12 +441,12 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
           )}
 
           {/* Form Navigation Controls */}
-          <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between gap-3">
+          <div className="pt-4 border-t border-slate-200 flex items-center justify-between gap-3">
             {step > 1 ? (
               <button
                 type="button"
                 onClick={() => setStep(step - 1)}
-                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-[#141D2D] hover:bg-[#1B263B] text-slate-200 border border-white/[0.08] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-colors cursor-pointer"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>Back</span>
@@ -460,7 +459,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep(step + 1)}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all cursor-pointer active:scale-95"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all cursor-pointer active:scale-95"
               >
                 <span>Continue</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -469,7 +468,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all cursor-pointer active:scale-95 disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all cursor-pointer active:scale-95 disabled:opacity-50"
               >
                 {submitting ? (
                   <span>Hashing to Ledger...</span>

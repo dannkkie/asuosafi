@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { WaterPoint, MiningConcession } from '@/types';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Navigation, MapPin, Layers, Crosshair } from 'lucide-react';
+import { Crosshair } from 'lucide-react';
 
 interface WaterMapProps {
   waterPoints: WaterPoint[];
@@ -99,43 +99,46 @@ export const WaterMap: React.FC<WaterMapProps> = ({
       const isSafe = point.currentStatus === 'safe';
       const isSelected = selectedWaterPoint?.id === point.id;
 
-      const markerColor = isToxic ? '#ef4444' : isSafe ? '#10b981' : '#f59e0b';
-      const ringColor = isToxic ? 'rgba(239, 68, 68, 0.4)' : isSafe ? 'rgba(16, 185, 129, 0.4)' : 'rgba(245, 158, 11, 0.4)';
+      // Natural, grounded tones (zero neon!)
+      const markerColor = isToxic ? '#b91c1c' : isSafe ? '#15803d' : '#b45309';
+      const badgeBg = isToxic ? '#fee2e2' : isSafe ? '#dcfce7' : '#fef3c7';
+      const badgeText = isToxic ? '#991b1b' : isSafe ? '#166534' : '#92400e';
+      const statusLabel = isToxic ? 'CRITICAL HAZARD' : isSafe ? 'POTABLE SAFE' : 'CAUTION';
 
-      // Precision SVG Marker Pin
+      // Tactile SVG Marker Pin
       const customIcon = L.divIcon({
         className: 'custom-water-marker',
         html: `
-          <div style="position: relative; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-            ${isSelected ? `<div style="position: absolute; width: 44px; height: 44px; border-radius: 9999px; background-color: ${ringColor}; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>` : ''}
-            <div style="position: relative; width: 32px; height: 32px; border-radius: 9999px; background-color: #0b0f17; border: 2.5px solid ${markerColor}; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.6);">
-              <div style="width: 10px; height: 10px; border-radius: 9999px; background-color: ${markerColor};"></div>
+          <div style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            ${isSelected ? `<div style="position: absolute; width: 42px; height: 42px; border-radius: 9999px; background-color: ${markerColor}20; border: 1.5px solid ${markerColor}60;"></div>` : ''}
+            <div style="position: relative; width: 28px; height: 28px; border-radius: 9999px; background-color: #ffffff; border: 3px solid ${markerColor}; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.18);">
+              <div style="width: 8px; height: 8px; border-radius: 9999px; background-color: ${markerColor};"></div>
             </div>
-            ${isSelected ? `<div style="position: absolute; bottom: -4px; width: 6px; height: 6px; background-color: ${markerColor}; transform: rotate(45deg);"></div>` : ''}
+            ${isSelected ? `<div style="position: absolute; bottom: -3px; width: 6px; height: 6px; background-color: ${markerColor}; transform: rotate(45deg);"></div>` : ''}
           </div>
         `,
-        iconSize: [36, 36],
-        iconAnchor: [18, 18],
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
       });
 
       const marker = L.marker([point.coordinates.latitude, point.coordinates.longitude], {
         icon: customIcon,
       }).addTo(map);
 
-      // Clean, professional dark popup
+      // Clean, professional white popup
       marker.bindPopup(`
-        <div style="background-color: #0e1524; color: #f1f5f9; padding: 12px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; min-width: 220px; border-radius: 8px;">
+        <div style="background-color: #ffffff; color: #0f172a; padding: 12px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; min-width: 220px; border-radius: 8px;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-            <span style="font-size: 10px; font-family: monospace; text-transform: uppercase; color: #94a3b8;">${point.sourceType}</span>
-            <span style="font-size: 10px; font-family: monospace; font-weight: bold; padding: 1px 6px; border-radius: 4px; background: ${isToxic ? 'rgba(239,68,68,0.2)' : isSafe ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.2)'}; color: ${markerColor};">
-              ${isToxic ? 'CRITICAL TOXIC' : isSafe ? 'POTABLE SAFE' : 'CAUTION'}
+            <span style="font-size: 10px; font-family: monospace; text-transform: uppercase; color: #64748b; font-weight: 600;">${point.sourceType}</span>
+            <span style="font-size: 10px; font-family: monospace; font-weight: 700; padding: 1px 6px; border-radius: 4px; background: ${badgeBg}; color: ${badgeText};">
+              ${statusLabel}
             </span>
           </div>
-          <strong style="font-size: 13px; color: #ffffff; display: block; margin-bottom: 2px;">${point.name}</strong>
-          <p style="margin: 0 0 8px 0; color: #94a3b8; font-size: 11px;">${point.community}, ${point.district}</p>
-          <div style="background-color: #141d2d; padding: 6px 8px; border-radius: 6px; display: flex; justify-content: space-between; font-family: monospace; font-size: 11px; margin-bottom: 8px;">
-            <span style="color: #94a3b8;">Turbidity:</span>
-            <strong style="color: ${point.metrics.turbidityNtu > 50 ? '#f87171' : '#34d399'};">${point.metrics.turbidityNtu} NTU</strong>
+          <strong style="font-size: 13px; color: #0f172a; display: block; margin-bottom: 2px;">${point.name}</strong>
+          <p style="margin: 0 0 8px 0; color: #64748b; font-size: 11px;">${point.community}, ${point.district}</p>
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 6px 8px; border-radius: 6px; display: flex; justify-content: space-between; font-family: monospace; font-size: 11px; margin-bottom: 8px;">
+            <span style="color: #64748b;">Turbidity:</span>
+            <strong style="color: ${point.metrics.turbidityNtu > 50 ? '#b91c1c' : '#15803d'}; font-weight: 700;">${point.metrics.turbidityNtu} NTU</strong>
           </div>
         </div>
       `);
@@ -161,22 +164,22 @@ export const WaterMap: React.FC<WaterMapProps> = ({
       const isIllegal = conc.licenseStatus === 'illegal_encroachment';
 
       const polygon = L.polygon(conc.boundaryPolygon, {
-        color: isIllegal ? '#ef4444' : '#10b981',
-        fillColor: isIllegal ? '#ef4444' : '#10b981',
-        fillOpacity: isIllegal ? 0.25 : 0.15,
-        weight: isIllegal ? 2 : 1.5,
+        color: isIllegal ? '#b91c1c' : '#15803d',
+        fillColor: isIllegal ? '#fee2e2' : '#dcfce7',
+        fillOpacity: isIllegal ? 0.35 : 0.3,
+        weight: 2,
         dashArray: isIllegal ? '5, 5' : undefined,
       }).addTo(layerGroup);
 
       polygon.bindPopup(`
-        <div style="background-color: #0e1524; color: #f1f5f9; padding: 12px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; max-width: 240px; border-radius: 8px;">
-          <strong style="color: ${isIllegal ? '#f87171' : '#34d399'}; font-size: 13px; display: block; margin-bottom: 4px;">
+        <div style="background-color: #ffffff; color: #0f172a; padding: 12px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; max-width: 240px; border-radius: 8px;">
+          <strong style="color: ${isIllegal ? '#b91c1c' : '#15803d'}; font-size: 13px; display: block; margin-bottom: 4px;">
             ${conc.concessionName}
           </strong>
-          <span style="display: inline-block; padding: 2px 6px; border-radius: 4px; background: ${isIllegal ? 'rgba(239,68,68,0.2)' : 'rgba(16,185,129,0.2)'}; color: ${isIllegal ? '#fca5a5' : '#6ee7b7'}; font-weight: bold; font-family: monospace; font-size: 10px; margin-bottom: 6px;">
+          <span style="display: inline-block; padding: 2px 6px; border-radius: 4px; background: ${isIllegal ? '#fee2e2' : '#dcfce7'}; color: ${isIllegal ? '#991b1b' : '#166534'}; font-weight: bold; font-family: monospace; font-size: 10px; margin-bottom: 6px;">
             ${isIllegal ? '⚠️ ILLEGAL BUFFER ENCROACHMENT' : '✓ LICENSED CONCESSION'}
           </span>
-          <p style="margin: 0; color: #94a3b8; font-size: 11px; line-height: 1.4;">${conc.notes}</p>
+          <p style="margin: 0; color: #475569; font-size: 11px; line-height: 1.4;">${conc.notes}</p>
         </div>
       `);
     });
@@ -201,7 +204,7 @@ export const WaterMap: React.FC<WaterMapProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full min-h-[440px] rounded-xl overflow-hidden border border-white/[0.08] shadow-2xl bg-[#06090F]">
+    <div className="relative w-full h-full min-h-[440px] rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
       <div ref={mapContainerRef} className="w-full h-full" />
       
       {/* Top Floating Controls Bar */}
@@ -210,30 +213,30 @@ export const WaterMap: React.FC<WaterMapProps> = ({
         {/* Reset View Button */}
         <button
           onClick={handleResetView}
-          className="p-1.5 rounded-lg bg-[#0E1524]/90 backdrop-blur-md border border-white/[0.1] text-slate-300 hover:text-white transition-colors shadow-lg cursor-pointer"
+          className="p-2 rounded-lg bg-white/95 backdrop-blur border border-slate-200 text-slate-700 hover:text-slate-900 shadow-sm transition-colors cursor-pointer"
           title="Reset to Ghana Mining Belt"
         >
           <Crosshair className="h-4 w-4" />
         </button>
 
         {/* Basemap Switcher Segmented Control */}
-        <div className="flex items-center bg-[#0E1524]/90 backdrop-blur-md border border-white/[0.1] p-1 rounded-lg shadow-lg">
+        <div className="flex items-center bg-white/95 backdrop-blur border border-slate-200 p-1 rounded-lg shadow-sm">
           <button
             onClick={() => setMapType('streets')}
-            className={`px-2.5 py-1 text-[11px] font-mono rounded transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 text-[11px] font-medium rounded transition-colors cursor-pointer ${
               mapType === 'streets'
-                ? 'bg-emerald-600 text-white font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Street
           </button>
           <button
             onClick={() => setMapType('satellite')}
-            className={`px-2.5 py-1 text-[11px] font-mono rounded transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 text-[11px] font-medium rounded transition-colors cursor-pointer ${
               mapType === 'satellite'
-                ? 'bg-emerald-600 text-white font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             Satellite
@@ -244,40 +247,40 @@ export const WaterMap: React.FC<WaterMapProps> = ({
 
       {/* Floating Coordinate Telemetry HUD (Bottom Right) */}
       {selectedWaterPoint && (
-        <div className="absolute bottom-3 right-3 z-20 bg-[#0E1524]/90 backdrop-blur-md border border-white/[0.08] px-2.5 py-1.5 rounded-lg shadow-lg text-[10px] font-mono text-slate-400 hidden sm:flex items-center gap-2">
-          <span className="text-slate-500">LOC:</span>
-          <span className="text-slate-300">
+        <div className="absolute bottom-3 right-3 z-20 bg-white/95 backdrop-blur border border-slate-200 px-2.5 py-1.5 rounded-lg shadow-sm text-[10px] font-mono text-slate-600 hidden sm:flex items-center gap-2">
+          <span className="text-slate-400">LOC:</span>
+          <span className="text-slate-800 font-semibold">
             {selectedWaterPoint.coordinates.latitude.toFixed(4)}°N, {Math.abs(selectedWaterPoint.coordinates.longitude).toFixed(4)}°W
           </span>
         </div>
       )}
 
       {/* Bottom Floating Legend Drawer */}
-      <div className="absolute bottom-3 left-3 z-20 bg-[#0E1524]/90 backdrop-blur-md border border-white/[0.08] p-3 rounded-lg shadow-xl text-xs text-slate-300 space-y-1.5 max-w-[260px]">
-        <div className="flex items-center justify-between pb-1 border-b border-white/[0.06]">
-          <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">
-            Ledger Ground Classification
+      <div className="absolute bottom-3 left-3 z-20 bg-white/95 backdrop-blur border border-slate-200 p-3 rounded-lg shadow-md text-xs text-slate-700 space-y-1.5 max-w-[260px]">
+        <div className="flex items-center justify-between pb-1 border-b border-slate-200">
+          <span className="font-mono text-[10px] uppercase tracking-wider text-slate-500 font-bold">
+            Ledger Ground Status
           </span>
         </div>
         
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-red-500/20" />
-          <span>Critical Toxic / Silt (&gt;50 NTU)</span>
+          <span className="h-2.5 w-2.5 rounded-full bg-red-700 ring-2 ring-red-100" />
+          <span>Critical Hazard / Toxic Silt (&gt;50 NTU)</span>
         </div>
         
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-600 ring-2 ring-amber-100" />
           <span>Caution / High Turbidity</span>
         </div>
         
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-700 ring-2 ring-emerald-100" />
           <span>Potable Tested Source (&lt;5 NTU)</span>
         </div>
 
         {showConcessions && (
-          <div className="flex items-center gap-2 pt-1 border-t border-white/[0.06] text-[10px] text-red-300 font-mono">
-            <span className="h-2 w-3 border border-dashed border-red-500 bg-red-500/20" />
+          <div className="flex items-center gap-2 pt-1 border-t border-slate-200 text-[10px] text-red-700 font-mono font-medium">
+            <span className="h-2 w-3 border border-dashed border-red-600 bg-red-100" />
             <span>Galamsey River Buffer Encroachment</span>
           </div>
         )}

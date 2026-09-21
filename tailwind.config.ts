@@ -9,41 +9,48 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        obsidian: {
-          950: '#06090F',
-          900: '#0B0F17',
-          850: '#0F1522',
-          800: '#141D2D',
-          750: '#1B263B',
-          700: '#223049',
+        canvas: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
         },
-        safe: {
-          50: '#ecfdf5',
-          100: '#d1fae5',
-          500: '#10b981',
-          600: '#059669',
-          700: '#047857',
+        surface: {
+          DEFAULT: '#ffffff',
+          muted: '#f8fafc',
+          card: '#ffffff',
+          subtle: '#f1f5f9',
         },
-        caution: {
+        forest: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+        },
+        ochre: {
           50: '#fffbeb',
           100: '#fef3c7',
-          500: '#f59e0b',
+          200: '#fde68a',
           600: '#d97706',
           700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
-        toxic: {
+        crimson: {
           50: '#fef2f2',
           100: '#fee2e2',
-          500: '#ef4444',
+          200: '#fecaca',
           600: '#dc2626',
           700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
         },
-        water: {
+        ocean: {
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
-          400: '#38bdf8',
-          500: '#0ea5e9',
           600: '#0284c7',
           700: '#0369a1',
           800: '#075985',
@@ -55,9 +62,9 @@ const config: Config = {
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       boxShadow: {
-        'glow-emerald': '0 0 20px -5px rgba(16, 185, 129, 0.25)',
-        'glow-red': '0 0 20px -5px rgba(239, 68, 68, 0.25)',
-        'glow-amber': '0 0 20px -5px rgba(245, 158, 11, 0.25)',
+        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07)',
+        'popover': '0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
       }
     },
   },

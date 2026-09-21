@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Radio, Volume2, VolumeX, ChevronDown, ChevronUp, Sparkles, AlertCircle, ShieldCheck } from 'lucide-react';
+import { Radio, Volume2, VolumeX, ChevronDown, ChevronUp } from 'lucide-react';
 import { WaterPoint, SupportedLanguage } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
 
@@ -88,30 +88,30 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
   };
 
   return (
-    <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-4 text-slate-100 shadow-xl space-y-3">
+    <div className="bg-white border border-slate-200 rounded-xl p-4 text-slate-900 shadow-sm space-y-3">
       
       {/* Top Dispatch Bar */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className={`p-2 rounded-lg border ${
             isPlaying
-              ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
-              : 'bg-[#141D2D] text-slate-400 border-white/[0.06]'
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+              : 'bg-slate-100 text-slate-600 border-slate-200'
           }`}>
-            <Radio className={`h-4 w-4 ${isPlaying ? 'animate-pulse text-emerald-400' : ''}`} />
+            <Radio className={`h-4 w-4 ${isPlaying ? 'text-emerald-700' : ''}`} />
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-200">
+              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800">
                 Civic Radio Voice Dispatch
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.06] text-slate-300 border border-white/[0.08]">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200 font-semibold">
                 {currentLanguage.toUpperCase()}
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              Low-literacy audio notice for <strong className="text-slate-300">{waterPoint.name}</strong>
+            <p className="text-[11px] text-slate-500 mt-0.5">
+              Low-literacy audio notice for <strong className="text-slate-800 font-semibold">{waterPoint.name}</strong>
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
           {/* Playback speed toggle */}
           <button
             onClick={() => setPlaybackSpeed(prev => prev === 1.0 ? 0.85 : 1.0)}
-            className="hidden sm:inline-flex items-center px-2 py-1 rounded bg-[#141D2D] hover:bg-[#1B263B] text-[10px] font-mono text-slate-300 border border-white/[0.06] transition-colors"
+            className="hidden sm:inline-flex items-center px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-[10px] font-mono text-slate-700 border border-slate-200 transition-colors cursor-pointer"
             title="Adjust speech rate (slower for clarity)"
           >
             {playbackSpeed}x Speed
@@ -133,8 +133,8 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
             onClick={handleToggleSpeech}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-all active:scale-95 cursor-pointer ${
               isPlaying
-                ? 'bg-red-600 hover:bg-red-500 text-white'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                ? 'bg-red-700 hover:bg-red-800 text-white'
+                : 'bg-emerald-700 hover:bg-emerald-800 text-white'
             }`}
           >
             {isPlaying ? (
@@ -152,29 +152,28 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
         </div>
       </div>
 
-      {/* Animated Waveform Studio Bar */}
-      <div className="bg-[#141D2D] border border-white/[0.04] rounded-lg px-3 py-2 flex items-center justify-between gap-3 text-xs">
+      {/* Waveform Studio Bar */}
+      <div className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 flex items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-1.5">
           {[4, 12, 8, 16, 10, 6, 14, 9, 15, 7, 11, 5].map((height, idx) => (
             <span
               key={idx}
               className={`w-1 rounded-full transition-all duration-150 ${
-                isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-slate-700'
+                isPlaying ? 'bg-slate-800' : 'bg-slate-300'
               }`}
               style={{
                 height: isPlaying ? `${height}px` : '4px',
-                animationDelay: `${idx * 80}ms`
               }}
             />
           ))}
-          <span className="text-[11px] font-mono text-slate-400 ml-2">
-            {isPlaying ? 'Broadcasting audio bulletin...' : 'Ready for local playback'}
+          <span className="text-[11px] font-mono text-slate-500 ml-2">
+            {isPlaying ? 'Broadcasting verified audio bulletin...' : 'Ready for playback in selected dialect'}
           </span>
         </div>
 
         <button
           onClick={() => setShowTranscript(!showTranscript)}
-          className="text-[11px] text-slate-400 hover:text-slate-200 flex items-center gap-1 font-mono transition-colors"
+          className="text-[11px] text-slate-600 hover:text-slate-900 flex items-center gap-1 font-mono transition-colors cursor-pointer"
         >
           <span>{showTranscript ? 'Hide Script' : 'View Script'}</span>
           {showTranscript ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -183,11 +182,11 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
 
       {/* Transcript Accordion */}
       {showTranscript && (
-        <div className="bg-[#0B0F17] border border-white/[0.06] rounded-lg p-3 text-xs text-slate-300 space-y-1.5 animate-in fade-in duration-150">
-          <span className="text-[10px] font-mono uppercase text-slate-500 block">
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1.5 animate-in fade-in duration-150">
+          <span className="text-[10px] font-mono uppercase text-slate-500 font-bold block">
             Broadcast Transcript ({currentLanguage.toUpperCase()}):
           </span>
-          <p className="leading-relaxed text-slate-200 italic">
+          <p className="leading-relaxed text-slate-800 italic">
             "{spokenText}"
           </p>
         </div>

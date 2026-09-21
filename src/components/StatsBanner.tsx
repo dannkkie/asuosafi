@@ -22,45 +22,45 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
     : 0;
 
   return (
-    <section className="bg-[#0B0F17]/80 border-b border-white/[0.06] py-3.5 px-4 sm:px-6 lg:px-8">
+    <section className="bg-white border-b border-slate-200/80 py-3.5 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-0 lg:divide-x lg:divide-white/[0.08] bg-white/[0.02] border border-white/[0.06] rounded-xl p-2 lg:p-0">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-0 lg:divide-x lg:divide-slate-200 bg-slate-50/60 border border-slate-200 rounded-xl p-2 lg:p-0">
           
           {/* Metric 1: Critical Toxic Zones */}
           <div className="p-3 lg:px-6 lg:py-3.5 flex items-center gap-3.5">
-            <div className="h-10 w-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0">
-              <AlertCircle className="h-5 w-5 text-red-400" />
+            <div className="h-10 w-10 rounded-lg bg-red-50 border border-red-200/80 flex items-center justify-center shrink-0">
+              <AlertCircle className="h-5 w-5 text-red-700" />
             </div>
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold font-mono tabular-nums text-white">
+                <span className="text-2xl font-bold font-mono tabular-nums text-slate-900">
                   {criticalPoints.length}
                 </span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-red-400 font-semibold px-1.5 py-0.2 rounded bg-red-500/10 border border-red-500/20">
+                <span className="text-[10px] uppercase font-mono tracking-wider text-red-800 font-semibold px-1.5 py-0.2 rounded bg-red-100/70 border border-red-200">
                   Critical Hazard
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Avg. Turbidity: <span className="text-red-300 font-mono font-medium">{avgCriticalTurbidity} NTU</span>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Avg. Turbidity: <span className="text-red-700 font-mono font-semibold">{avgCriticalTurbidity} NTU</span>
               </p>
             </div>
           </div>
 
           {/* Metric 2: Verified Potable Alternatives */}
           <div className="p-3 lg:px-6 lg:py-3.5 flex items-center gap-3.5">
-            <div className="h-10 w-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
-              <CheckCircle className="h-5 w-5 text-emerald-400" />
+            <div className="h-10 w-10 rounded-lg bg-emerald-50 border border-emerald-200/80 flex items-center justify-center shrink-0">
+              <CheckCircle className="h-5 w-5 text-emerald-700" />
             </div>
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold font-mono tabular-nums text-white">
+                <span className="text-2xl font-bold font-mono tabular-nums text-slate-900">
                   {safePoints.length}
                 </span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-emerald-400 font-semibold px-1.5 py-0.2 rounded bg-emerald-500/10 border border-emerald-500/20">
+                <span className="text-[10px] uppercase font-mono tracking-wider text-emerald-800 font-semibold px-1.5 py-0.2 rounded bg-emerald-100/70 border border-emerald-200">
                   Potable
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Boreholes & Protected Springs
               </p>
             </div>
@@ -68,19 +68,19 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
 
           {/* Metric 3: Multi-Witness Attestations */}
           <div className="p-3 lg:px-6 lg:py-3.5 flex items-center gap-3.5">
-            <div className="h-10 w-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
-              <Users className="h-5 w-5 text-cyan-400" />
+            <div className="h-10 w-10 rounded-lg bg-sky-50 border border-sky-200/80 flex items-center justify-center shrink-0">
+              <Users className="h-5 w-5 text-sky-700" />
             </div>
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold font-mono tabular-nums text-white">
+                <span className="text-2xl font-bold font-mono tabular-nums text-slate-900">
                   {totalWitnesses}
                 </span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-cyan-400 font-semibold px-1.5 py-0.2 rounded bg-cyan-500/10 border border-cyan-500/20">
+                <span className="text-[10px] uppercase font-mono tracking-wider text-sky-800 font-semibold px-1.5 py-0.2 rounded bg-sky-100/70 border border-sky-200">
                   Consensus
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Decentralized Co-Signatories
               </p>
             </div>
@@ -88,19 +88,19 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
 
           {/* Metric 4: Statutory Redress Filings */}
           <div className="p-3 lg:px-6 lg:py-3.5 flex items-center gap-3.5">
-            <div className="h-10 w-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0">
-              <Scale className="h-5 w-5 text-amber-400" />
+            <div className="h-10 w-10 rounded-lg bg-amber-50 border border-amber-200/80 flex items-center justify-center shrink-0">
+              <Scale className="h-5 w-5 text-amber-700" />
             </div>
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold font-mono tabular-nums text-white">
+                <span className="text-2xl font-bold font-mono tabular-nums text-slate-900">
                   Act 522
                 </span>
-                <span className="text-[10px] uppercase font-mono tracking-wider text-amber-400 font-semibold px-1.5 py-0.2 rounded bg-amber-500/10 border border-amber-500/20">
+                <span className="text-[10px] uppercase font-mono tracking-wider text-amber-800 font-semibold px-1.5 py-0.2 rounded bg-amber-100/70 border border-amber-200">
                   Enforceable
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Statutory Redress Instruments
               </p>
             </div>
