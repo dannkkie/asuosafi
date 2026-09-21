@@ -77,7 +77,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-transparent text-slate-900 dark:text-slate-100 font-sans selection:bg-amber-100 dark:selection:bg-amber-950 selection:text-amber-900 dark:selection:text-amber-300 transition-colors duration-150 relative">
+    <div className="min-h-screen flex flex-col bg-transparent text-[#1f2124] dark:text-[#f5f5f1] font-sans selection:bg-blue-100 dark:selection:bg-[#331114] selection:text-[#1a73e8] dark:selection:text-[#e50914] transition-colors duration-150 relative">
       
       {/* 1. Global Command Navigation Bar */}
       <Navbar
