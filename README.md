@@ -93,8 +93,8 @@ Across Ghana's mineral-rich belts, illegal and unregulated artisanal mining (*ga
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/osf-hackathon-asuosafi.git
-cd osf-hackathon-asuosafi
+git clone https://github.com/dannkkie/asuosafi.git
+cd asuosafi
 
 # Install dependencies
 pnpm install
@@ -124,10 +124,7 @@ While grounded in Ghana's *galamsey* crisis, AsuoSafi’s underlying data schema
 
 ---
 
-## 7. Submission Artifacts Included in this Repository
+## 7. Submission Artifacts & Documentation
 
-* [**`SUBMISSION_DOSSIER.md`**](./SUBMISSION_DOSSIER.md) — Complete copy-paste submission text:
-  1. Official Written Summary (addressing all 4 judging criteria).
-  2. Complete 10-Slide Pitch Deck Content.
-  3. 3-Minute Video Presentation Script with visual cues.
-* [**`ASUOSAFI_IMPLEMENTATION_PLAN.md`**](./ASUOSAFI_IMPLEMENTATION_PLAN.md) — Architectural design document.
+* [**`DESIGN.md`**](./DESIGN.md) — Comprehensive design system architecture specifications following Google Material and Netflix Cinematic tokens.
+* **Official Hackathon Dossier** — Structured evaluation response covering the 4 core judging criteria (Impact, Feasibility, Trust Architecture, Civic Redress), 10-slide pitch deck structure, and 3-minute video presentation script.
