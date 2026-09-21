@@ -77,7 +77,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#0B0F17] text-slate-900 dark:text-slate-100 font-sans selection:bg-emerald-100 dark:selection:bg-emerald-950 selection:text-emerald-900 dark:selection:text-emerald-300 transition-colors duration-150">
+    <div className="min-h-screen flex flex-col bg-transparent text-slate-900 dark:text-slate-100 font-sans selection:bg-amber-100 dark:selection:bg-amber-950 selection:text-amber-900 dark:selection:text-amber-300 transition-colors duration-150 relative">
       
       {/* 1. Global Command Navigation Bar */}
       <Navbar
@@ -96,7 +96,7 @@ export default function Home() {
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         
         {/* Workspace Control Strip: Filters & View Switcher */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-[#121927] border border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 rounded-xl shadow-sm transition-colors duration-150">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white/80 dark:bg-[#121520] border border-slate-200/80 dark:border-[#1F2536] p-2.5 sm:p-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none backdrop-blur-md transition-colors duration-150">
           
           {/* Status Filter Segmented Controls */}
           <div className="flex items-center gap-1.5 overflow-x-auto">
@@ -107,19 +107,19 @@ export default function Home() {
 
             {[
               { id: 'all', label: 'All Sources' },
-              { id: 'critical_toxic', label: 'Critical Hazard', dot: 'bg-red-600 dark:bg-red-400' },
-              { id: 'caution_turbid', label: 'Caution', dot: 'bg-amber-600 dark:bg-amber-400' },
-              { id: 'safe', label: 'Potable Safe', dot: 'bg-emerald-600 dark:bg-emerald-400' },
+              { id: 'critical_toxic', label: 'Critical Hazard', dot: 'bg-[#EF4444]' },
+              { id: 'caution_turbid', label: 'Caution', dot: 'bg-[#F59E0B]' },
+              { id: 'safe', label: 'Potable Safe', dot: 'bg-[#10B981]' },
             ].map((f) => {
               const isActive = statusFilter === f.id;
               return (
                 <button
                   key={f.id}
                   onClick={() => setStatusFilter(f.id as any)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                     isActive
-                      ? 'bg-slate-900 dark:bg-emerald-700 text-white font-semibold shadow-sm'
-                      : 'bg-white dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750'
+                      ? 'bg-slate-950 dark:bg-[#1E2536] text-white font-bold shadow-sm border border-transparent dark:border-[#2C364D]'
+                      : 'bg-white/90 dark:bg-[#151924] text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200/80 dark:border-[#202738] hover:bg-slate-50 dark:hover:bg-slate-800'
                   }`}
                 >
                   {f.dot && <span className={`h-1.5 w-1.5 rounded-full ${f.dot}`} />}
@@ -130,40 +130,40 @@ export default function Home() {
           </div>
 
           {/* View Mode Switcher (Spatial Map vs Table vs Redress) */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-1 shrink-0 self-end sm:self-auto">
+          <div className="flex items-center gap-1 bg-slate-100/90 dark:bg-[#161B28] border border-slate-200/80 dark:border-[#232B3E] rounded-full p-1 shrink-0 self-end sm:self-auto shadow-inner">
             <button
               onClick={() => setActiveView('map')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
                 activeView === 'map'
-                  ? 'bg-white dark:bg-[#121927] text-slate-900 dark:text-white font-semibold shadow-sm'
+                  ? 'bg-white dark:bg-[#121520] text-slate-950 dark:text-white font-bold shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <Map className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" />
+              <Map className="h-3.5 w-3.5 text-emerald-600 dark:text-[#10B981]" />
               <span>Spatial Map</span>
             </button>
 
             <button
               onClick={() => setActiveView('table')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
                 activeView === 'table'
-                  ? 'bg-white dark:bg-[#121927] text-slate-900 dark:text-white font-semibold shadow-sm'
+                  ? 'bg-white dark:bg-[#121520] text-slate-950 dark:text-white font-bold shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <TableIcon className="h-3.5 w-3.5 text-sky-700 dark:text-sky-400" />
+              <TableIcon className="h-3.5 w-3.5 text-sky-600 dark:text-[#60A5FA]" />
               <span>Ledger Table</span>
             </button>
 
             <button
               onClick={() => setActiveView('redress')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
                 activeView === 'redress'
-                  ? 'bg-white dark:bg-[#121927] text-slate-900 dark:text-white font-semibold shadow-sm'
+                  ? 'bg-white dark:bg-[#121520] text-slate-950 dark:text-white font-bold shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <Scale className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400" />
+              <Scale className="h-3.5 w-3.5 text-amber-600 dark:text-[#FBBF24]" />
               <span>Redress Hub</span>
             </button>
           </div>

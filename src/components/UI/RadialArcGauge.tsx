@@ -7,7 +7,7 @@ interface RadialArcGaugeProps {
   label: string;
   sublabel?: string;
   size?: number;
-  variant?: 'emerald' | 'amber' | 'crimson' | 'dynamic';
+  variant?: 'emerald' | 'amber' | 'crimson' | 'dynamic' | 'opspulse' | 'exon';
 }
 
 export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
@@ -21,23 +21,40 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
   const totalTicks = 20;
   const activeTicks = Math.round((Math.min(100, Math.max(0, percentage)) / 100) * totalTicks);
 
+  // Exon Spring Mint gradient palette (from dark emerald to glowing mint)
+  const exonMintPalette = [
+    '#047857', '#059669', '#059669', '#10b981', '#10b981',
+    '#10b981', '#34d399', '#34d399', '#6ee7b7', '#a7f3d0'
+  ];
+
   // Determine color theme based on score or variant
   const getColor = (tickIndex: number) => {
-    if (variant === 'dynamic') {
-      const ratio = tickIndex / totalTicks;
-      if (ratio < 0.35) return '#b91c1c'; // Red
-      if (ratio < 0.65) return '#b45309'; // Amber
-      return '#15803d'; // Forest Green
+    if (variant === 'exon') {
+      const idx = Math.min(exonMintPalette.length - 1, Math.floor((tickIndex / totalTicks) * exonMintPalette.length));
+      return exonMintPalette[idx];
     }
-    if (variant === 'crimson') return '#b91c1c';
-    if (variant === 'amber') return '#b45309';
-    return '#15803d';
-  };
 
-  const getActiveColor = () => {
-    if (percentage >= 70) return 'text-emerald-700 dark:text-emerald-400';
-    if (percentage >= 40) return 'text-amber-700 dark:text-amber-400';
-    return 'text-red-700 dark:text-red-400';
+    if (variant === 'opspulse') {
+      const ratio = tickIndex / totalTicks;
+      if (ratio < 0.35) return '#f97316'; // OpsPulse Warm Orange
+      if (ratio < 0.75) return '#10b981'; // OpsPulse Lush Emerald
+      return '#2563eb'; // OpsPulse Cobalt Blue
+    }
+
+    if (variant === 'dynamic') {
+      if (percentage >= 65) {
+        const idx = Math.min(exonMintPalette.length - 1, Math.floor((tickIndex / totalTicks) * exonMintPalette.length));
+        return exonMintPalette[idx];
+      }
+      if (percentage >= 35) {
+        return tickIndex < totalTicks * 0.5 ? '#f59e0b' : '#d97706'; // Golden Amber
+      }
+      return tickIndex < totalTicks * 0.4 ? '#ef4444' : '#dc2626'; // Alert Crimson
+    }
+
+    if (variant === 'crimson') return '#ef4444';
+    if (variant === 'amber') return '#f59e0b';
+    return '#10b981';
   };
 
   // Generate tick paths along a semicircle from 180deg to 0deg (left to right)
@@ -73,13 +90,13 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
                 y1={yInner}
                 x2={xOuter}
                 y2={yOuter}
-                stroke={isActive ? color : 'currentColor'}
-                strokeWidth={4.5}
+                stroke={isActive ? color : undefined}
+                strokeWidth={5}
                 strokeLinecap="round"
                 className={`transition-all duration-300 ${
                   isActive
                     ? 'opacity-100'
-                    : 'text-slate-200 dark:text-slate-800 opacity-60'
+                    : 'stroke-slate-200 dark:stroke-[#1E2536] opacity-70'
                 }`}
               />
             );
@@ -88,7 +105,7 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
 
         {/* Center Readout Text */}
         <div className="absolute inset-x-0 bottom-1 flex flex-col items-center justify-center text-center">
-          <span className={`text-2xl sm:text-3xl font-bold font-mono tracking-tight tabular-nums ${getActiveColor()}`}>
+          <span className="text-2xl sm:text-3xl font-bold font-mono tracking-tight tabular-nums text-slate-900 dark:text-white">
             {percentage}%
           </span>
           <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold mt-0.5">

@@ -23,17 +23,17 @@ export const BarcodeSignalMeter: React.FC<BarcodeSignalMeterProps> = ({
 
   const getBarColor = (index: number) => {
     const isActive = index < activeCount;
-    if (!isActive) return 'bg-slate-200 dark:bg-slate-800';
+    if (!isActive) return 'bg-slate-200/90 dark:bg-[#1E2536]';
 
-    if (status === 'safe') return 'bg-emerald-600 dark:bg-emerald-500';
-    if (status === 'caution') return 'bg-amber-600 dark:bg-amber-500';
-    if (status === 'critical') return 'bg-red-600 dark:bg-red-500';
+    if (status === 'safe') return 'bg-emerald-500 dark:bg-[#10B981]';
+    if (status === 'caution') return 'bg-amber-500 dark:bg-[#F59E0B]';
+    if (status === 'critical') return 'bg-red-500 dark:bg-[#EF4444]';
 
     // Auto coloring based on active ratio
     const ratio = activeCount / barCount;
-    if (ratio >= 0.7) return 'bg-emerald-600 dark:bg-emerald-500';
-    if (ratio >= 0.4) return 'bg-amber-600 dark:bg-amber-500';
-    return 'bg-red-600 dark:bg-red-500';
+    if (ratio >= 0.7) return 'bg-emerald-500 dark:bg-[#10B981]';
+    if (ratio >= 0.4) return 'bg-amber-500 dark:bg-[#F59E0B]';
+    return 'bg-red-500 dark:bg-[#EF4444]';
   };
 
   return (

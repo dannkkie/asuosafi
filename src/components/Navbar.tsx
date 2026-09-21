@@ -65,11 +65,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Center Telemetry Status Pill (Desktop only) */}
-          <div className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100/70 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-400">
-            <Activity className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+          <div className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100/80 dark:bg-[#141824] border border-slate-200/80 dark:border-[#202738] text-xs text-slate-600 dark:text-slate-400">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 dark:bg-[#10B981] animate-pulse" />
             <span className="text-slate-800 dark:text-slate-200 font-medium">6 Mining Basins Monitored</span>
-            <span className="text-slate-300 dark:text-slate-600">•</span>
-            <span className="text-emerald-700 dark:text-emerald-400 font-mono text-[11px] font-semibold">Consensus Protocol Active</span>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <span className="text-emerald-700 dark:text-[#34D399] font-mono text-[11px] font-semibold">Consensus Protocol Active</span>
           </div>
 
           {/* Right Action Command Controls (Pill Cluster) */}
@@ -80,15 +80,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onToggleConcessions}
               className={`hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all border cursor-pointer ${
                 showConcessions
-                  ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border-amber-300 dark:border-amber-800/60 shadow-sm'
-                  : 'bg-white dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
+                  ? 'bg-amber-500/10 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border-amber-300 dark:border-amber-800/60 shadow-sm'
+                  : 'bg-white/90 dark:bg-[#161924] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#232938] hover:bg-slate-50 dark:hover:bg-slate-800'
               }`}
               title={t.concessionLayerToggle}
             >
-              <Layers className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400" />
+              <Layers className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
               <span>Concession Buffer</span>
               <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
-                showConcessions ? 'bg-amber-200/70 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                showConcessions ? 'bg-amber-200/80 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
               }`}>
                 {showConcessions ? 'ACTIVE' : 'OFF'}
               </span>
@@ -97,19 +97,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* AI Environmental & Statutory Advisor Pill */}
             <button
               onClick={onOpenAiAdvisor}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-sky-500/10 dark:bg-sky-950/40 hover:bg-sky-500/20 text-sky-800 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800/50 shadow-sm transition-all cursor-pointer"
               title="Access AI Environmental & Legal Rights Advisor"
             >
               <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
               <span className="hidden sm:inline">AI Legal Advisor</span>
             </button>
 
-            {/* Primary Action Pill: Submit Water Audit */}
+            {/* Primary Action Pill: OpsPulse Marigold Golden Button */}
             <button
               onClick={onOpenReportModal}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-[#FBBF24] hover:bg-[#F59E0B] text-slate-950 border border-amber-400/40 shadow-sm shadow-amber-400/20 transition-all cursor-pointer active:scale-95"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-4 w-4 stroke-[2.5]" />
               <span className="hidden sm:inline">{t.reportWaterIssue}</span>
               <span className="sm:hidden">Report</span>
             </button>

@@ -4,19 +4,35 @@
 
 :root {
   --foreground-rgb: 15, 23, 42;
-  --background-rgb: 248, 250, 252;
+  --background-rgb: 243, 244, 246;
 }
 
 .dark {
   --foreground-rgb: 241, 245, 249;
-  --background-rgb: 11, 15, 23;
+  --background-rgb: 10, 12, 16;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
+  background-color: #f3f4f6;
+  background-image: 
+    radial-gradient(circle at 85% 15%, rgba(254, 215, 170, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 15% 85%, rgba(187, 247, 208, 0.35) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(224, 242, 254, 0.25) 0%, transparent 50%);
+  background-attachment: fixed;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark body,
+html.dark body {
+  background-color: #0a0c10;
+  background-image: 
+    radial-gradient(circle at 80% 12%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 12% 88%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
 /* Custom scrollbars */
