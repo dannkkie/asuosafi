@@ -10,6 +10,7 @@ import { VoiceBulletinPlayer } from '@/components/Audio/VoiceBulletinPlayer';
 import { ReportWizardModal } from '@/components/Report/ReportWizardModal';
 import { PetitionModal } from '@/components/Civic/PetitionModal';
 import { AuditTrailModal } from '@/components/Trust/AuditTrailModal';
+import { AiAdvisorModal } from '@/components/AI/AiAdvisorModal';
 import { INITIAL_WATER_POINTS, INITIAL_MINING_CONCESSIONS } from '@/data/mockData';
 import { WaterPoint, SupportedLanguage, ContaminationStatus } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
@@ -36,6 +37,7 @@ export default function Home() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isPetitionModalOpen, setIsPetitionModalOpen] = useState(false);
   const [isAuditTrailModalOpen, setIsAuditTrailModalOpen] = useState(false);
+  const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
   const [targetPointForModal, setTargetPointForModal] = useState<WaterPoint | null>(null);
 
   const t = TRANSLATIONS[currentLanguage];
@@ -77,6 +79,7 @@ export default function Home() {
         currentLanguage={currentLanguage}
         onLanguageChange={setCurrentLanguage}
         onOpenReportModal={() => setIsReportModalOpen(true)}
+        onOpenAiAdvisor={() => setIsAiAdvisorOpen(true)}
         showConcessions={showConcessions}
         onToggleConcessions={() => setShowConcessions(!showConcessions)}
       />
@@ -282,6 +285,13 @@ export default function Home() {
             setIsAuditTrailModalOpen(false);
             setTargetPointForModal(null);
           }}
+          currentLanguage={currentLanguage}
+        />
+      )}
+
+      {isAiAdvisorOpen && (
+        <AiAdvisorModal
+          onClose={() => setIsAiAdvisorOpen(false)}
           currentLanguage={currentLanguage}
         />
       )}

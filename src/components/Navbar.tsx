@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Droplets, ShieldAlert, Globe, Radio, PlusCircle } from 'lucide-react';
+import { Droplets, ShieldAlert, Globe, Radio, PlusCircle, Sparkles, Bot } from 'lucide-react';
 import { SupportedLanguage } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
 
@@ -9,6 +9,7 @@ interface NavbarProps {
   currentLanguage: SupportedLanguage;
   onLanguageChange: (lang: SupportedLanguage) => void;
   onOpenReportModal: () => void;
+  onOpenAiAdvisor: () => void;
   showConcessions: boolean;
   onToggleConcessions: () => void;
 }
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentLanguage,
   onLanguageChange,
   onOpenReportModal,
+  onOpenAiAdvisor,
   showConcessions,
   onToggleConcessions,
 }) => {
@@ -62,10 +64,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Galamsey Zones</span>
             </button>
 
+            {/* AI Environmental & Civic Advisor Button */}
+            <button
+              onClick={onOpenAiAdvisor}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-emerald-600/30 to-cyan-600/30 hover:from-emerald-600/50 hover:to-cyan-600/50 text-emerald-300 border border-emerald-500/40 shadow-sm transition-all active:scale-95 cursor-pointer"
+              title="Ask AI Environmental & Civic Rights Assistant"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
+              <span className="hidden sm:inline">AI Advisor</span>
+            </button>
+
             {/* Report Water Condition Button */}
             <button
               onClick={onOpenReportModal}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-900/30 transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-900/30 transition-all active:scale-95 cursor-pointer"
             >
               <PlusCircle className="h-4 w-4" />
               <span className="hidden xs:inline">{t.reportWaterIssue}</span>
