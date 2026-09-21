@@ -7,6 +7,7 @@ import { MapWrapper } from '@/components/Map/MapWrapper';
 import { WaterPointCard } from '@/components/Water/WaterPointCard';
 import { SafeAlternativeFinder } from '@/components/Water/SafeAlternativeFinder';
 import { VoiceBulletinPlayer } from '@/components/Audio/VoiceBulletinPlayer';
+import { BasinRegistryTable } from '@/components/Basin/BasinRegistryTable';
 import { ReportWizardModal } from '@/components/Report/ReportWizardModal';
 import { PetitionModal } from '@/components/Civic/PetitionModal';
 import { AuditTrailModal } from '@/components/Trust/AuditTrailModal';
@@ -15,14 +16,20 @@ import { INITIAL_WATER_POINTS, INITIAL_MINING_CONCESSIONS } from '@/data/mockDat
 import { WaterPoint, SupportedLanguage, ContaminationStatus } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
 import {
-  Droplets,
+  Map,
+  Table as TableIcon,
+  Scale,
   Filter,
   ShieldAlert,
-  HelpCircle,
-  Award,
+  Droplets,
   Globe2,
-  Sparkles,
-  MapPin
+  CheckCircle,
+  AlertCircle,
+  AlertTriangle,
+  ChevronRight,
+  ExternalLink,
+  ShieldCheck,
+  FileText
 } from 'lucide-react';
 
 export default function Home() {
@@ -32,6 +39,7 @@ export default function Home() {
   const [showConcessions, setShowConcessions] = useState(true);
   const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>('en');
   const [statusFilter, setStatusFilter] = useState<'all' | ContaminationStatus>('all');
+  const [activeView, setActiveView] = useState<'map' | 'table' | 'redress'>('map');
 
   // Modal Dialog States
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -73,8 +81,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
-      {/* 1. Global Navigation Bar */}
+    <div className="min-h-screen flex flex-col bg-[#06090F] text-slate-100 font-sans selection:bg-emerald-500/20 selection:text-emerald-300">
+      
+      {/* 1. Global Command Navigation Bar */}
       <Navbar
         currentLanguage={currentLanguage}
         onLanguageChange={setCurrentLanguage}
@@ -84,176 +93,380 @@ export default function Home() {
         onToggleConcessions={() => setShowConcessions(!showConcessions)}
       />
 
-      {/* 2. Key Stats & Summary Banner */}
+      {/* 2. Analytical KPI & Telemetry Bar */}
       <StatsBanner waterPoints={waterPoints} currentLanguage={currentLanguage} />
 
       {/* 3. Main Dashboard Workspace */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         
-        {/* Filter Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900/60 border border-slate-800/80 p-3 rounded-2xl">
-          <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold">
-            <Filter className="h-4 w-4 text-emerald-400" />
-            <span>Filter Water Sources:</span>
-          </div>
+        {/* Workspace Control Strip: Filters & View Switcher */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#0E1524] border border-white/[0.08] p-2.5 sm:p-3 rounded-xl shadow-lg">
+          
+          {/* Status Filter Segmented Controls */}
+          <div className="flex items-center gap-1.5 overflow-x-auto">
+            <div className="flex items-center gap-1.5 text-xs text-slate-400 mr-1 hidden md:flex font-mono">
+              <Filter className="h-3.5 w-3.5 text-emerald-400" />
+              <span>FILTER:</span>
+            </div>
 
-          <div className="flex flex-wrap items-center gap-1.5">
             {[
               { id: 'all', label: 'All Sources' },
-              { id: 'critical_toxic', label: 'Critical Toxic', color: 'bg-red-500/20 text-red-300 border-red-500/40' },
-              { id: 'caution_turbid', label: 'Caution / Turbid', color: 'bg-amber-500/20 text-amber-300 border-amber-500/40' },
-              { id: 'safe', label: 'Verified Safe', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' },
-            ].map((f) => (
-              <button
-                key={f.id}
-                onClick={() => setStatusFilter(f.id as any)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
-                  statusFilter === f.id
-                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-md shadow-emerald-950/40'
-                    : 'bg-slate-800/60 text-slate-300 border-slate-700/60 hover:bg-slate-700'
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
+              { id: 'critical_toxic', label: 'Critical Toxic', dot: 'bg-red-400' },
+              { id: 'caution_turbid', label: 'Caution', dot: 'bg-amber-400' },
+              { id: 'safe', label: 'Potable Safe', dot: 'bg-emerald-400' },
+            ].map((f) => {
+              const isActive = statusFilter === f.id;
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => setStatusFilter(f.id as any)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
+                    isActive
+                      ? 'bg-emerald-600 text-white font-semibold shadow-sm'
+                      : 'bg-[#141D2D] text-slate-300 hover:text-white border border-white/[0.06]'
+                  }`}
+                >
+                  {f.dot && <span className={`h-1.5 w-1.5 rounded-full ${f.dot}`} />}
+                  <span>{f.label}</span>
+                </button>
+              );
+            })}
           </div>
+
+          {/* View Mode Switcher (Spatial Map vs Table vs Redress) */}
+          <div className="flex items-center gap-1 bg-[#141D2D] border border-white/[0.08] rounded-lg p-1 shrink-0 self-end sm:self-auto">
+            <button
+              onClick={() => setActiveView('map')}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+                activeView === 'map'
+                  ? 'bg-white/[0.08] text-white font-semibold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Map className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Spatial Map</span>
+            </button>
+
+            <button
+              onClick={() => setActiveView('table')}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+                activeView === 'table'
+                  ? 'bg-white/[0.08] text-white font-semibold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <TableIcon className="h-3.5 w-3.5 text-cyan-400" />
+              <span>Ledger Table</span>
+            </button>
+
+            <button
+              onClick={() => setActiveView('redress')}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+                activeView === 'redress'
+                  ? 'bg-white/[0.08] text-white font-semibold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Scale className="h-3.5 w-3.5 text-amber-400" />
+              <span>Redress Hub</span>
+            </button>
+          </div>
+
         </div>
 
-        {/* 2-Column Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
-          {/* Left Column: Interactive Map & Voice Bulletin (7 cols on lg) */}
-          <div className="lg:col-span-7 space-y-4">
-            {/* Geospatial Map */}
-            <div className="h-[480px] w-full">
-              <MapWrapper
-                waterPoints={filteredWaterPoints}
-                selectedWaterPoint={selectedWaterPoint}
-                onSelectWaterPoint={(pt) => setSelectedWaterPoint(pt)}
-                concessions={concessions}
-                showConcessions={showConcessions}
-              />
-            </div>
-
-            {/* Voice Bulletin Component for Audio Accessibility */}
-            <VoiceBulletinPlayer
-              waterPoint={selectedWaterPoint}
-              currentLanguage={currentLanguage}
-              safeAlternative={safeAlternative}
-            />
-
-            {/* Quick Community Switcher Bar */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-400 block mb-2.5">
-                Observed Ghana Mining Basins & Sources
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {waterPoints.slice(0, 4).map((pt) => {
-                  const isCur = selectedWaterPoint.id === pt.id;
-                  const isTox = pt.currentStatus === 'critical_toxic';
-                  return (
-                    <button
-                      key={pt.id}
-                      onClick={() => setSelectedWaterPoint(pt)}
-                      className={`text-left p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 ${
-                        isCur
-                          ? 'bg-slate-800 border-emerald-500 shadow-md'
-                          : 'bg-slate-900/60 border-slate-800 hover:bg-slate-800/40'
-                      }`}
-                    >
-                      <div className="min-w-0">
-                        <p className="font-bold text-xs text-white truncate">{pt.name}</p>
-                        <p className="text-[10px] text-slate-400 truncate">{pt.community}</p>
-                      </div>
-                      <span className={`h-2.5 w-2.5 rounded-full shrink-0 ${isTox ? 'bg-red-500' : 'bg-emerald-500'}`} />
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Water Point Inspection Card & Safe Alternative (5 cols on lg) */}
-          <div className="lg:col-span-5 space-y-4">
-            {/* Water Point Full Detail Card */}
-            {selectedWaterPoint && (
-              <WaterPointCard
-                waterPoint={selectedWaterPoint}
-                onOpenPetition={handleOpenPetition}
-                onOpenAuditTrail={handleOpenAuditTrail}
-                onFindSafeAlternative={(pt) => {
-                  if (safeAlternative) setSelectedWaterPoint(safeAlternative);
-                }}
-                currentLanguage={currentLanguage}
-              />
-            )}
-
-            {/* Safe Alternative Finder (If selected point is contaminated) */}
-            {selectedWaterPoint && selectedWaterPoint.currentStatus !== 'safe' && safeAlternative && (
-              <SafeAlternativeFinder
-                currentWaterPoint={selectedWaterPoint}
-                safeAlternative={safeAlternative}
-                onSelectSafePoint={(safePt) => setSelectedWaterPoint(safePt)}
-                currentLanguage={currentLanguage}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* 4. Strategic Context & Hackathon Alignment Section */}
-        <div className="mt-12 pt-8 border-t border-slate-800/80">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* VIEW 1: SPATIAL MAP & TELEMETRY WORKSPACE */}
+        {activeView === 'map' && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
-            {/* Pillar 1: Root Cause & Peace Building */}
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="h-9 w-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <Droplets className="h-5 w-5" />
+            {/* Left Column (7 cols on lg): Interactive Map, Audio Bulletin & Basin Feed */}
+            <div className="lg:col-span-7 space-y-4">
+              
+              {/* Geospatial Map Container */}
+              <div className="h-[480px] w-full">
+                <MapWrapper
+                  waterPoints={filteredWaterPoints}
+                  selectedWaterPoint={selectedWaterPoint}
+                  onSelectWaterPoint={(pt) => setSelectedWaterPoint(pt)}
+                  concessions={concessions}
+                  showConcessions={showConcessions}
+                />
               </div>
-              <h4 className="font-extrabold text-sm text-white">
-                Galamsey & Water Peace
+
+              {/* Emergency Civic Radio Voice Bulletin */}
+              <VoiceBulletinPlayer
+                waterPoint={selectedWaterPoint}
+                currentLanguage={currentLanguage}
+                safeAlternative={safeAlternative}
+              />
+
+              {/* Active Basin Monitoring Stations Feed */}
+              <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-4 shadow-xl">
+                <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/[0.06]">
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-medium">
+                    Active River Basin Stations ({waterPoints.length})
+                  </span>
+                  <button
+                    onClick={() => setActiveView('table')}
+                    className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-mono transition-colors"
+                  >
+                    <span>View all in table</span>
+                    <ChevronRight className="h-3 w-3" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {waterPoints.map((pt) => {
+                    const isCur = selectedWaterPoint?.id === pt.id;
+                    const isTox = pt.currentStatus === 'critical_toxic';
+                    const isSafe = pt.currentStatus === 'safe';
+
+                    return (
+                      <button
+                        key={pt.id}
+                        onClick={() => setSelectedWaterPoint(pt)}
+                        className={`text-left p-3 rounded-lg border transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                          isCur
+                            ? 'bg-emerald-500/[0.08] border-emerald-500/50 shadow-sm'
+                            : 'bg-[#141D2D]/60 border-white/[0.04] hover:bg-[#141D2D] hover:border-white/[0.1]'
+                        }`}
+                      >
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5">
+                            <p className="font-semibold text-xs text-white truncate">{pt.name}</p>
+                            {isCur && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
+                            )}
+                          </div>
+                          <p className="text-[11px] text-slate-400 truncate mt-0.5">
+                            {pt.community} • {pt.riverBasin || pt.district}
+                          </p>
+                        </div>
+
+                        <div className="text-right shrink-0">
+                          <span className={`font-mono text-xs font-bold block ${
+                            isTox ? 'text-red-400' : isSafe ? 'text-emerald-400' : 'text-amber-400'
+                          }`}>
+                            {pt.metrics.turbidityNtu} NTU
+                          </span>
+                          <span className="text-[9px] font-mono text-slate-500 block">
+                            {pt.upstreamMiningDistanceKm} km mine
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column (5 cols on lg): Water Point Inspector & Safe Alternative */}
+            <div className="lg:col-span-5 space-y-4">
+              {selectedWaterPoint && (
+                <WaterPointCard
+                  waterPoint={selectedWaterPoint}
+                  onOpenPetition={handleOpenPetition}
+                  onOpenAuditTrail={handleOpenAuditTrail}
+                  onFindSafeAlternative={(pt) => {
+                    if (safeAlternative) setSelectedWaterPoint(safeAlternative);
+                  }}
+                  currentLanguage={currentLanguage}
+                />
+              )}
+
+              {/* Safe Alternative Quick Switcher (If point is contaminated) */}
+              {selectedWaterPoint && selectedWaterPoint.currentStatus !== 'safe' && safeAlternative && (
+                <SafeAlternativeFinder
+                  currentWaterPoint={selectedWaterPoint}
+                  safeAlternative={safeAlternative}
+                  onSelectSafePoint={(safePt) => setSelectedWaterPoint(safePt)}
+                  currentLanguage={currentLanguage}
+                />
+              )}
+            </div>
+
+          </div>
+        )}
+
+        {/* VIEW 2: BASIN REGISTRY LEDGER TABLE */}
+        {activeView === 'table' && (
+          <BasinRegistryTable
+            waterPoints={waterPoints}
+            selectedWaterPoint={selectedWaterPoint}
+            onSelectWaterPoint={(pt) => setSelectedWaterPoint(pt)}
+            onOpenPetition={handleOpenPetition}
+            onOpenAuditTrail={handleOpenAuditTrail}
+            onSwitchToMap={() => setActiveView('map')}
+            currentLanguage={currentLanguage}
+          />
+        )}
+
+        {/* VIEW 3: STATUTORY REDRESS & LEGAL HUB */}
+        {activeView === 'redress' && (
+          <div className="space-y-6 animate-in fade-in duration-200">
+            
+            {/* Legal Redress Header */}
+            <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-6 shadow-2xl">
+              <div className="max-w-3xl space-y-2">
+                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                  STATUTORY ACCOUNTABILITY FRAMEWORK
+                </span>
+                <h3 className="text-xl font-bold tracking-tight text-white">
+                  Civic Legal Redress & Executive Mobilization Engine
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Information without statutory enforcement cannot protect Ghana’s rivers. AsuoSafi transforms verified citizen environmental audits into formal legal instruments with verifiable citations under Ghanaian constitutional and statutory law.
+                </p>
+              </div>
+            </div>
+
+            {/* Statutory Pillars Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              {/* Pillar 1: Water Resources Commission Act */}
+              <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-5 space-y-3">
+                <div className="h-9 w-9 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center">
+                  <Scale className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-white">Act 522 (Water Resources)</h4>
+                  <p className="text-[11px] font-mono text-emerald-400 mt-0.5">Section 24 & Section 29</p>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Grants statutory powers to prohibit the discharge of untreated industrial tailings, silt, or mining wash-water into national water bodies. Empowers District Assemblies to seal unlawful diversions.
+                </p>
+              </div>
+
+              {/* Pillar 2: Minerals & Mining Act */}
+              <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-5 space-y-3">
+                <div className="h-9 w-9 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center">
+                  <ShieldAlert className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-white">Act 995 (Mining Amendment)</h4>
+                  <p className="text-[11px] font-mono text-amber-400 mt-0.5">Section 99 & Section 100</p>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Criminalizes dredging or mining within 100 meters of a water body without an EPA environmental permit. Prescribes mandatory prison sentences and confiscation of excavators to the State.
+                </p>
+              </div>
+
+              {/* Pillar 3: Whistleblower Protection */}
+              <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-5 space-y-3">
+                <div className="h-9 w-9 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center">
+                  <ShieldCheck className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-white">Act 720 (Whistleblower)</h4>
+                  <p className="text-[11px] font-mono text-cyan-400 mt-0.5">Section 12 & Section 18</p>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Guarantees full civil and criminal immunity to citizens reporting environmental degradation or public hazards to statutory authorities, protecting monitors from local cartel intimidation.
+                </p>
+              </div>
+
+            </div>
+
+            {/* Active Grievances List */}
+            <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-5 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+                <h4 className="font-bold text-sm text-white">
+                  Contaminated Basins Requiring Immediate Statutory Filing
+                </h4>
+                <span className="text-[10px] font-mono text-slate-400">
+                  {waterPoints.filter(p => p.currentStatus === 'critical_toxic').length} Actions Pending
+                </span>
+              </div>
+
+              <div className="space-y-3">
+                {waterPoints.filter(p => p.currentStatus === 'critical_toxic').map((pt) => (
+                  <div
+                    key={pt.id}
+                    className="p-3.5 bg-[#141D2D] border border-white/[0.06] rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-xs text-white">{pt.name}</span>
+                        <span className="text-[10px] font-mono text-red-400 bg-red-500/10 px-1.5 py-0.2 rounded border border-red-500/20">
+                          {pt.metrics.turbidityNtu} NTU
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        Target: District Chief Executive ({pt.district}, {pt.region} Region)
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => handleOpenPetition(pt)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-red-600 hover:bg-red-500 text-white shadow-sm transition-all cursor-pointer shrink-0"
+                    >
+                      <FileText className="h-3.5 w-3.5" />
+                      <span>Prepare Statutory Petition</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        )}
+
+        {/* 4. Strategic Governance & Impact Architecture */}
+        <div className="mt-12 pt-8 border-t border-white/[0.08]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            
+            {/* Pillar 1: Evidence-Based Peace */}
+            <div className="bg-[#0E1524] border border-white/[0.06] rounded-xl p-5 space-y-2.5">
+              <div className="h-8 w-8 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center">
+                <Droplets className="h-4 w-4" />
+              </div>
+              <h4 className="font-bold text-sm text-white font-sans">
+                Evidence-Based Water Peace
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                By replacing unverified rumors with decentralized, multi-witness water quality data, AsuoSafi defuses tensions between rural farming communities, mining task forces, and traditional authorities.
+                By substituting unverified social media rumors with decentralized, multi-witness chemical assays, AsuoSafi builds verifiable consensus between farmers, miners, and traditional councils.
               </p>
             </div>
 
-            {/* Pillar 2: Pan-African Scalability */}
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="h-9 w-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
-                <Globe2 className="h-5 w-5" />
+            {/* Pillar 2: Pan-African Extractive Scalability */}
+            <div className="bg-[#0E1524] border border-white/[0.06] rounded-xl p-5 space-y-2.5">
+              <div className="h-8 w-8 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center">
+                <Globe2 className="h-4 w-4" />
               </div>
-              <h4 className="font-extrabold text-sm text-white">
+              <h4 className="font-bold text-sm text-white font-sans">
                 Pan-African Scalability
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                The core ledger schema seamlessly extends to artisanal mining basins across the DRC (coltan/cobalt in Katanga), South Africa (Zama Zama gold runoff in Gauteng), and Zimbabwe.
+                The core ledger architecture seamlessly extends to artisanal mining basins across Africa: Katanga cobalt corridors in DR Congo, Zama Zama acid-mine drainage in South Africa, and Kadoma gold belts in Zimbabwe.
               </p>
             </div>
 
-            {/* Pillar 3: Actionable Statutory Redress */}
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 space-y-2">
-              <div className="h-9 w-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
-                <ShieldAlert className="h-5 w-5" />
+            {/* Pillar 3: Grounded In Statutory Law */}
+            <div className="bg-[#0E1524] border border-white/[0.06] rounded-xl p-5 space-y-2.5">
+              <div className="h-8 w-8 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center">
+                <ShieldAlert className="h-4 w-4" />
               </div>
-              <h4 className="font-extrabold text-sm text-white">
-                Statutory Redress Engine
+              <h4 className="font-bold text-sm text-white font-sans">
+                Actionable Statutory Redress
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Information is only the start: 1-click legal petitions cite Section 24 of Ghana’s Act 522 and Act 995, mobilizing District Assemblies and EPA officers into real-world enforcement.
+                1-click statutory petitions cite Ghana's Act 522 and Act 995, equipping citizens with formal legal instruments to demand prompt enforcement by District Assemblies and the EPA.
               </p>
             </div>
+
           </div>
         </div>
+
       </main>
 
-      {/* 5. Footer */}
-      <footer className="border-t border-slate-800 bg-slate-950 py-6 px-4 sm:px-6 text-center text-xs text-slate-500">
+      {/* 5. Institutional Footer */}
+      <footer className="border-t border-white/[0.08] bg-[#06090F] py-6 px-4 sm:px-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>
-            <strong className="text-slate-300">AsuoSafi</strong> • OSF × Andela Hackathon Capstone Project
+          <p className="text-slate-400">
+            <strong className="text-slate-200">AsuoSafi</strong> • National Extractive Water & Environmental Safety Ledger
           </p>
-          <p className="text-[11px]">
-            Information You Can Trust • Built for African Communities Affected by Artisanal Mining
+          <p className="text-[11px] font-mono text-slate-500">
+            OSF × Andela Hackathon Capstone • Open Civic Data Standard v1.2
           </p>
         </div>
       </footer>
@@ -295,6 +508,7 @@ export default function Home() {
           currentLanguage={currentLanguage}
         />
       )}
+
     </div>
   );
 }

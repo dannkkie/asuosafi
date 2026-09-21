@@ -9,6 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        obsidian: {
+          950: '#06090F',
+          900: '#0B0F17',
+          850: '#0F1522',
+          800: '#141D2D',
+          750: '#1B263B',
+          700: '#223049',
+        },
         safe: {
           50: '#ecfdf5',
           100: '#d1fae5',
@@ -34,18 +42,23 @@ const config: Config = {
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
+          400: '#38bdf8',
           500: '#0ea5e9',
           600: '#0284c7',
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
         },
-        kale: {
-          800: '#064e3b',
-          900: '#022c22',
-          950: '#011c15',
-        }
       },
+      fontFamily: {
+        sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+      },
+      boxShadow: {
+        'glow-emerald': '0 0 20px -5px rgba(16, 185, 129, 0.25)',
+        'glow-red': '0 0 20px -5px rgba(239, 68, 68, 0.25)',
+        'glow-amber': '0 0 20px -5px rgba(245, 158, 11, 0.25)',
+      }
     },
   },
   plugins: [],

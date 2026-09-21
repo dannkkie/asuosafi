@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Navigation, CheckCircle2, Droplet, Clock, ShieldCheck } from 'lucide-react';
+import { Navigation, CheckCircle, Clock, Droplets, ShieldCheck, ArrowRight } from 'lucide-react';
 import { WaterPoint, SupportedLanguage } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
 import { calculateDistanceKm } from '@/utils/crypto';
@@ -34,68 +34,68 @@ export const SafeAlternativeFinder: React.FC<SafeAlternativeFinderProps> = ({
   const walkingMinutes = Math.max(5, Math.round((distanceKm / 4) * 60));
 
   return (
-    <div className="bg-gradient-to-br from-emerald-950/60 to-slate-900 border-2 border-emerald-500/50 rounded-2xl p-4 text-white shadow-xl">
-      <div className="flex items-center gap-2 text-emerald-400 mb-2">
-        <CheckCircle2 className="h-5 w-5 shrink-0" />
-        <span className="font-bold text-sm tracking-wide uppercase">
-          {t.nearestSafeDistance}
+    <div className="bg-[#0E1524] border border-emerald-500/30 rounded-xl p-4 text-slate-100 shadow-xl space-y-3.5">
+      
+      {/* Header */}
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-emerald-400">
+          <CheckCircle className="h-4 w-4" />
+          <span className="text-xs font-mono uppercase tracking-wider font-semibold">
+            Nearest Potable Water Alternative
+          </span>
+        </div>
+        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          {safeAlternative.sourceType}
         </span>
       </div>
 
-      <div className="bg-slate-900/80 border border-emerald-500/30 rounded-xl p-3 mb-3">
-        <div className="flex justify-between items-start gap-2">
+      {/* Target Water Point Info Box */}
+      <div className="bg-[#141D2D] border border-white/[0.06] rounded-lg p-3">
+        <div className="flex justify-between items-start">
           <div>
-            <h4 className="font-bold text-base text-emerald-100">{safeAlternative.name}</h4>
-            <p className="text-xs text-slate-300">{safeAlternative.community}, {safeAlternative.district}</p>
+            <h4 className="font-bold text-sm text-white">{safeAlternative.name}</h4>
+            <p className="text-xs text-slate-400 mt-0.5">{safeAlternative.community}, {safeAlternative.district}</p>
           </div>
-          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shrink-0">
-            {safeAlternative.sourceType}
+          <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+            {safeAlternative.metrics.turbidityNtu} NTU
           </span>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-slate-800 text-center">
-          <div className="bg-slate-800/60 rounded-lg p-1.5">
-            <span className="text-[10px] text-slate-400 block">Distance</span>
-            <span className="text-xs font-bold text-emerald-300 flex items-center justify-center gap-0.5">
-              <Navigation className="h-3 w-3" />
-              {distanceKm} km
-            </span>
+        {/* Metric Badges */}
+        <div className="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-white/[0.06] text-center text-xs">
+          <div className="bg-[#0B0F17] rounded p-1.5 border border-white/[0.04]">
+            <span className="text-[10px] text-slate-500 block uppercase font-mono">Distance</span>
+            <span className="font-mono font-bold text-slate-200 mt-0.5 block">{distanceKm} km</span>
           </div>
 
-          <div className="bg-slate-800/60 rounded-lg p-1.5">
-            <span className="text-[10px] text-slate-400 block">Walking Time</span>
-            <span className="text-xs font-bold text-emerald-300 flex items-center justify-center gap-0.5">
-              <Clock className="h-3 w-3" />
-              ~{walkingMinutes} min
-            </span>
+          <div className="bg-[#0B0F17] rounded p-1.5 border border-white/[0.04]">
+            <span className="text-[10px] text-slate-500 block uppercase font-mono">Walking Time</span>
+            <span className="font-mono font-bold text-slate-200 mt-0.5 block">~{walkingMinutes} min</span>
           </div>
 
-          <div className="bg-slate-800/60 rounded-lg p-1.5">
-            <span className="text-[10px] text-slate-400 block">Purity</span>
-            <span className="text-xs font-bold text-emerald-300 flex items-center justify-center gap-0.5">
-              <Droplet className="h-3 w-3" />
-              {safeAlternative.metrics.turbidityNtu} NTU
-            </span>
+          <div className="bg-[#0B0F17] rounded p-1.5 border border-white/[0.04]">
+            <span className="text-[10px] text-slate-500 block uppercase font-mono">Water Purity</span>
+            <span className="font-mono font-bold text-emerald-400 mt-0.5 block">100% Safe</span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5 text-xs text-slate-300">
-          <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
-          <span className="text-[11px] leading-tight">
-            Verified Clean by Ghana Water Co. & Local Water Board
-          </span>
+      {/* Action Strip */}
+      <div className="flex items-center justify-between gap-3 pt-1">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+          <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+          <span>Certified clean by Ghana Water Company Ltd</span>
         </div>
 
         <button
           onClick={() => onSelectSafePoint(safeAlternative)}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950/40 transition-all active:scale-95 shrink-0"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all active:scale-95 cursor-pointer shrink-0"
         >
-          <Navigation className="h-3.5 w-3.5" />
-          <span>Switch to Safe Water</span>
+          <span>Select Safe Source</span>
+          <ArrowRight className="h-3.5 w-3.5" />
         </button>
       </div>
+
     </div>
   );
 };

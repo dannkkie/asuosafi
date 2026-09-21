@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Radio, Sparkles } from 'lucide-react';
+import { Radio, Volume2, VolumeX, ChevronDown, ChevronUp, Sparkles, AlertCircle, ShieldCheck } from 'lucide-react';
 import { WaterPoint, SupportedLanguage } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
 
@@ -17,6 +17,8 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
   safeAlternative,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
+  const [showTranscript, setShowTranscript] = useState(false);
   const t = TRANSLATIONS[currentLanguage];
 
   // Stop speech when water point or language changes
@@ -58,11 +60,13 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
     }
   };
 
+  const spokenText = generateSpokenText();
+
   const handleToggleSpeech = () => {
     if (typeof window === 'undefined') return;
 
     if (!('speechSynthesis' in window)) {
-      alert("Audio synthesis is not supported on this browser device.");
+      alert("Audio speech synthesis is not supported on this browser device.");
       return;
     }
 
@@ -72,9 +76,8 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
       return;
     }
 
-    const textToSpeak = generateSpokenText();
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.rate = 0.95;
+    const utterance = new SpeechSynthesisUtterance(spokenText);
+    utterance.rate = playbackSpeed;
     utterance.pitch = 1.0;
 
     utterance.onend = () => setIsPlaying(false);
@@ -85,67 +88,111 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-3 sm:p-4 text-white shadow-lg">
+    <div className="bg-[#0E1524] border border-white/[0.08] rounded-xl p-4 text-slate-100 shadow-xl space-y-3">
+      
+      {/* Top Dispatch Bar */}
       <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <div className={`p-2 rounded-lg ${isPlaying ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-400'}`}>
+        <div className="flex items-center gap-3">
+          <div className={`p-2 rounded-lg border ${
+            isPlaying
+              ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+              : 'bg-[#141D2D] text-slate-400 border-white/[0.06]'
+          }`}>
             <Radio className={`h-4 w-4 ${isPlaying ? 'animate-pulse text-emerald-400' : ''}`} />
           </div>
+
           <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                {t.audioWarningTitle}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-200">
+                Civic Radio Voice Dispatch
               </span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 border border-slate-700">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.06] text-slate-300 border border-white/[0.08]">
                 {currentLanguage.toUpperCase()}
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 line-clamp-1">
-              {waterPoint.name} — {waterPoint.community}
+            <p className="text-[11px] text-slate-400 mt-0.5">
+              Low-literacy audio notice for <strong className="text-slate-300">{waterPoint.name}</strong>
             </p>
           </div>
         </div>
 
-        {/* Play/Pause button */}
+        {/* Controls: Speed + Play/Stop */}
+        <div className="flex items-center gap-2">
+          
+          {/* Playback speed toggle */}
+          <button
+            onClick={() => setPlaybackSpeed(prev => prev === 1.0 ? 0.85 : 1.0)}
+            className="hidden sm:inline-flex items-center px-2 py-1 rounded bg-[#141D2D] hover:bg-[#1B263B] text-[10px] font-mono text-slate-300 border border-white/[0.06] transition-colors"
+            title="Adjust speech rate (slower for clarity)"
+          >
+            {playbackSpeed}x Speed
+          </button>
+
+          {/* Primary Audio Toggle */}
+          <button
+            onClick={handleToggleSpeech}
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-all active:scale-95 cursor-pointer ${
+              isPlaying
+                ? 'bg-red-600 hover:bg-red-500 text-white'
+                : 'bg-emerald-600 hover:bg-emerald-500 text-white'
+            }`}
+          >
+            {isPlaying ? (
+              <>
+                <VolumeX className="h-4 w-4" />
+                <span>Stop Broadcast</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="h-4 w-4" />
+                <span>Play Voice Bulletin</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Animated Waveform Studio Bar */}
+      <div className="bg-[#141D2D] border border-white/[0.04] rounded-lg px-3 py-2 flex items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-1.5">
+          {[4, 12, 8, 16, 10, 6, 14, 9, 15, 7, 11, 5].map((height, idx) => (
+            <span
+              key={idx}
+              className={`w-1 rounded-full transition-all duration-150 ${
+                isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-slate-700'
+              }`}
+              style={{
+                height: isPlaying ? `${height}px` : '4px',
+                animationDelay: `${idx * 80}ms`
+              }}
+            />
+          ))}
+          <span className="text-[11px] font-mono text-slate-400 ml-2">
+            {isPlaying ? 'Broadcasting audio bulletin...' : 'Ready for local playback'}
+          </span>
+        </div>
+
         <button
-          onClick={handleToggleSpeech}
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-md active:scale-95 ${
-            isPlaying
-              ? 'bg-red-600 hover:bg-red-500 text-white shadow-red-900/30'
-              : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-emerald-950/40'
-          }`}
+          onClick={() => setShowTranscript(!showTranscript)}
+          className="text-[11px] text-slate-400 hover:text-slate-200 flex items-center gap-1 font-mono transition-colors"
         >
-          {isPlaying ? (
-            <>
-              <VolumeX className="h-4 w-4" />
-              <span>Stop</span>
-            </>
-          ) : (
-            <>
-              <Volume2 className="h-4 w-4" />
-              <span>{t.audioPlayPrompt}</span>
-            </>
-          )}
+          <span>{showTranscript ? 'Hide Script' : 'View Script'}</span>
+          {showTranscript ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
         </button>
       </div>
 
-      {/* Audio Waveform visualization indicator when playing */}
-      {isPlaying && (
-        <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between gap-3 text-xs text-emerald-300">
-          <div className="flex items-center gap-1">
-            <span className="h-2 w-1 bg-emerald-400 animate-bounce rounded-full" style={{ animationDelay: '0ms' }} />
-            <span className="h-4 w-1 bg-emerald-400 animate-bounce rounded-full" style={{ animationDelay: '150ms' }} />
-            <span className="h-3 w-1 bg-emerald-400 animate-bounce rounded-full" style={{ animationDelay: '300ms' }} />
-            <span className="h-5 w-1 bg-emerald-400 animate-bounce rounded-full" style={{ animationDelay: '75ms' }} />
-            <span className="h-2 w-1 bg-emerald-400 animate-bounce rounded-full" style={{ animationDelay: '220ms' }} />
-            <span className="ml-2 text-[11px] font-medium">{t.audioPlaying}</span>
-          </div>
-          <span className="text-[10px] text-slate-400 flex items-center gap-1">
-            <Sparkles className="h-3 w-3 text-emerald-400" />
-            Audio Accessibility Mode
+      {/* Transcript Accordion */}
+      {showTranscript && (
+        <div className="bg-[#0B0F17] border border-white/[0.06] rounded-lg p-3 text-xs text-slate-300 space-y-1.5 animate-in fade-in duration-150">
+          <span className="text-[10px] font-mono uppercase text-slate-500 block">
+            Broadcast Transcript ({currentLanguage.toUpperCase()}):
           </span>
+          <p className="leading-relaxed text-slate-200 italic">
+            "{spokenText}"
+          </p>
         </div>
       )}
+
     </div>
   );
 };

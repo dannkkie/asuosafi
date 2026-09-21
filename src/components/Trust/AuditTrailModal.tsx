@@ -6,14 +6,14 @@ import {
   ShieldCheck,
   Hash,
   UserCheck,
-  CheckCircle2,
+  CheckCircle,
   Calendar,
   Layers,
-  MapPin,
   Lock,
-  Award
+  Award,
+  FileCheck
 } from 'lucide-react';
-import { WaterPoint, VerificationRecord, SupportedLanguage } from '@/types';
+import { WaterPoint, SupportedLanguage } from '@/types';
 import { INITIAL_VERIFICATIONS } from '@/data/mockData';
 import { TRANSLATIONS } from '@/utils/translations';
 
@@ -67,25 +67,25 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-white animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-6 overflow-y-auto">
+      <div className="bg-[#0E1524] border border-white/[0.1] rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-100 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-cyan-950 to-slate-900 border-b border-cyan-900/60 p-4 sm:p-5 flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-cyan-900/60 text-cyan-400 border border-cyan-800">
+        <div className="bg-[#0B0F17] border-b border-white/[0.08] p-4 sm:p-5 flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
               <ShieldCheck className="h-6 w-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base sm:text-lg font-black tracking-tight text-white">
+                <h3 className="text-base sm:text-lg font-bold tracking-tight text-white font-sans">
                   Cryptographic Trust & Attestation Ledger
                 </h3>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
+                <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 font-semibold">
                   {verification.calculatedTrustScore}% Integrity
                 </span>
               </div>
-              <p className="text-xs text-cyan-200/80 mt-0.5">
+              <p className="text-xs text-slate-400 mt-0.5">
                 {waterPoint.name} — {waterPoint.community}
               </p>
             </div>
@@ -93,7 +93,7 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer"
             title={t.close}
           >
             <X className="h-5 w-5" />
@@ -101,33 +101,33 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-200 bg-slate-950/70">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-200 bg-[#06090F]/90">
           
           {/* SHA-256 Hash Stamp */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+          <div className="bg-[#141D2D] border border-white/[0.06] rounded-xl p-3.5 space-y-1.5">
             <div className="flex items-center justify-between text-slate-400">
-              <span className="text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 text-cyan-400">
+              <span className="text-[10px] font-mono uppercase tracking-wider flex items-center gap-1.5 text-cyan-400 font-semibold">
                 <Hash className="h-3.5 w-3.5" />
-                Immutable SHA-256 Audit Stamp
+                Immutable SHA-256 Chain of Custody Stamp
               </span>
-              <span className="text-[10px] text-emerald-400 flex items-center gap-1 font-semibold">
+              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1 font-semibold">
                 <Lock className="h-3 w-3" />
                 Tamper-Proof
               </span>
             </div>
-            <p className="font-mono text-[11px] text-cyan-200 bg-black/40 p-2 rounded-lg break-all border border-cyan-950 select-all">
+            <p className="font-mono text-[11px] text-cyan-200 bg-[#0B0F17] p-2.5 rounded-lg break-all border border-white/[0.06] select-all">
               {verification.sha256Hash}
             </p>
           </div>
 
           {/* Primary Observer / Submitter */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div className="bg-[#141D2D] border border-white/[0.06] rounded-xl p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 block">
                 Primary Field Observer
               </span>
               <p className="font-bold text-white text-sm mt-0.5 flex items-center gap-1.5">
-                <UserCheck className="h-4 w-4 text-cyan-400" />
+                <UserCheck className="h-4 w-4 text-cyan-400 shrink-0" />
                 {verification.reporterAlias}
               </p>
               <span className="text-[11px] text-slate-400 capitalize">
@@ -136,16 +136,16 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
             </div>
 
             <div className="sm:text-right">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 block">
                 Field Observation Timestamp
               </span>
               <p className="font-semibold text-slate-200 text-xs mt-0.5 flex items-center sm:justify-end gap-1">
                 <Calendar className="h-3.5 w-3.5 text-slate-400" />
                 {verification.observationDate}
               </p>
-              <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 mt-1 font-semibold">
-                <CheckCircle2 className="h-3 w-3" />
-                EXIF GPS Verified (&lt;50m)
+              <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 mt-1 font-semibold">
+                <CheckCircle className="h-3 w-3" />
+                EXIF GPS Spatial Accuracy &lt;50m
               </span>
             </div>
           </div>
@@ -153,31 +153,31 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
           {/* Independent Multi-Witness Attestations */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-300">
-                Multi-Witness Corroboration Attestations ({verification.attestations.length})
+              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-300 font-semibold">
+                Decentralized Attestations ({verification.attestations.length} Co-Signatories)
               </span>
-              <span className="text-[10px] text-emerald-400 font-semibold">
+              <span className="text-[10px] font-mono text-emerald-400 font-semibold">
                 Consensus Gate Passed
               </span>
             </div>
 
             <div className="space-y-2">
               {verification.attestations.map((att, i) => (
-                <div key={i} className="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-start justify-between gap-3 text-xs">
+                <div key={i} className="bg-[#141D2D] border border-white/[0.06] p-3 rounded-xl flex items-start justify-between gap-3 text-xs">
                   <div className="flex items-start gap-2.5">
-                    <div className="h-7 w-7 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="h-7 w-7 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
                       <Award className="h-4 w-4" />
                     </div>
                     <div>
                       <p className="font-bold text-white text-xs">{att.witnessNameOrRole}</p>
                       <p className="text-[11px] text-slate-400">{att.organization}</p>
-                      <span className="text-[10px] text-cyan-300 capitalize inline-block mt-0.5">
-                        Verified via: {att.verifiedVia.replace(/_/g, ' ')}
+                      <span className="text-[10px] font-mono text-cyan-300 capitalize inline-block mt-0.5">
+                        Verification Method: {att.verifiedVia.replace(/_/g, ' ')}
                       </span>
                     </div>
                   </div>
 
-                  <span className="text-[10px] text-slate-400 shrink-0">
+                  <span className="text-[10px] font-mono text-slate-500 shrink-0">
                     {att.verifiedAt}
                   </span>
                 </div>
@@ -186,11 +186,11 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
           </div>
 
           {/* Inspection Protocol Notes */}
-          <div className="bg-slate-900/60 border border-slate-800/80 p-3 rounded-xl text-xs text-slate-300">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-1">
-              Field Protocol Summary
+          <div className="bg-[#141D2D]/60 border border-white/[0.04] p-3 rounded-xl text-xs text-slate-300">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 block mb-1">
+              Cryptographic Consensus Standard
             </span>
-            <p className="leading-relaxed text-slate-300 text-[11px]">
+            <p className="leading-relaxed text-slate-400 text-[11px]">
               {verification.notes}
             </p>
           </div>
@@ -198,13 +198,13 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-slate-900 border-t border-slate-800 p-4 flex items-center justify-between">
-          <span className="text-[11px] text-slate-400">
-            AsuoSafi Protocol v1.0 • Powered by Multi-Attestation Consensus
+        <div className="bg-[#0B0F17] border-t border-white/[0.08] p-4 flex items-center justify-between">
+          <span className="text-[11px] font-mono text-slate-500">
+            AsuoSafi Protocol v1.2 • Multi-Witness Ledger Security
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white transition-all cursor-pointer"
+            className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-[#141D2D] hover:bg-[#1B263B] text-white border border-white/[0.08] transition-colors cursor-pointer"
           >
             {t.close}
           </button>
