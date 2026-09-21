@@ -65,10 +65,10 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
             const angleDeg = 180 - (index / (totalTicks - 1)) * 180;
             const angleRad = (angleDeg * Math.PI) / 180;
 
-            const xInner = center + (radius - tickLength) * Math.cos(angleRad);
-            const yInner = center - (radius - tickLength) * Math.sin(angleRad);
-            const xOuter = center + radius * Math.cos(angleRad);
-            const yOuter = center - radius * Math.sin(angleRad);
+            const xInner = Number((center + (radius - tickLength) * Math.cos(angleRad)).toFixed(2));
+            const yInner = Number((center - (radius - tickLength) * Math.sin(angleRad)).toFixed(2));
+            const xOuter = Number((center + radius * Math.cos(angleRad)).toFixed(2));
+            const yOuter = Number((center - radius * Math.sin(angleRad)).toFixed(2));
 
             const isActive = index < activeTicks;
             const color = getColor(index);
