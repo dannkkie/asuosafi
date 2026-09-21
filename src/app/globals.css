@@ -2,37 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   DESIGN.md SPECIFICATIONS
+   MODE 1: Google Material Design Elevation (Light)
+   MODE 2: Netflix Cinematic Engine (Dark)
+   ========================================================================== */
+
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-rgb: 243, 244, 246;
+  /* Google Material Tokens */
+  --primary: #1a73e8;
+  --on-primary: #ffffff;
+  --surface-bg: #f8f9fa;
+  --surface-container: #ffffff;
+  --text-primary: #1f2124;
+  --text-secondary: #5f6368;
+  --border: #e0e2e6;
+  --radius-medium: 12px;
+  --radius-pill: 24px;
+  --material-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
 }
 
 .dark {
-  --foreground-rgb: 241, 245, 249;
-  --background-rgb: 10, 12, 16;
+  /* Netflix Cinematic Tokens */
+  --primary: #e50914;
+  --primary-hover: #b80710;
+  --surface-bg: #141414;
+  --surface-container: #1f1f1f;
+  --surface-container-alt: #221f1f;
+  --text-primary: #f5f5f1;
+  --text-secondary: #a3a3a3;
+  --border: #2a2a2a;
+  --radius-medium: 8px;
+  --radius-compact: 4px;
+  --material-shadow: none;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #f3f4f6;
-  background-image: 
-    radial-gradient(circle at 85% 15%, rgba(254, 215, 170, 0.45) 0%, transparent 45%),
-    radial-gradient(circle at 15% 85%, rgba(187, 247, 208, 0.35) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(224, 242, 254, 0.25) 0%, transparent 50%);
-  background-attachment: fixed;
+  color: var(--text-primary);
+  background-color: var(--surface-bg);
+  letter-spacing: -0.01em;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.03em;
+}
+
 .dark body,
 html.dark body {
-  background-color: #0a0c10;
-  background-image: 
-    radial-gradient(circle at 80% 12%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 12% 88%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
-  background-attachment: fixed;
+  background-color: #141414;
+  color: #f5f5f1;
 }
 
 /* Custom scrollbars */
@@ -41,23 +62,23 @@ html.dark body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f1f3f4;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #1f1f1f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #dadce0;
   border-radius: 9999px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #333333;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #bdc1c6;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #444444;
 }
 
 /* Leaflet map styles */
@@ -65,36 +86,38 @@ html.dark body {
   width: 100%;
   height: 100%;
   z-index: 10;
-  border-radius: 0.75rem;
-  background-color: #f1f5f9 !important;
+  border-radius: 12px;
+  background-color: #f8f9fa !important;
 }
 .dark .leaflet-container {
-  background-color: #0b0f17 !important;
+  border-radius: 8px;
+  background-color: #141414 !important;
 }
 
 .leaflet-popup-content-wrapper {
   background-color: #ffffff !important;
-  color: #0f172a !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 0.75rem !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
+  color: #1f2124 !important;
+  border: 1px solid #e0e2e6 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15) !important;
   padding: 0 !important;
   overflow: hidden !important;
 }
 .dark .leaflet-popup-content-wrapper {
-  background-color: #121927 !important;
-  color: #f1f5f9 !important;
-  border: 1px solid #1e293b !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  background-color: #1f1f1f !important;
+  color: #f5f5f1 !important;
+  border: 1px solid #2a2a2a !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
 }
 
 .leaflet-popup-tip {
   background-color: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #e0e2e6 !important;
 }
 .dark .leaflet-popup-tip {
-  background-color: #121927 !important;
-  border: 1px solid #1e293b !important;
+  background-color: #1f1f1f !important;
+  border: 1px solid #2a2a2a !important;
 }
 
 .leaflet-popup-content {

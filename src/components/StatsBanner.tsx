@@ -29,23 +29,23 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
     : 0;
 
   return (
-    <section className="bg-white/60 dark:bg-[#0B0F17]/60 border-b border-slate-200/80 dark:border-slate-800/80 py-4 px-4 sm:px-6 lg:px-8 transition-colors duration-150 backdrop-blur-sm">
+    <section className="bg-[#f8f9fa] dark:bg-[#141414] border-b border-[#e0e2e6] dark:border-[#2a2a2a] py-4 px-4 sm:px-6 lg:px-8 transition-colors duration-150">
       <div className="max-w-7xl mx-auto">
         
         {/* Main 3-Column Telemetry Dashboard Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-stretch">
           
           {/* Card 1 (4 cols): National Basin Potability Pulse with Radial Arc Gauge */}
-          <div className="md:col-span-4 bg-white/85 dark:bg-[#121520] border border-slate-200/80 dark:border-[#1F2536] rounded-2xl p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none backdrop-blur-md flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-[#1E2536]">
+          <div className="md:col-span-4 bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 shadow-material dark:shadow-none flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 dark:bg-[#10B981] animate-pulse" />
-                <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-slate-200">
+                <span className="h-2 w-2 rounded-full bg-[#1e8e3e] dark:bg-[#e50914] animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-base dark:tracking-wide">
                   National Water Security Pulse
                 </span>
               </div>
-              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-slate-100/90 dark:bg-[#1A2030] text-slate-600 dark:text-slate-300 border border-slate-200/70 dark:border-[#273248]">
-                WHO Class Index
+              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full dark:rounded-[3px] bg-[#f1f3f4] dark:bg-[#181818] text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a]">
+                WHO Index
               </span>
             </div>
 
@@ -55,36 +55,36 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
                 label="Potability Rate"
                 sublabel={`${safePoints.length} of ${waterPoints.length} sources safe for consumption`}
                 size={170}
-                variant="opspulse"
+                variant="dynamic"
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-1.5 pt-2 border-t border-slate-100 dark:border-[#1E2536] text-center">
-              <div className="p-1.5 rounded-xl bg-emerald-500/10 dark:bg-[#0E241E] border border-emerald-500/20 dark:border-emerald-800/40">
-                <span className="text-[9px] uppercase font-mono text-emerald-800 dark:text-[#34D399] block font-medium">Safe</span>
-                <span className="font-mono font-bold text-xs text-emerald-700 dark:text-[#34D399]">{safePoints.length}</span>
+            <div className="grid grid-cols-3 gap-1.5 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] text-center">
+              <div className="p-1.5 rounded-[8px] dark:rounded-[4px] bg-emerald-50 dark:bg-[#172319] border border-emerald-200 dark:border-[#254228]">
+                <span className="text-[9px] uppercase font-mono text-emerald-800 dark:text-[#a7f3d0] block font-medium">Safe</span>
+                <span className="font-mono font-bold text-xs text-emerald-700 dark:text-[#a7f3d0]">{safePoints.length}</span>
               </div>
-              <div className="p-1.5 rounded-xl bg-amber-500/10 dark:bg-[#2A1D0E] border border-amber-500/20 dark:border-amber-800/40">
-                <span className="text-[9px] uppercase font-mono text-amber-800 dark:text-[#FBBF24] block font-medium">Caution</span>
-                <span className="font-mono font-bold text-xs text-amber-700 dark:text-[#FBBF24]">{cautionPoints.length}</span>
+              <div className="p-1.5 rounded-[8px] dark:rounded-[4px] bg-amber-50 dark:bg-[#282119] border border-amber-200 dark:border-[#523215]">
+                <span className="text-[9px] uppercase font-mono text-amber-800 dark:text-[#fde68a] block font-medium">Caution</span>
+                <span className="font-mono font-bold text-xs text-amber-700 dark:text-[#fde68a]">{cautionPoints.length}</span>
               </div>
-              <div className="p-1.5 rounded-xl bg-red-500/10 dark:bg-[#2E1215] border border-red-500/20 dark:border-red-800/40">
-                <span className="text-[9px] uppercase font-mono text-red-800 dark:text-[#F87171] block font-medium">Toxic</span>
-                <span className="font-mono font-bold text-xs text-red-700 dark:text-[#F87171]">{criticalPoints.length}</span>
+              <div className="p-1.5 rounded-[8px] dark:rounded-[4px] bg-red-50 dark:bg-[#2e1517] border border-red-200 dark:border-[#541e22]">
+                <span className="text-[9px] uppercase font-mono text-red-800 dark:text-[#fca5a5] block font-medium">Toxic</span>
+                <span className="font-mono font-bold text-xs text-red-700 dark:text-[#fca5a5]">{criticalPoints.length}</span>
               </div>
             </div>
           </div>
 
           {/* Card 2 (4 cols): Silt & Turbidity Equalizer Spectrum */}
-          <div className="md:col-span-4 bg-white/85 dark:bg-[#121520] border border-slate-200/80 dark:border-[#1F2536] rounded-2xl p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none backdrop-blur-md flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-[#1E2536]">
+          <div className="md:col-span-4 bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 shadow-material dark:shadow-none flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
               <div className="flex items-center gap-2">
-                <Activity className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-slate-200">
+                <Activity className="h-4 w-4 text-[#f9ab00] dark:text-[#e50914]" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-base dark:tracking-wide">
                   Galamsey Silt Dispersion
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-red-700 dark:text-[#F87171] font-bold bg-red-500/10 dark:bg-[#2E1215] px-2.5 py-0.5 rounded-full border border-red-500/20 dark:border-red-900/60">
+              <span className="text-[10px] font-mono text-red-700 dark:text-[#fca5a5] font-bold bg-red-50 dark:bg-[#2e1517] px-2.5 py-0.5 rounded-full dark:rounded-[3px] border border-red-200 dark:border-[#541e22]">
                 Avg {avgCriticalTurbidity} NTU
               </span>
             </div>
@@ -103,22 +103,22 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
                       className="flex-1 flex flex-col items-center gap-1 group relative"
                     >
                       <div
-                        className={`w-full rounded-t transition-all duration-300 ${
+                        className={`w-full rounded-t-[2px] transition-all duration-300 ${
                           isCritical
-                            ? 'bg-[#EF4444]'
+                            ? 'bg-[#d93025] dark:bg-[#e50914]'
                             : isSafe
-                            ? 'bg-[#10B981]'
-                            : 'bg-[#F59E0B]'
+                            ? 'bg-[#1e8e3e] dark:bg-[#1e8e3e]'
+                            : 'bg-[#f9ab00] dark:bg-[#f9ab00]'
                         }`}
                         style={{ height: `${heightPercent}%` }}
                       />
-                      <span className="text-[8px] font-mono text-slate-400 truncate w-full text-center">
+                      <span className="text-[8px] font-mono text-[#5f6368] dark:text-[#a3a3a3] truncate w-full text-center">
                         {pt.name.slice(0, 3).toUpperCase()}
                       </span>
 
                       {/* Tooltip on Hover */}
                       <div className="absolute bottom-full mb-1 hidden group-hover:flex flex-col items-center z-30 pointer-events-none">
-                        <div className="bg-slate-900 text-white text-[10px] font-mono rounded px-2 py-1 whitespace-nowrap shadow-lg">
+                        <div className="bg-[#1f2124] dark:bg-[#141414] border border-transparent dark:border-[#2a2a2a] text-white text-[10px] font-mono rounded-[4px] px-2 py-1 whitespace-nowrap shadow-material">
                           {pt.name}: {pt.metrics.turbidityNtu} NTU
                         </div>
                       </div>
@@ -127,72 +127,72 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
                 })}
               </div>
 
-              <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 mt-2 px-1 pt-2 border-t border-slate-100 dark:border-[#1E2536]">
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] mt-2 px-1 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a]">
                 <span>Safe Limit: &lt;5 NTU</span>
-                <span className="text-red-700 dark:text-[#F87171] font-bold">Severe Silt: &gt;50 NTU</span>
+                <span className="text-red-700 dark:text-[#fca5a5] font-bold">Severe Silt: &gt;50 NTU</span>
               </div>
             </div>
 
             {/* Bottom Telemetry Mini-Pill */}
-            <div className="flex items-center justify-between p-2 rounded-xl bg-slate-50/80 dark:bg-[#161B28] border border-slate-200/60 dark:border-[#232B3E] text-xs">
-              <span className="text-slate-600 dark:text-slate-400 text-[11px]">Primary Basin Silt:</span>
-              <span className="font-mono font-bold text-slate-900 dark:text-white">Pra & Offin Corridors</span>
+            <div className="flex items-center justify-between p-2 rounded-[8px] dark:rounded-[4px] bg-[#f8f9fa] dark:bg-[#181818] border border-[#e0e2e6] dark:border-[#2a2a2a] text-xs">
+              <span className="text-[#5f6368] dark:text-[#a3a3a3] text-[11px]">Primary Basin Silt:</span>
+              <span className="font-mono font-bold text-[#1f2124] dark:text-[#f5f5f1]">Pra & Offin Corridors</span>
             </div>
           </div>
 
           {/* Card 3 (4 cols): Decentralized Consensus & Statutory Enforcement */}
-          <div className="md:col-span-4 bg-white/85 dark:bg-[#121520] border border-slate-200/80 dark:border-[#1F2536] rounded-2xl p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none backdrop-blur-md flex flex-col justify-between">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-[#1E2536]">
+          <div className="md:col-span-4 bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 shadow-material dark:shadow-none flex flex-col justify-between">
+            <div className="flex items-center justify-between pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-sky-600 dark:text-[#60A5FA]" />
-                <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-slate-200">
+                <ShieldCheck className="h-4 w-4 text-[#1a73e8] dark:text-[#e50914]" />
+                <span className="text-xs font-bold uppercase tracking-wider text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-base dark:tracking-wide">
                   Civic Consensus & Legal Power
                 </span>
               </div>
-              <span className="text-[10px] font-mono font-bold text-blue-700 dark:text-[#60A5FA] bg-blue-500/10 dark:bg-[#0F1E38] px-2.5 py-0.5 rounded-full border border-blue-500/20 dark:border-blue-800/60">
+              <span className="text-[10px] font-mono font-bold text-[#1a73e8] dark:text-[#f5f5f1] bg-[#e8f0fe] dark:bg-[#181818] px-2.5 py-0.5 rounded-full dark:rounded-[3px] border border-[#d2e3fc] dark:border-[#2a2a2a]">
                 Act 522 / 995
               </span>
             </div>
 
             <div className="my-auto space-y-2.5 py-1">
               {/* Co-Signatories Metric */}
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-[#161B28] border border-slate-200/60 dark:border-[#232B3E]">
+              <div className="flex items-center justify-between p-2.5 rounded-[8px] dark:rounded-[4px] bg-[#f8f9fa] dark:bg-[#181818] border border-[#e0e2e6] dark:border-[#2a2a2a]">
                 <div className="flex items-center gap-2">
-                  <div className="h-7 w-7 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 flex items-center justify-center font-bold text-xs">
+                  <div className="h-7 w-7 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#2a2a2a] text-[#1a73e8] dark:text-[#f5f5f1] flex items-center justify-center font-bold text-xs">
                     {totalWitnesses}
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-slate-900 dark:text-white block">Verified Co-Signatories</span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400">Decentralized Community Monitored</span>
+                    <span className="text-xs font-bold text-[#1f2124] dark:text-[#f5f5f1] block">Verified Co-Signatories</span>
+                    <span className="text-[10px] text-[#5f6368] dark:text-[#a3a3a3]">Decentralized Community Monitored</span>
                   </div>
                 </div>
                 <BarcodeSignalMeter score={totalWitnesses} maxScore={25} status="safe" height={16} />
               </div>
 
               {/* Ready Petitions Metric */}
-              <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-[#161B28] border border-slate-200/60 dark:border-[#232B3E]">
+              <div className="flex items-center justify-between p-2.5 rounded-[8px] dark:rounded-[4px] bg-[#f8f9fa] dark:bg-[#181818] border border-[#e0e2e6] dark:border-[#2a2a2a]">
                 <div className="flex items-center gap-2">
-                  <div className="h-7 w-7 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-[#FBBF24] flex items-center justify-center">
+                  <div className="h-7 w-7 rounded-[6px] dark:rounded-[4px] bg-amber-100 dark:bg-[#282119] text-amber-800 dark:text-amber-400 flex items-center justify-center">
                     <Scale className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-slate-900 dark:text-white block">{criticalPoints.length} Statutory Petitions Ready</span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400">District Chief Executive Injunctions</span>
+                    <span className="text-xs font-bold text-[#1f2124] dark:text-[#f5f5f1] block">{criticalPoints.length} Statutory Petitions Ready</span>
+                    <span className="text-[10px] text-[#5f6368] dark:text-[#a3a3a3]">District Chief Executive Injunctions</span>
                   </div>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-amber-800 dark:text-[#FBBF24] px-2 py-0.5 rounded bg-amber-500/10 dark:bg-amber-950/60 border border-amber-500/20 dark:border-amber-800/60">
+                <span className="text-[10px] font-mono font-bold text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-[4px] bg-amber-50 dark:bg-[#282119] border border-amber-200 dark:border-[#523215]">
                   Ready
                 </span>
               </div>
             </div>
 
             {/* Cryptographic Ledger Verification Stamp */}
-            <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-[#1E2536] text-[10px] font-mono text-slate-500 dark:text-slate-400">
+            <div className="flex items-center justify-between pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-[#10B981]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#1e8e3e] dark:bg-[#e50914]" />
                 Immutable SHA-256 Ledger
               </span>
-              <span className="text-slate-700 dark:text-slate-300 font-semibold">100% Tamper-Proof</span>
+              <span className="text-[#1f2124] dark:text-[#f5f5f1] font-semibold">100% Tamper-Proof</span>
             </div>
           </div>
 

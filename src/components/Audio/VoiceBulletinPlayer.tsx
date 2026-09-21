@@ -88,30 +88,30 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-[#121927] border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-slate-900 dark:text-slate-100 shadow-sm space-y-3">
+    <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 text-[#1f2124] dark:text-[#f5f5f1] shadow-material dark:shadow-none space-y-3">
       
       {/* Top Dispatch Bar */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg border ${
+          <div className={`p-2 rounded-[8px] dark:rounded-[4px] border ${
             isPlaying
-              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800/60'
-              : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+              ? 'bg-[#e8f0fe] dark:bg-[#281819] text-[#1a73e8] dark:text-[#fca5a5] border-[#d2e3fc] dark:border-[#541e22]'
+              : 'bg-[#f1f3f4] dark:bg-[#141414] text-[#5f6368] dark:text-[#a3a3a3] border-[#e0e2e6] dark:border-[#2a2a2a]'
           }`}>
-            <Radio className={`h-4 w-4 ${isPlaying ? 'text-emerald-700 dark:text-emerald-400' : ''}`} />
+            <Radio className={`h-4 w-4 ${isPlaying ? 'text-[#1a73e8] dark:text-[#e50914]' : ''}`} />
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-slate-200">
+              <span className="text-xs font-mono uppercase tracking-wider font-bold text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-sm">
                 Civic Radio Voice Dispatch
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-semibold">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-[4px] bg-[#f1f3f4] dark:bg-[#141414] text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a] font-semibold">
                 {currentLanguage.toUpperCase()}
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-              Low-literacy audio notice for <strong className="text-slate-800 dark:text-slate-200 font-semibold">{waterPoint.name}</strong>
+            <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] mt-0.5">
+              Low-literacy audio notice for <strong className="text-[#1f2124] dark:text-[#f5f5f1] font-semibold">{waterPoint.name}</strong>
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
           {/* Playback speed toggle */}
           <button
             onClick={() => setPlaybackSpeed(prev => prev === 1.0 ? 0.85 : 1.0)}
-            className="hidden sm:inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[10px] font-mono text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+            className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full dark:rounded-[4px] bg-[#f1f3f4] dark:bg-[#141414] hover:bg-[#e8eaed] dark:hover:bg-[#252525] text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a] transition-colors cursor-pointer"
             title="Adjust speech rate (slower for clarity)"
           >
             {playbackSpeed}x Speed
@@ -131,10 +131,10 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
           {/* Primary Audio Toggle */}
           <button
             onClick={handleToggleSpeech}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-all active:scale-95 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full dark:rounded-[4px] text-xs font-semibold shadow-material dark:shadow-none transition-all active:scale-95 cursor-pointer ${
               isPlaying
-                ? 'bg-red-700 hover:bg-red-800 text-white'
-                : 'bg-emerald-700 hover:bg-emerald-800 text-white'
+                ? 'bg-[#d93025] hover:bg-[#b80710] dark:bg-[#e50914] dark:hover:bg-[#b80710] text-white'
+                : 'bg-[#1a73e8] hover:bg-[#1765cc] dark:bg-[#e50914] dark:hover:bg-[#b80710] text-white'
             }`}
           >
             {isPlaying ? (
@@ -153,27 +153,27 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
       </div>
 
       {/* Waveform Studio Bar */}
-      <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2 flex items-center justify-between gap-3 text-xs">
+      <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] px-3 py-2 flex items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-1.5">
           {[4, 12, 8, 16, 10, 6, 14, 9, 15, 7, 11, 5].map((height, idx) => (
             <span
               key={idx}
               className={`w-1 rounded-full transition-all duration-150 ${
-                isPlaying ? 'bg-slate-800 dark:bg-emerald-400' : 'bg-slate-300 dark:bg-slate-700'
+                isPlaying ? 'bg-[#1a73e8] dark:bg-[#e50914]' : 'bg-[#e0e2e6] dark:bg-[#2a2a2a]'
               }`}
               style={{
                 height: isPlaying ? `${height}px` : '4px',
               }}
             />
           ))}
-          <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 ml-2">
+          <span className="text-[11px] font-mono text-[#5f6368] dark:text-[#a3a3a3] ml-2">
             {isPlaying ? 'Broadcasting verified audio bulletin...' : 'Ready for playback in selected dialect'}
           </span>
         </div>
 
         <button
           onClick={() => setShowTranscript(!showTranscript)}
-          className="text-[11px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 font-mono transition-colors cursor-pointer"
+          className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1] flex items-center gap-1 font-mono transition-colors cursor-pointer"
         >
           <span>{showTranscript ? 'Hide Script' : 'View Script'}</span>
           {showTranscript ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -182,11 +182,11 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
 
       {/* Transcript Accordion */}
       {showTranscript && (
-        <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg p-3 text-xs text-slate-700 dark:text-slate-300 space-y-1.5 animate-in fade-in duration-150">
-          <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold block">
+        <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3 text-xs text-[#1f2124] dark:text-[#f5f5f1] space-y-1.5 animate-in fade-in duration-150">
+          <span className="text-[10px] font-mono uppercase text-[#5f6368] dark:text-[#a3a3a3] font-bold block">
             Broadcast Transcript ({currentLanguage.toUpperCase()}):
           </span>
-          <p className="leading-relaxed text-slate-800 dark:text-slate-200 italic">
+          <p className="leading-relaxed text-[#1f2124] dark:text-[#f5f5f1] italic">
             "{spokenText}"
           </p>
         </div>

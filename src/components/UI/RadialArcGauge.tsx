@@ -27,34 +27,24 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
     '#10b981', '#34d399', '#34d399', '#6ee7b7', '#a7f3d0'
   ];
 
-  // Determine color theme based on score or variant
+  // Google Material & Netflix Cinematic palette
   const getColor = (tickIndex: number) => {
-    if (variant === 'exon') {
-      const idx = Math.min(exonMintPalette.length - 1, Math.floor((tickIndex / totalTicks) * exonMintPalette.length));
-      return exonMintPalette[idx];
-    }
+    const ratio = tickIndex / totalTicks;
 
-    if (variant === 'opspulse') {
-      const ratio = tickIndex / totalTicks;
-      if (ratio < 0.35) return '#f97316'; // OpsPulse Warm Orange
-      if (ratio < 0.75) return '#10b981'; // OpsPulse Lush Emerald
-      return '#2563eb'; // OpsPulse Cobalt Blue
-    }
+    if (variant === 'crimson') return '#d93025';
+    if (variant === 'amber') return '#f9ab00';
+    if (variant === 'emerald') return '#1e8e3e';
 
-    if (variant === 'dynamic') {
-      if (percentage >= 65) {
-        const idx = Math.min(exonMintPalette.length - 1, Math.floor((tickIndex / totalTicks) * exonMintPalette.length));
-        return exonMintPalette[idx];
-      }
-      if (percentage >= 35) {
-        return tickIndex < totalTicks * 0.5 ? '#f59e0b' : '#d97706'; // Golden Amber
-      }
-      return tickIndex < totalTicks * 0.4 ? '#ef4444' : '#dc2626'; // Alert Crimson
+    if (percentage >= 65) {
+      // Safe / Potable: Google Green to Blue gradient
+      return ratio < 0.6 ? '#1e8e3e' : '#1a73e8';
     }
-
-    if (variant === 'crimson') return '#ef4444';
-    if (variant === 'amber') return '#f59e0b';
-    return '#10b981';
+    if (percentage >= 35) {
+      // Moderate Caution: Google Amber / Gold
+      return ratio < 0.5 ? '#f9ab00' : '#ea8600';
+    }
+    // Critical: Netflix Red / Google Red
+    return ratio < 0.5 ? '#d93025' : '#b80710';
   };
 
   // Generate tick paths along a semicircle from 180deg to 0deg (left to right)
@@ -96,7 +86,7 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
                 className={`transition-all duration-300 ${
                   isActive
                     ? 'opacity-100'
-                    : 'stroke-slate-200 dark:stroke-[#1E2536] opacity-70'
+                    : 'stroke-[#e0e2e6] dark:stroke-[#2a2a2a] opacity-70'
                 }`}
               />
             );
@@ -105,17 +95,17 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
 
         {/* Center Readout Text */}
         <div className="absolute inset-x-0 bottom-1 flex flex-col items-center justify-center text-center">
-          <span className="text-2xl sm:text-3xl font-bold font-mono tracking-tight tabular-nums text-slate-900 dark:text-white">
+          <span className="text-2xl sm:text-3xl font-bold font-mono tracking-tight tabular-nums text-[#1f2124] dark:text-[#f5f5f1]">
             {percentage}%
           </span>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold mt-0.5">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold mt-0.5">
             {label}
           </span>
         </div>
       </div>
 
       {sublabel && (
-        <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center mt-1">
+        <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] text-center mt-1">
           {sublabel}
         </p>
       )}

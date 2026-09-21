@@ -107,20 +107,20 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-white dark:bg-[#121927] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 dark:text-slate-100 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#141414]/80 p-3 sm:p-6 overflow-y-auto">
+      <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl dark:shadow-none overflow-hidden text-[#1f2124] dark:text-[#f5f5f1] animate-in fade-in duration-150">
         
         {/* Header */}
-        <div className="bg-slate-50 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 p-4 sm:p-5 flex items-center justify-between">
+        <div className="bg-[#f8f9fa] dark:bg-[#181818] border-b border-[#e0e2e6] dark:border-[#2a2a2a] p-4 sm:p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
+            <div className="p-2 rounded-[8px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-[#f5f5f1] border border-[#d2e3fc] dark:border-[#2a2a2a]">
               <Droplet className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base sm:text-lg text-slate-900 dark:text-white font-sans">
+              <h3 className="font-bold text-base sm:text-lg text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-xl dark:tracking-wide">
                 {t.reportWaterIssue}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+              <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] font-mono">
                 Step {step} of 4 • Decentralized Field Audit
               </p>
             </div>
@@ -128,22 +128,22 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-[6px] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-white hover:bg-[#e8eaed] dark:hover:bg-[#282828] transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Step Progress Bar */}
-        <div className="grid grid-cols-4 h-1 bg-slate-100 dark:bg-slate-800">
-          <div className={`h-full transition-all ${step >= 1 ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-transparent'}`} />
-          <div className={`h-full transition-all ${step >= 2 ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-transparent'}`} />
-          <div className={`h-full transition-all ${step >= 3 ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-transparent'}`} />
-          <div className={`h-full transition-all ${step >= 4 ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-transparent'}`} />
+        <div className="grid grid-cols-4 h-1 bg-[#e0e2e6] dark:bg-[#2a2a2a]">
+          <div className={`h-full transition-all ${step >= 1 ? 'bg-[#1a73e8] dark:bg-[#e50914]' : 'bg-transparent'}`} />
+          <div className={`h-full transition-all ${step >= 2 ? 'bg-[#1a73e8] dark:bg-[#e50914]' : 'bg-transparent'}`} />
+          <div className={`h-full transition-all ${step >= 3 ? 'bg-[#1a73e8] dark:bg-[#e50914]' : 'bg-transparent'}`} />
+          <div className={`h-full transition-all ${step >= 4 ? 'bg-[#1a73e8] dark:bg-[#e50914]' : 'bg-transparent'}`} />
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-[#121927]">
+        <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#1f2124] dark:text-[#f5f5f1] bg-white dark:bg-[#1f1f1f]">
           
           {/* STEP 1: Water Location & Source Type */}
           {step === 1 && (
@@ -441,12 +441,12 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
           )}
 
           {/* Form Navigation Controls */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div className="pt-4 border-t border-[#e0e2e6] dark:border-[#2a2a2a] flex items-center justify-between gap-3">
             {step > 1 ? (
               <button
                 type="button"
                 onClick={() => setStep(step - 1)}
-                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full dark:rounded-[4px] text-xs font-medium bg-[#f1f3f4] dark:bg-[#141414] hover:bg-[#e8eaed] dark:hover:bg-[#252525] text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a] transition-colors cursor-pointer"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>Back</span>
@@ -459,7 +459,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep(step + 1)}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all cursor-pointer active:scale-95"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full dark:rounded-[4px] text-xs font-semibold bg-[#1a73e8] hover:bg-[#1765cc] dark:bg-[#e50914] dark:hover:bg-[#b80710] text-white shadow-material dark:shadow-none transition-all cursor-pointer active:scale-95"
               >
                 <span>Continue</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -468,7 +468,7 @@ export const ReportWizardModal: React.FC<ReportWizardModalProps> = ({
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all cursor-pointer active:scale-95 disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full dark:rounded-[4px] text-xs font-semibold bg-[#1a73e8] hover:bg-[#1765cc] dark:bg-[#e50914] dark:hover:bg-[#b80710] text-white shadow-material dark:shadow-none transition-all cursor-pointer active:scale-95 disabled:opacity-50"
               >
                 {submitting ? (
                   <span>Hashing to Ledger...</span>

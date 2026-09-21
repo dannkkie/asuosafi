@@ -1,6 +1,20 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/Theme/ThemeProvider";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "AsuoSafi — Community Water Safety & Mining Concession Ledger",
@@ -14,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#15803d",
+  themeColor: "#1a73e8",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -27,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
-      <body className="min-h-full flex flex-col font-sans antialiased bg-[#F8FAFC] dark:bg-[#0B0F17] text-slate-900 dark:text-slate-100 transition-colors duration-150">
+      <body className={`${plusJakartaSans.variable} ${bebasNeue.variable} min-h-full flex flex-col font-sans antialiased bg-[#f8f9fa] dark:bg-[#141414] text-[#1f2124] dark:text-[#f5f5f1] transition-colors duration-150`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

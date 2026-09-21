@@ -65,25 +65,25 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-white dark:bg-[#121927] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 dark:text-slate-100 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#141414]/80 p-3 sm:p-6 overflow-y-auto">
+      <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl dark:shadow-none overflow-hidden text-[#1f2124] dark:text-[#f5f5f1] animate-in fade-in duration-150">
         
         {/* Modal Header */}
-        <div className="bg-slate-50 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 p-4 sm:p-5 flex items-start justify-between gap-4">
+        <div className="bg-[#f8f9fa] dark:bg-[#181818] border-b border-[#e0e2e6] dark:border-[#2a2a2a] p-4 sm:p-5 flex items-start justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="p-2.5 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800/60">
+            <div className="p-2.5 rounded-[8px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-[#f5f5f1] border border-[#d2e3fc] dark:border-[#2a2a2a]">
               <ShieldCheck className="h-6 w-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white font-sans">
+                <h3 className="text-base sm:text-lg font-bold tracking-tight text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-xl dark:tracking-wide">
                   Cryptographic Trust & Attestation Ledger
                 </h3>
-                <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950/70 text-sky-900 dark:text-sky-300 border border-sky-200 dark:border-sky-800/60 font-bold">
+                <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-[#f5f5f1] border border-[#d2e3fc] dark:border-[#2a2a2a] font-bold">
                   {verification.calculatedTrustScore}% Integrity
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] mt-0.5">
                 {waterPoint.name} — {waterPoint.community}
               </p>
             </div>
@@ -91,7 +91,7 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-[6px] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-white hover:bg-[#e8eaed] dark:hover:bg-[#282828] transition-colors cursor-pointer"
             title={t.close}
           >
             <X className="h-5 w-5" />
@@ -99,49 +99,49 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-[#121927]">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#1f2124] dark:text-[#f5f5f1] bg-white dark:bg-[#1f1f1f]">
           
           {/* SHA-256 Hash Stamp */}
-          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 space-y-1.5">
-            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-              <span className="text-[10px] font-mono uppercase tracking-wider flex items-center gap-1.5 text-sky-800 dark:text-sky-300 font-bold">
+          <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3.5 space-y-1.5">
+            <div className="flex items-center justify-between text-[#5f6368] dark:text-[#a3a3a3]">
+              <span className="text-[10px] font-mono uppercase tracking-wider flex items-center gap-1.5 text-[#1a73e8] dark:text-[#f5f5f1] font-bold">
                 <Hash className="h-3.5 w-3.5" />
                 Immutable SHA-256 Chain of Custody Stamp
               </span>
-              <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 flex items-center gap-1 font-bold">
+              <span className="text-[10px] font-mono text-emerald-700 dark:text-[#a7f3d0] flex items-center gap-1 font-bold">
                 <Lock className="h-3 w-3" />
                 Tamper-Proof
               </span>
             </div>
-            <p className="font-mono text-[11px] text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900/80 p-2.5 rounded-lg break-all border border-slate-200 dark:border-slate-750 select-all font-semibold">
+            <p className="font-mono text-[11px] text-[#1f2124] dark:text-[#f5f5f1] bg-white dark:bg-[#181818] p-2.5 rounded-[6px] dark:rounded-[4px] break-all border border-[#e0e2e6] dark:border-[#2a2a2a] select-all font-semibold">
               {verification.sha256Hash}
             </p>
           </div>
 
           {/* Primary Observer / Submitter */}
-          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div>
-              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-semibold block">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold block">
                 Primary Field Observer
               </span>
-              <p className="font-bold text-slate-900 dark:text-white text-sm mt-0.5 flex items-center gap-1.5">
-                <UserCheck className="h-4 w-4 text-sky-700 dark:text-sky-400 shrink-0" />
+              <p className="font-bold text-[#1f2124] dark:text-[#f5f5f1] text-sm mt-0.5 flex items-center gap-1.5">
+                <UserCheck className="h-4 w-4 text-[#1a73e8] dark:text-[#e50914] shrink-0" />
                 {verification.reporterAlias}
               </p>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 capitalize">
+              <span className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] capitalize">
                 Role: {verification.reportedByRole.replace(/_/g, ' ')}
               </span>
             </div>
 
             <div className="sm:text-right">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-semibold block">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold block">
                 Field Observation Timestamp
               </span>
-              <p className="font-semibold text-slate-800 dark:text-slate-200 text-xs mt-0.5 flex items-center sm:justify-end gap-1">
-                <Calendar className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
+              <p className="font-semibold text-[#1f2124] dark:text-[#f5f5f1] text-xs mt-0.5 flex items-center sm:justify-end gap-1">
+                <Calendar className="h-3.5 w-3.5 text-[#5f6368] dark:text-[#a3a3a3]" />
                 {verification.observationDate}
               </p>
-              <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-700 dark:text-emerald-400 mt-1 font-bold">
+              <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-700 dark:text-[#a7f3d0] mt-1 font-bold">
                 <CheckCircle className="h-3 w-3" />
                 EXIF GPS Spatial Accuracy &lt;50m
               </span>
@@ -151,31 +151,31 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
           {/* Independent Multi-Witness Attestations */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-700 dark:text-slate-300 font-bold">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-[#1f2124] dark:text-[#f5f5f1] font-bold">
                 Decentralized Attestations ({verification.attestations.length} Co-Signatories)
               </span>
-              <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-bold">
+              <span className="text-[10px] font-mono text-emerald-700 dark:text-[#a7f3d0] font-bold">
                 Consensus Gate Passed
               </span>
             </div>
 
             <div className="space-y-2">
               {verification.attestations.map((att, i) => (
-                <div key={i} className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-3 rounded-xl flex items-start justify-between gap-3 text-xs">
+                <div key={i} className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] p-3 rounded-[8px] dark:rounded-[4px] flex items-start justify-between gap-3 text-xs">
                   <div className="flex items-start gap-2.5">
-                    <div className="h-7 w-7 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="h-7 w-7 rounded-[6px] dark:rounded-[4px] bg-emerald-100 dark:bg-[#172319] text-emerald-800 dark:text-[#a7f3d0] border border-emerald-200 dark:border-[#254228] flex items-center justify-center shrink-0 mt-0.5">
                       <Award className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="font-bold text-slate-900 dark:text-white text-xs">{att.witnessNameOrRole}</p>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">{att.organization}</p>
-                      <span className="text-[10px] font-mono text-sky-800 dark:text-sky-300 capitalize inline-block mt-0.5 font-medium">
+                      <p className="font-bold text-[#1f2124] dark:text-[#f5f5f1] text-xs">{att.witnessNameOrRole}</p>
+                      <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3]">{att.organization}</p>
+                      <span className="text-[10px] font-mono text-[#1a73e8] dark:text-[#f5f5f1] capitalize inline-block mt-0.5 font-medium">
                         Verification Method: {att.verifiedVia.replace(/_/g, ' ')}
                       </span>
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 shrink-0">
+                  <span className="text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] shrink-0">
                     {att.verifiedAt}
                   </span>
                 </div>
@@ -184,11 +184,11 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
           </div>
 
           {/* Inspection Protocol Notes */}
-          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-3 rounded-xl text-xs text-slate-600 dark:text-slate-300">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-bold block mb-1">
+          <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] p-3 rounded-[8px] dark:rounded-[4px] text-xs text-[#5f6368] dark:text-[#a3a3a3]">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-[#1f2124] dark:text-[#f5f5f1] font-bold block mb-1">
               Cryptographic Consensus Standard
             </span>
-            <p className="leading-relaxed text-slate-600 dark:text-slate-300 text-[11px]">
+            <p className="leading-relaxed text-[#5f6368] dark:text-[#a3a3a3] text-[11px]">
               {verification.notes}
             </p>
           </div>
@@ -196,13 +196,13 @@ export const AuditTrailModal: React.FC<AuditTrailModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-slate-50 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 p-4 flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+        <div className="bg-[#f8f9fa] dark:bg-[#181818] border-t border-[#e0e2e6] dark:border-[#2a2a2a] p-4 flex items-center justify-between">
+          <span className="text-[11px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
             AsuoSafi Protocol v1.2 • Multi-Witness Ledger Security
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-sm transition-colors cursor-pointer"
+            className="px-4 py-1.5 rounded-full dark:rounded-[4px] text-xs font-semibold bg-white dark:bg-[#141414] hover:bg-[#f1f3f4] dark:hover:bg-[#252525] text-[#1f2124] dark:text-[#f5f5f1] border border-[#e0e2e6] dark:border-[#2a2a2a] shadow-material dark:shadow-none transition-colors cursor-pointer"
           >
             {t.close}
           </button>
