@@ -122,7 +122,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#202124]/50 dark:bg-[#141414]/80 p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] max-w-2xl w-full max-h-[90vh] flex flex-col shadow-material dark:shadow-none overflow-hidden text-[#1f2124] dark:text-[#f5f5f1] animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] max-w-2xl w-full max-h-[90vh] flex flex-col shadow-material dark:shadow-none overflow-hidden text-[#1f2124] dark:text-white animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
         <div className="bg-[#f8f9fa] dark:bg-[#181818] border-b border-[#e0e2e6] dark:border-[#2a2a2a] p-4 sm:p-5 flex items-center justify-between">
@@ -132,7 +132,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-base sm:text-lg text-[#1f2124] font-sans dark:text-[#f5f5f1] dark:font-display dark:text-xl dark:tracking-wider uppercase">
+                <h3 className="font-bold text-base sm:text-lg text-[#1f2124] dark:text-white font-sans uppercase tracking-tight">
                   AI Statutory & Environmental Counsel
                 </h3>
                 <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-full dark:rounded-[4px] bg-[#e6f4ea] dark:bg-[#221f1f] text-[#137333] dark:text-[#e50914] border border-[#ceead6] dark:border-[#e50914]/40 flex items-center gap-1 font-bold">
@@ -140,7 +140,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
                   Statutory Law Engine
                 </span>
               </div>
-              <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] mt-0.5">
+              <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] mt-0.5">
                 Grounded in Ghana Water Act (522), Mining Act (995) & WHO Guidelines
               </p>
             </div>
@@ -148,7 +148,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-[8px] dark:rounded-[4px] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1] hover:bg-[#e8eaed] dark:hover:bg-[#2a2a2a] transition-colors cursor-pointer"
+            className="p-1.5 rounded-[8px] dark:rounded-[4px] text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white hover:bg-[#e8eaed] dark:hover:bg-[#2a2a2a] transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
@@ -167,13 +167,13 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
                 className={`max-w-[88%] p-3.5 leading-relaxed ${
                   msg.role === 'user'
                     ? 'bg-[#1a73e8] dark:bg-[#e50914] text-white font-medium rounded-[12px] dark:rounded-[4px] rounded-br-[2px] dark:rounded-br-none shadow-sm dark:shadow-none'
-                    : 'bg-[#f8f9fa] dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] text-[#1f2124] dark:text-[#f5f5f1] rounded-[12px] dark:rounded-[4px] rounded-bl-[2px] dark:rounded-bl-none shadow-sm dark:shadow-none'
+                    : 'bg-[#f8f9fa] dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] text-[#1f2124] dark:text-white rounded-[12px] dark:rounded-[4px] rounded-bl-[2px] dark:rounded-bl-none shadow-sm dark:shadow-none'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{msg.content}</div>
 
                 {msg.role === 'assistant' && (
-                  <div className="mt-2.5 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] flex items-center justify-between gap-2 text-[10px] text-[#5f6368] dark:text-[#a3a3a3] font-mono">
+                  <div className="mt-2.5 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] flex items-center justify-between gap-2 text-xs text-[#4b5563] dark:text-[#cbd5e1] font-mono">
                     <span className="flex items-center gap-1">
                       <ShieldCheck className="h-3 w-3 text-[#137333] dark:text-[#e50914]" />
                       {msg.source === 'gemini-1.5-flash'
@@ -204,7 +204,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
           ))}
 
           {loading && (
-            <div className="flex items-center gap-2 text-xs text-[#5f6368] dark:text-[#a3a3a3] bg-[#f8f9fa] dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] p-3 rounded-[8px] dark:rounded-[4px] max-w-[240px]">
+            <div className="flex items-center gap-2 text-xs text-[#4b5563] dark:text-[#cbd5e1] bg-[#f8f9fa] dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] p-3 rounded-[8px] dark:rounded-[4px] max-w-[240px]">
               <div className="h-2 w-2 rounded-full bg-[#1a73e8] dark:bg-[#e50914] animate-pulse" />
               <span>Analyzing Ghanaian environmental statutes...</span>
             </div>
@@ -218,7 +218,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
               key={idx}
               type="button"
               onClick={() => handleSendQuestion(p.text)}
-              className="text-[11px] whitespace-nowrap bg-white dark:bg-[#2a2a2a] hover:bg-[#f1f3f4] dark:hover:bg-[#333333] text-[#3c4043] dark:text-[#a3a3a3] dark:hover:text-[#f5f5f1] px-3 py-1 rounded-full dark:rounded-[4px] border border-[#dadce0] dark:border-[#333333] shadow-sm dark:shadow-none transition-colors cursor-pointer shrink-0 font-medium"
+              className="text-xs whitespace-nowrap bg-white dark:bg-[#2a2a2a] hover:bg-[#f1f3f4] dark:hover:bg-[#333333] text-[#3c4043] dark:text-[#cbd5e1] dark:hover:text-white px-3 py-1 rounded-full dark:rounded-[4px] border border-[#dadce0] dark:border-[#333333] shadow-sm dark:shadow-none transition-colors cursor-pointer shrink-0 font-medium"
             >
               {p.label}
             </button>
@@ -239,7 +239,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
               value={inputQuestion}
               onChange={(e) => setInputQuestion(e.target.value)}
               placeholder="Ask about water safety, galamsey penalties, or reporting rights..."
-              className="flex-1 bg-[#f8f9fa] dark:bg-[#141414] border border-[#dadce0] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] px-3.5 py-2 text-xs sm:text-sm text-[#1f2124] dark:text-[#f5f5f1] placeholder-[#5f6368] dark:placeholder-[#a3a3a3] focus:outline-none focus:border-[#1a73e8] dark:focus:border-[#e50914] focus:bg-white dark:focus:bg-[#141414] transition-colors"
+              className="flex-1 bg-[#f8f9fa] dark:bg-[#141414] border border-[#dadce0] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] px-3.5 py-2 text-xs sm:text-sm text-[#1f2124] dark:text-white placeholder-[#4b5563] dark:placeholder-[#94a3b8] focus:outline-none focus:border-[#1a73e8] dark:focus:border-[#e50914] focus:bg-white dark:focus:bg-[#141414] transition-colors"
             />
 
             <button

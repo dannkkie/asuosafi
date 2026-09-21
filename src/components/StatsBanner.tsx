@@ -40,11 +40,11 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
             <div className="flex items-center justify-between pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-[#1e8e3e] dark:bg-[#e50914] animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-base dark:tracking-wide">
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1f2124] dark:text-white font-sans">
                   National Water Security Pulse
                 </span>
               </div>
-              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full dark:rounded-[3px] bg-[#f1f3f4] dark:bg-[#181818] text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a]">
+              <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full dark:rounded-[3px] bg-[#f1f3f4] dark:bg-[#262626] text-[#4b5563] dark:text-[#cbd5e1] border border-[#e0e2e6] dark:border-[#383838]">
                 WHO Index
               </span>
             </div>
@@ -61,16 +61,16 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
 
             <div className="grid grid-cols-3 gap-1.5 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] text-center">
               <div className="p-1.5 rounded-[8px] dark:rounded-[4px] bg-emerald-50 dark:bg-[#172319] border border-emerald-200 dark:border-[#254228]">
-                <span className="text-[9px] uppercase font-mono text-emerald-800 dark:text-[#a7f3d0] block font-medium">Safe</span>
-                <span className="font-mono font-bold text-xs text-emerald-700 dark:text-[#a7f3d0]">{safePoints.length}</span>
+                <span className="text-[11px] uppercase font-mono text-emerald-800 dark:text-[#a7f3d0] block font-semibold">Safe</span>
+                <span className="font-mono font-bold text-sm text-emerald-700 dark:text-[#a7f3d0]">{safePoints.length}</span>
               </div>
               <div className="p-1.5 rounded-[8px] dark:rounded-[4px] bg-amber-50 dark:bg-[#282119] border border-amber-200 dark:border-[#523215]">
-                <span className="text-[9px] uppercase font-mono text-amber-800 dark:text-[#fde68a] block font-medium">Caution</span>
-                <span className="font-mono font-bold text-xs text-amber-700 dark:text-[#fde68a]">{cautionPoints.length}</span>
+                <span className="text-[11px] uppercase font-mono text-amber-800 dark:text-[#fde68a] block font-semibold">Caution</span>
+                <span className="font-mono font-bold text-sm text-amber-700 dark:text-[#fde68a]">{cautionPoints.length}</span>
               </div>
               <div className="p-1.5 rounded-[8px] dark:rounded-[4px] bg-red-50 dark:bg-[#2e1517] border border-red-200 dark:border-[#541e22]">
-                <span className="text-[9px] uppercase font-mono text-red-800 dark:text-[#fca5a5] block font-medium">Toxic</span>
-                <span className="font-mono font-bold text-xs text-red-700 dark:text-[#fca5a5]">{criticalPoints.length}</span>
+                <span className="text-[11px] uppercase font-mono text-red-800 dark:text-[#fca5a5] block font-semibold">Toxic</span>
+                <span className="font-mono font-bold text-sm text-red-700 dark:text-[#fca5a5]">{criticalPoints.length}</span>
               </div>
             </div>
           </div>
@@ -80,11 +80,11 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
             <div className="flex items-center justify-between pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
               <div className="flex items-center gap-2">
                 <Activity className="h-4 w-4 text-[#f9ab00] dark:text-[#e50914]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-base dark:tracking-wide">
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1f2124] dark:text-white font-sans">
                   Galamsey Silt Dispersion
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-red-700 dark:text-[#fca5a5] font-bold bg-red-50 dark:bg-[#2e1517] px-2.5 py-0.5 rounded-full dark:rounded-[3px] border border-red-200 dark:border-[#541e22]">
+              <span className="text-[11px] font-mono text-red-700 dark:text-[#fca5a5] font-bold bg-red-50 dark:bg-[#2e1517] px-2.5 py-0.5 rounded-full dark:rounded-[3px] border border-red-200 dark:border-[#541e22]">
                 Avg {avgCriticalTurbidity} NTU
               </span>
             </div>
@@ -112,7 +112,7 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
                         }`}
                         style={{ height: `${heightPercent}%` }}
                       />
-                      <span className="text-[8px] font-mono text-[#5f6368] dark:text-[#a3a3a3] truncate w-full text-center">
+                      <span className="text-[10px] font-mono font-semibold text-[#4b5563] dark:text-[#cbd5e1] truncate w-full text-center">
                         {pt.name.slice(0, 3).toUpperCase()}
                       </span>
 
@@ -127,7 +127,7 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
                 })}
               </div>
 
-              <div className="flex items-center justify-between text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] mt-2 px-1 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a]">
+              <div className="flex items-center justify-between text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1] mt-2 px-1 pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a]">
                 <span>Safe Limit: &lt;5 NTU</span>
                 <span className="text-red-700 dark:text-[#fca5a5] font-bold">Severe Silt: &gt;50 NTU</span>
               </div>
@@ -135,8 +135,8 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
 
             {/* Bottom Telemetry Mini-Pill */}
             <div className="flex items-center justify-between p-2 rounded-[8px] dark:rounded-[4px] bg-[#f8f9fa] dark:bg-[#181818] border border-[#e0e2e6] dark:border-[#2a2a2a] text-xs">
-              <span className="text-[#5f6368] dark:text-[#a3a3a3] text-[11px]">Primary Basin Silt:</span>
-              <span className="font-mono font-bold text-[#1f2124] dark:text-[#f5f5f1]">Pra & Offin Corridors</span>
+              <span className="text-[#4b5563] dark:text-[#cbd5e1] text-xs font-medium">Primary Basin Silt:</span>
+              <span className="font-mono font-bold text-xs text-[#1f2124] dark:text-white">Pra & Offin Corridors</span>
             </div>
           </div>
 
@@ -145,11 +145,11 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
             <div className="flex items-center justify-between pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-[#1a73e8] dark:text-[#e50914]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-base dark:tracking-wide">
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1f2124] dark:text-white font-sans">
                   Civic Consensus & Legal Power
                 </span>
               </div>
-              <span className="text-[10px] font-mono font-bold text-[#1a73e8] dark:text-[#f5f5f1] bg-[#e8f0fe] dark:bg-[#181818] px-2.5 py-0.5 rounded-full dark:rounded-[3px] border border-[#d2e3fc] dark:border-[#2a2a2a]">
+              <span className="text-[11px] font-mono font-bold text-[#1a73e8] dark:text-white bg-[#e8f0fe] dark:bg-[#262626] px-2.5 py-0.5 rounded-full dark:rounded-[3px] border border-[#d2e3fc] dark:border-[#383838]">
                 Act 522 / 995
               </span>
             </div>
@@ -158,12 +158,12 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
               {/* Co-Signatories Metric */}
               <div className="flex items-center justify-between p-2.5 rounded-[8px] dark:rounded-[4px] bg-[#f8f9fa] dark:bg-[#181818] border border-[#e0e2e6] dark:border-[#2a2a2a]">
                 <div className="flex items-center gap-2">
-                  <div className="h-7 w-7 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#2a2a2a] text-[#1a73e8] dark:text-[#f5f5f1] flex items-center justify-center font-bold text-xs">
+                  <div className="h-7 w-7 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#2a2a2a] text-[#1a73e8] dark:text-white flex items-center justify-center font-bold text-xs">
                     {totalWitnesses}
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#1f2124] dark:text-[#f5f5f1] block">Verified Co-Signatories</span>
-                    <span className="text-[10px] text-[#5f6368] dark:text-[#a3a3a3]">Decentralized Community Monitored</span>
+                    <span className="text-xs font-bold text-[#1f2124] dark:text-white block">Verified Co-Signatories</span>
+                    <span className="text-[11px] text-[#4b5563] dark:text-[#cbd5e1]">Decentralized Community Monitored</span>
                   </div>
                 </div>
                 <BarcodeSignalMeter score={totalWitnesses} maxScore={25} status="safe" height={16} />
@@ -176,23 +176,23 @@ export const StatsBanner: React.FC<StatsBannerProps> = ({ waterPoints, currentLa
                     <Scale className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#1f2124] dark:text-[#f5f5f1] block">{criticalPoints.length} Statutory Petitions Ready</span>
-                    <span className="text-[10px] text-[#5f6368] dark:text-[#a3a3a3]">District Chief Executive Injunctions</span>
+                    <span className="text-xs font-bold text-[#1f2124] dark:text-white block">{criticalPoints.length} Statutory Petitions Ready</span>
+                    <span className="text-[11px] text-[#4b5563] dark:text-[#cbd5e1]">District Chief Executive Injunctions</span>
                   </div>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-[4px] bg-amber-50 dark:bg-[#282119] border border-amber-200 dark:border-[#523215]">
+                <span className="text-[11px] font-mono font-bold text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-[4px] bg-amber-50 dark:bg-[#282119] border border-amber-200 dark:border-[#523215]">
                   Ready
                 </span>
               </div>
             </div>
 
             {/* Cryptographic Ledger Verification Stamp */}
-            <div className="flex items-center justify-between pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
+            <div className="flex items-center justify-between pt-2 border-t border-[#e0e2e6] dark:border-[#2a2a2a] text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1]">
               <span className="flex items-center gap-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#1e8e3e] dark:bg-[#e50914]" />
                 Immutable SHA-256 Ledger
               </span>
-              <span className="text-[#1f2124] dark:text-[#f5f5f1] font-semibold">100% Tamper-Proof</span>
+              <span className="text-[#1f2124] dark:text-white font-bold">100% Tamper-Proof</span>
             </div>
           </div>
 

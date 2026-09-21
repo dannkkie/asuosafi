@@ -1,18 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Bebas_Neue } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/Theme/ThemeProvider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-display",
   display: "swap",
 });
 
@@ -41,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
-      <body className={`${plusJakartaSans.variable} ${bebasNeue.variable} min-h-full flex flex-col font-sans antialiased bg-[#f8f9fa] dark:bg-[#141414] text-[#1f2124] dark:text-[#f5f5f1] transition-colors duration-150`}>
+      <body className={`${plusJakartaSans.variable} min-h-full flex flex-col font-sans antialiased bg-[#f8f9fa] dark:bg-[#141414] text-[#1f2124] dark:text-white transition-colors duration-150`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

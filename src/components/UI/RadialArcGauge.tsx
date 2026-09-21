@@ -95,17 +95,17 @@ export const RadialArcGauge: React.FC<RadialArcGaugeProps> = ({
 
         {/* Center Readout Text */}
         <div className="absolute inset-x-0 bottom-1 flex flex-col items-center justify-center text-center">
-          <span className="text-2xl sm:text-3xl font-bold font-mono tracking-tight tabular-nums text-[#1f2124] dark:text-[#f5f5f1]">
+          <span className="text-2xl sm:text-3xl font-extrabold font-sans tracking-tight tabular-nums text-[#1f2124] dark:text-white">
             {percentage}%
           </span>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold mt-0.5">
+          <span className="text-xs font-mono uppercase tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold mt-0.5">
             {label}
           </span>
         </div>
       </div>
 
       {sublabel && (
-        <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] text-center mt-1">
+        <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] text-center mt-1.5 font-medium">
           {sublabel}
         </p>
       )}

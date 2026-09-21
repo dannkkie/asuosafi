@@ -88,7 +88,7 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 text-[#1f2124] dark:text-[#f5f5f1] shadow-material dark:shadow-none space-y-3">
+    <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 text-[#1f2124] dark:text-white shadow-material dark:shadow-none space-y-3">
       
       {/* Top Dispatch Bar */}
       <div className="flex items-center justify-between gap-3">
@@ -96,22 +96,22 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
           <div className={`p-2 rounded-[8px] dark:rounded-[4px] border ${
             isPlaying
               ? 'bg-[#e8f0fe] dark:bg-[#281819] text-[#1a73e8] dark:text-[#fca5a5] border-[#d2e3fc] dark:border-[#541e22]'
-              : 'bg-[#f1f3f4] dark:bg-[#141414] text-[#5f6368] dark:text-[#a3a3a3] border-[#e0e2e6] dark:border-[#2a2a2a]'
+              : 'bg-[#f1f3f4] dark:bg-[#141414] text-[#4b5563] dark:text-[#cbd5e1] border-[#e0e2e6] dark:border-[#2a2a2a]'
           }`}>
             <Radio className={`h-4 w-4 ${isPlaying ? 'text-[#1a73e8] dark:text-[#e50914]' : ''}`} />
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono uppercase tracking-wider font-bold text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-sm">
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1f2124] dark:text-white font-sans">
                 Civic Radio Voice Dispatch
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-[4px] bg-[#f1f3f4] dark:bg-[#141414] text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a] font-semibold">
+              <span className="text-xs font-mono px-2 py-0.5 rounded-[4px] bg-[#f1f3f4] dark:bg-[#141414] text-[#4b5563] dark:text-[#cbd5e1] border border-[#e0e2e6] dark:border-[#2a2a2a] font-semibold">
                 {currentLanguage.toUpperCase()}
               </span>
             </div>
-            <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] mt-0.5">
-              Low-literacy audio notice for <strong className="text-[#1f2124] dark:text-[#f5f5f1] font-semibold">{waterPoint.name}</strong>
+            <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] mt-0.5">
+              Low-literacy audio notice for <strong className="text-[#1f2124] dark:text-white font-bold">{waterPoint.name}</strong>
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
           {/* Playback speed toggle */}
           <button
             onClick={() => setPlaybackSpeed(prev => prev === 1.0 ? 0.85 : 1.0)}
-            className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full dark:rounded-[4px] bg-[#f1f3f4] dark:bg-[#141414] hover:bg-[#e8eaed] dark:hover:bg-[#252525] text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] border border-[#e0e2e6] dark:border-[#2a2a2a] transition-colors cursor-pointer"
+            className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full dark:rounded-[4px] bg-[#f1f3f4] dark:bg-[#141414] hover:bg-[#e8eaed] dark:hover:bg-[#252525] text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white border border-[#e0e2e6] dark:border-[#2a2a2a] transition-colors cursor-pointer"
             title="Adjust speech rate (slower for clarity)"
           >
             {playbackSpeed}x Speed
@@ -166,14 +166,14 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
               }}
             />
           ))}
-          <span className="text-[11px] font-mono text-[#5f6368] dark:text-[#a3a3a3] ml-2">
+          <span className="text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1] ml-2">
             {isPlaying ? 'Broadcasting verified audio bulletin...' : 'Ready for playback in selected dialect'}
           </span>
         </div>
 
         <button
           onClick={() => setShowTranscript(!showTranscript)}
-          className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1] flex items-center gap-1 font-mono transition-colors cursor-pointer"
+          className="text-xs text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white flex items-center gap-1 font-mono transition-colors cursor-pointer"
         >
           <span>{showTranscript ? 'Hide Script' : 'View Script'}</span>
           {showTranscript ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -182,11 +182,11 @@ export const VoiceBulletinPlayer: React.FC<VoiceBulletinPlayerProps> = ({
 
       {/* Transcript Accordion */}
       {showTranscript && (
-        <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3 text-xs text-[#1f2124] dark:text-[#f5f5f1] space-y-1.5 animate-in fade-in duration-150">
-          <span className="text-[10px] font-mono uppercase text-[#5f6368] dark:text-[#a3a3a3] font-bold block">
+        <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3 text-xs text-[#1f2124] dark:text-[#e2e8f0] space-y-1.5 animate-in fade-in duration-150">
+          <span className="text-xs font-mono uppercase text-[#4b5563] dark:text-[#cbd5e1] font-bold block">
             Broadcast Transcript ({currentLanguage.toUpperCase()}):
           </span>
-          <p className="leading-relaxed text-[#1f2124] dark:text-[#f5f5f1] italic">
+          <p className="leading-relaxed text-[#1f2124] dark:text-[#f1f5f9] italic">
             "{spokenText}"
           </p>
         </div>

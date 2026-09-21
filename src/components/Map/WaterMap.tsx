@@ -213,7 +213,7 @@ export const WaterMap: React.FC<WaterMapProps> = ({
         {/* Reset View Button */}
         <button
           onClick={handleResetView}
-          className="p-2 rounded-[8px] dark:rounded-[4px] bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1] shadow-material dark:shadow-none transition-colors cursor-pointer"
+          className="p-2 rounded-[8px] dark:rounded-[4px] bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white shadow-material dark:shadow-none transition-colors cursor-pointer"
           title="Reset to Ghana Mining Belt"
         >
           <Crosshair className="h-4 w-4" />
@@ -223,20 +223,20 @@ export const WaterMap: React.FC<WaterMapProps> = ({
         <div className="flex items-center bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] p-1 rounded-[8px] dark:rounded-[4px] shadow-material dark:shadow-none">
           <button
             onClick={() => setMapType('streets')}
-            className={`px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer ${
               mapType === 'streets'
                 ? 'bg-[#1a73e8] text-white font-semibold rounded-[6px] dark:bg-[#e50914] dark:rounded-[4px]'
-                : 'text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1]'
+                : 'text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white'
             }`}
           >
             Street
           </button>
           <button
             onClick={() => setMapType('satellite')}
-            className={`px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer ${
               mapType === 'satellite'
                 ? 'bg-[#1a73e8] text-white font-semibold rounded-[6px] dark:bg-[#e50914] dark:rounded-[4px]'
-                : 'text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1]'
+                : 'text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white'
             }`}
           >
             Satellite
@@ -247,18 +247,18 @@ export const WaterMap: React.FC<WaterMapProps> = ({
 
       {/* Floating Coordinate Telemetry HUD (Bottom Right) */}
       {selectedWaterPoint && (
-        <div className="absolute bottom-3 right-3 z-20 bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] px-2.5 py-1.5 rounded-[8px] dark:rounded-[4px] shadow-material dark:shadow-none text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] hidden sm:flex items-center gap-2">
-          <span className="text-[#5f6368] dark:text-[#a3a3a3]">LOC:</span>
-          <span className="text-[#1f2124] dark:text-[#f5f5f1] font-semibold">
+        <div className="absolute bottom-3 right-3 z-20 bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] px-2.5 py-1.5 rounded-[8px] dark:rounded-[4px] shadow-material dark:shadow-none text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1] hidden sm:flex items-center gap-2">
+          <span className="text-[#4b5563] dark:text-[#cbd5e1]">LOC:</span>
+          <span className="text-[#1f2124] dark:text-white font-semibold">
             {selectedWaterPoint.coordinates.latitude.toFixed(4)}°N, {Math.abs(selectedWaterPoint.coordinates.longitude).toFixed(4)}°W
           </span>
         </div>
       )}
 
       {/* Bottom Floating Legend Drawer */}
-      <div className="absolute bottom-3 left-3 z-20 bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] p-3 rounded-[12px] dark:rounded-[6px] shadow-material dark:shadow-none text-xs text-[#1f2124] dark:text-[#f5f5f1] space-y-1.5 max-w-[260px]">
+      <div className="absolute bottom-3 left-3 z-20 bg-white dark:bg-[#1f1f1f] border border-[#dadce0] dark:border-[#2a2a2a] p-3 rounded-[12px] dark:rounded-[6px] shadow-material dark:shadow-none text-xs text-[#1f2124] dark:text-white space-y-1.5 max-w-[260px]">
         <div className="flex items-center justify-between pb-1 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
-          <span className="font-mono text-[10px] uppercase tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-bold">
+          <span className="font-mono text-xs uppercase tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold">
             Ledger Ground Status
           </span>
         </div>

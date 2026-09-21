@@ -62,7 +62,7 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] overflow-hidden shadow-material dark:shadow-none text-[#1f2124] dark:text-[#f5f5f1] transition-all">
+    <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] overflow-hidden shadow-material dark:shadow-none text-[#1f2124] dark:text-white transition-all">
       
       {/* Top Header / Hazard Status Strip */}
       <div className={`px-5 py-3.5 border-b flex items-center justify-between gap-3 ${
@@ -73,7 +73,7 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           : 'bg-amber-50 dark:bg-[#282119] border-amber-200 dark:border-[#523215]'
       }`}>
         <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold">
+          <span className="text-xs font-mono uppercase tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold">
             {waterPoint.sourceType.toUpperCase()} • {waterPoint.riverBasin || 'LOCAL BASIN'}
           </span>
         </div>
@@ -110,16 +110,16 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         
         {/* Title & Geospatial Coordinates */}
         <div>
-          <h3 className="text-xl font-bold tracking-tight text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-2xl dark:tracking-wide">
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1f2124] dark:text-white font-sans">
             {waterPoint.name}
           </h3>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-[#5f6368] dark:text-[#a3a3a3]">
-            <span className="flex items-center gap-1 font-medium text-[#1f2124] dark:text-[#f5f5f1]">
-              <MapPin className="h-3.5 w-3.5 text-[#5f6368] dark:text-[#a3a3a3]" />
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-[#4b5563] dark:text-[#cbd5e1]">
+            <span className="flex items-center gap-1 font-semibold text-[#1f2124] dark:text-white">
+              <MapPin className="h-3.5 w-3.5 text-[#4b5563] dark:text-[#cbd5e1]" />
               {waterPoint.community}, {waterPoint.district} ({waterPoint.region} Region)
             </span>
-            <span className="text-[#e0e2e6] dark:text-[#333333]">•</span>
-            <span className="font-mono text-[#5f6368] dark:text-[#a3a3a3]">
+            <span className="text-[#e0e2e6] dark:text-[#383838]">•</span>
+            <span className="font-mono text-[#4b5563] dark:text-[#cbd5e1]">
               {waterPoint.coordinates.latitude.toFixed(4)}° N, {Math.abs(waterPoint.coordinates.longitude).toFixed(4)}° W
             </span>
           </div>
@@ -141,7 +141,7 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         )}
 
         {/* Narrative Description */}
-        <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed bg-[#f8f9fa] dark:bg-[#141414] p-3 rounded-[8px] dark:rounded-[4px] border border-[#e0e2e6] dark:border-[#2a2a2a]">
+        <p className="text-xs text-[#374151] dark:text-[#e2e8f0] leading-relaxed bg-[#f8f9fa] dark:bg-[#141414] p-3.5 rounded-[8px] dark:rounded-[4px] border border-[#e0e2e6] dark:border-[#2a2a2a]">
           {waterPoint.description}
         </p>
 
@@ -150,7 +150,7 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           
           {/* Metric 1: Turbidity Gauge */}
           <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold block">
+            <span className="text-[11px] uppercase font-mono tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold block">
               Turbidity (NTU)
             </span>
             <span className={`text-xl font-bold font-mono tabular-nums block mt-0.5 ${
@@ -166,15 +166,15 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
                 style={{ width: `${Math.min(100, (waterPoint.metrics.turbidityNtu / 1000) * 100)}%` }}
               />
             </div>
-            <span className="text-[9px] text-[#5f6368] dark:text-[#a3a3a3] font-mono mt-1 block">WHO Safe: &lt;5 NTU</span>
+            <span className="text-xs text-[#4b5563] dark:text-[#cbd5e1] font-mono mt-1.5 block">WHO Safe: &lt;5 NTU</span>
           </div>
 
           {/* Metric 2: pH Acidity Strip */}
           <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold block">
+            <span className="text-[11px] uppercase font-mono tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold block">
               pH Acidity
             </span>
-            <span className="text-xl font-bold font-mono tabular-nums text-[#1f2124] dark:text-[#f5f5f1] block mt-0.5">
+            <span className="text-xl font-bold font-mono tabular-nums text-[#1f2124] dark:text-white block mt-0.5">
               {waterPoint.metrics.phLevel}
             </span>
             <div className="w-full bg-[#e0e2e6] dark:bg-[#2a2a2a] h-1.5 rounded-full mt-2 overflow-hidden">
@@ -185,27 +185,27 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
                 style={{ width: `${(waterPoint.metrics.phLevel / 14) * 100}%` }}
               />
             </div>
-            <span className="text-[9px] text-[#5f6368] dark:text-[#a3a3a3] font-mono mt-1 block">Standard: 6.5–8.5</span>
+            <span className="text-xs text-[#4b5563] dark:text-[#cbd5e1] font-mono mt-1.5 block">Standard: 6.5–8.5</span>
           </div>
 
           {/* Metric 3: Upstream Mining Threat */}
           <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold block">
+            <span className="text-[11px] uppercase font-mono tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold block">
               Mining Proximity
             </span>
             <span className={`text-xl font-bold font-mono tabular-nums block mt-0.5 ${
-              waterPoint.upstreamMiningDistanceKm < 1.0 ? 'text-amber-800 dark:text-amber-400' : 'text-[#1f2124] dark:text-[#f5f5f1]'
+              waterPoint.upstreamMiningDistanceKm < 1.0 ? 'text-amber-800 dark:text-amber-400' : 'text-[#1f2124] dark:text-white'
             }`}>
               {waterPoint.upstreamMiningDistanceKm} km
             </span>
-            <span className="text-[9px] text-[#5f6368] dark:text-[#a3a3a3] mt-2 block font-medium">
+            <span className="text-xs text-[#4b5563] dark:text-[#cbd5e1] mt-2 block font-medium">
               {waterPoint.upstreamMiningDistanceKm < 1.0 ? '⚠️ Active Upstream' : 'Distal Basin'}
             </span>
           </div>
 
           {/* Metric 4: Chemical Residue Risk */}
           <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-semibold block">
+            <span className="text-[11px] uppercase font-mono tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold block">
               Chemical Residue
             </span>
             <span className={`text-sm font-bold block mt-1.5 ${
@@ -213,7 +213,7 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
             }`}>
               {waterPoint.metrics.chemicalRiskDetected ? 'Hazard Detected' : 'Clear / Negligible'}
             </span>
-            <span className="text-[9px] text-[#5f6368] dark:text-[#a3a3a3] mt-2 block font-mono">
+            <span className="text-xs text-[#4b5563] dark:text-[#cbd5e1] mt-2 block font-mono">
               {waterPoint.metrics.visualColor.replace('_', ' ').toUpperCase()}
             </span>
           </div>
@@ -223,11 +223,11 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         {/* 7-Audit Historical Telemetry Spectrum & AI Plume Risk Forecast */}
         <div className="bg-[#f8f9fa] dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3.5 space-y-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#1f2124] dark:text-[#f5f5f1]">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#1f2124] dark:text-white">
               <Activity className="h-3.5 w-3.5 text-[#1a73e8] dark:text-[#e50914]" />
               <span>14-Day Turbidity History & AI Threat Trend</span>
             </div>
-            <div className="flex items-center gap-1 text-[10px] font-mono font-semibold text-[#5f6368] dark:text-[#a3a3a3]">
+            <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-[#4b5563] dark:text-[#cbd5e1]">
               {isToxic ? (
                 <span className="text-red-600 dark:text-[#e50914] flex items-center gap-0.5 font-bold">
                   <TrendingUp className="h-3 w-3" /> +55% Silt Runoff
@@ -253,13 +253,13 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
                     }`}
                     style={{ height: `${barHeightPercent}%` }}
                   />
-                  <span className="text-[8px] font-mono text-[#5f6368] dark:text-[#a3a3a3] truncate w-full text-center">
+                  <span className="text-[10px] font-mono font-medium text-[#4b5563] dark:text-[#cbd5e1] truncate w-full text-center">
                     {item.day}
                   </span>
 
                   {/* Micro Tooltip */}
                   <div className="absolute bottom-full mb-1 hidden group-hover:flex flex-col items-center z-20 pointer-events-none">
-                    <div className="bg-[#1f2124] dark:bg-[#141414] border border-transparent dark:border-[#2a2a2a] text-white text-[9px] font-mono rounded-[3px] px-1.5 py-0.5 whitespace-nowrap shadow-material">
+                    <div className="bg-[#1f2124] dark:bg-[#141414] border border-transparent dark:border-[#2a2a2a] text-white text-[10px] font-mono rounded-[3px] px-1.5 py-0.5 whitespace-nowrap shadow-material">
                       {item.ntu} NTU
                     </div>
                   </div>
@@ -269,10 +269,10 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           </div>
 
           {/* AI Plume Forecast Pill */}
-          <div className="flex items-center gap-2.5 p-2.5 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#1f1f1f] border border-[#d2e3fc] dark:border-[#2a2a2a] text-[11px]">
-            <Sparkles className="h-3.5 w-3.5 text-[#1a73e8] dark:text-[#e50914] shrink-0" />
-            <p className="text-[#1f2124] dark:text-[#f5f5f1] leading-snug">
-              <strong className="font-semibold">AI Predictive Dispersion: </strong>
+          <div className="flex items-center gap-2.5 p-3 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#1f1f1f] border border-[#d2e3fc] dark:border-[#2a2a2a] text-xs">
+            <Sparkles className="h-4 w-4 text-[#1a73e8] dark:text-[#e50914] shrink-0" />
+            <p className="text-[#1f2124] dark:text-[#f8fafc] leading-relaxed">
+              <strong className="font-bold text-[#1f2124] dark:text-white">AI Predictive Dispersion: </strong>
               {isToxic
                 ? `Heavy upstream Changfa wash-water presents elevated contamination across downstream intake zones for 48h.`
                 : `Protected aquifer parameters verify zero heavy-metal percolation from distal mining corridors.`}
@@ -283,17 +283,17 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         {/* Multi-Witness Cryptographic Attestation Block */}
         <div className="bg-[#f8f9fa] dark:bg-[#181818] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[8px] dark:rounded-[4px] p-3.5 space-y-2.5">
           <div className="flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 text-[#1f2124] dark:text-[#f5f5f1]">
+            <div className="flex items-center gap-2 text-[#1f2124] dark:text-white">
               <ShieldCheck className="h-4 w-4 text-[#1e8e3e] dark:text-[#e50914]" />
-              <span className="font-semibold">{waterPoint.verifiedByCount} Verified Co-Signatories</span>
-              <span className="text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
+              <span className="font-bold">{waterPoint.verifiedByCount} Verified Co-Signatories</span>
+              <span className="text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1]">
                 ({waterPoint.verificationBadge.replace(/_/g, ' ')})
               </span>
             </div>
 
             <button
               onClick={() => onOpenAuditTrail(waterPoint)}
-              className="text-[#1a73e8] dark:text-[#f5f5f1] hover:underline text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+              className="text-[#1a73e8] dark:text-[#fca5a5] hover:underline text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>{t.inspectAuditTrail}</span>
               <ExternalLink className="h-3 w-3" />
@@ -301,17 +301,17 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           </div>
 
           {/* Cryptographic SHA-256 Hash Display */}
-          <div className="flex items-center justify-between gap-2 bg-white dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[6px] dark:rounded-[4px] px-2.5 py-1.5 text-[11px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
+          <div className="flex items-center justify-between gap-2 bg-white dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[6px] dark:rounded-[4px] px-2.5 py-1.5 text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1]">
             <div className="flex items-center gap-1.5 truncate">
-              <span className="text-[#5f6368] dark:text-[#a3a3a3]">SHA-256:</span>
-              <span className="truncate text-[#1f2124] dark:text-[#f5f5f1] font-medium">{mockSha256}</span>
+              <span className="text-[#4b5563] dark:text-[#cbd5e1] font-bold">SHA-256:</span>
+              <span className="truncate text-[#1f2124] dark:text-white font-medium">{mockSha256}</span>
             </div>
             <button
               onClick={handleCopyHash}
-              className="p-1 hover:text-[#1f2124] dark:hover:text-[#f5f5f1] transition-colors shrink-0 cursor-pointer"
+              className="p-1 hover:text-[#1f2124] dark:hover:text-white transition-colors shrink-0 cursor-pointer"
               title="Copy cryptographic audit hash"
             >
-              {copiedHash ? <Check className="h-3.5 w-3.5 text-[#1e8e3e]" /> : <Copy className="h-3.5 w-3.5 text-[#5f6368] dark:text-[#a3a3a3]" />}
+              {copiedHash ? <Check className="h-3.5 w-3.5 text-[#1e8e3e]" /> : <Copy className="h-3.5 w-3.5 text-[#4b5563] dark:text-[#cbd5e1]" />}
             </button>
           </div>
         </div>

@@ -77,7 +77,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-transparent text-[#1f2124] dark:text-[#f5f5f1] font-sans selection:bg-blue-100 dark:selection:bg-[#331114] selection:text-[#1a73e8] dark:selection:text-[#e50914] transition-colors duration-150 relative">
+    <div className="min-h-screen flex flex-col bg-transparent text-[#1f2124] dark:text-white font-sans selection:bg-blue-100 dark:selection:bg-[#331114] selection:text-[#1a73e8] dark:selection:text-[#e50914] transition-colors duration-150 relative">
       
       {/* 1. Global Command Navigation Bar */}
       <Navbar
@@ -100,8 +100,8 @@ export default function Home() {
           
           {/* Status Filter Segmented Controls */}
           <div className="flex items-center gap-1.5 overflow-x-auto">
-            <div className="flex items-center gap-1.5 text-xs text-[#5f6368] dark:text-[#a3a3a3] mr-1 hidden md:flex font-mono font-medium">
-              <Filter className="h-3.5 w-3.5 text-[#5f6368] dark:text-[#a3a3a3]" />
+            <div className="flex items-center gap-1.5 text-xs text-[#4b5563] dark:text-[#cbd5e1] mr-1 hidden md:flex font-mono font-medium">
+              <Filter className="h-3.5 w-3.5 text-[#4b5563] dark:text-[#cbd5e1]" />
               <span>FILTER:</span>
             </div>
 
@@ -119,7 +119,7 @@ export default function Home() {
                   className={`px-3.5 py-1.5 rounded-full dark:rounded-[4px] text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                     isActive
                       ? 'bg-[#1a73e8] dark:bg-[#e50914] text-white font-medium dark:font-bold shadow-material dark:shadow-none'
-                      : 'bg-[#f1f3f4] dark:bg-[#141414] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1] border border-[#e0e2e6] dark:border-[#2a2a2a] hover:bg-[#e8eaed] dark:hover:bg-[#252525]'
+                      : 'bg-[#f1f3f4] dark:bg-[#141414] text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white border border-[#e0e2e6] dark:border-[#2a2a2a] hover:bg-[#e8eaed] dark:hover:bg-[#252525]'
                   }`}
                 >
                   {f.dot && <span className={`h-1.5 w-1.5 rounded-full ${f.dot}`} />}
@@ -135,8 +135,8 @@ export default function Home() {
               onClick={() => setActiveView('map')}
               className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full dark:rounded-[3px] text-xs font-medium transition-colors cursor-pointer ${
                 activeView === 'map'
-                  ? 'bg-white dark:bg-[#1f1f1f] text-[#1f2124] dark:text-[#f5f5f1] font-semibold dark:font-bold shadow-material dark:shadow-none'
-                  : 'text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1]'
+                  ? 'bg-white dark:bg-[#1f1f1f] text-[#1f2124] dark:text-white font-semibold dark:font-bold shadow-material dark:shadow-none'
+                  : 'text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white'
               }`}
             >
               <Map className="h-3.5 w-3.5 text-[#1e8e3e] dark:text-[#e50914]" />
@@ -147,11 +147,11 @@ export default function Home() {
               onClick={() => setActiveView('table')}
               className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full dark:rounded-[3px] text-xs font-medium transition-colors cursor-pointer ${
                 activeView === 'table'
-                  ? 'bg-white dark:bg-[#1f1f1f] text-[#1f2124] dark:text-[#f5f5f1] font-semibold dark:font-bold shadow-material dark:shadow-none'
-                  : 'text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1]'
+                  ? 'bg-white dark:bg-[#1f1f1f] text-[#1f2124] dark:text-white font-semibold dark:font-bold shadow-material dark:shadow-none'
+                  : 'text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white'
               }`}
             >
-              <TableIcon className="h-3.5 w-3.5 text-[#1a73e8] dark:text-[#f5f5f1]" />
+              <TableIcon className="h-3.5 w-3.5 text-[#1a73e8] dark:text-white" />
               <span>Ledger Table</span>
             </button>
 
@@ -159,8 +159,8 @@ export default function Home() {
               onClick={() => setActiveView('redress')}
               className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full dark:rounded-[3px] text-xs font-medium transition-colors cursor-pointer ${
                 activeView === 'redress'
-                  ? 'bg-white dark:bg-[#1f1f1f] text-[#1f2124] dark:text-[#f5f5f1] font-semibold dark:font-bold shadow-material dark:shadow-none'
-                  : 'text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1]'
+                  ? 'bg-white dark:bg-[#1f1f1f] text-[#1f2124] dark:text-white font-semibold dark:font-bold shadow-material dark:shadow-none'
+                  : 'text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white'
               }`}
             >
               <Scale className="h-3.5 w-3.5 text-[#f9ab00] dark:text-[#e50914]" />
@@ -198,12 +198,12 @@ export default function Home() {
               {/* Active Basin Monitoring Stations Feed */}
               <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-4 shadow-material dark:shadow-none transition-colors duration-150">
                 <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-[#5f6368] dark:text-[#a3a3a3] font-bold">
+                  <span className="text-xs uppercase font-mono tracking-wider text-[#4b5563] dark:text-[#cbd5e1] font-bold">
                     Active River Basin Stations ({waterPoints.length})
                   </span>
                   <button
                     onClick={() => setActiveView('table')}
-                    className="text-xs text-[#1a73e8] dark:text-[#f5f5f1] hover:underline flex items-center gap-1 font-mono font-medium transition-colors cursor-pointer"
+                    className="text-xs text-[#1a73e8] dark:text-white hover:underline flex items-center gap-1 font-mono font-medium transition-colors cursor-pointer"
                   >
                     <span>View all in table</span>
                     <ChevronRight className="h-3 w-3" />
@@ -228,12 +228,12 @@ export default function Home() {
                       >
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">
-                            <p className="font-semibold text-xs text-[#1f2124] dark:text-[#f5f5f1] truncate">{pt.name}</p>
+                            <p className="font-bold text-xs sm:text-sm text-[#1f2124] dark:text-white truncate">{pt.name}</p>
                             {isCur && (
                               <span className="h-1.5 w-1.5 rounded-full bg-[#1a73e8] dark:bg-[#e50914] shrink-0" />
                             )}
                           </div>
-                          <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] truncate mt-0.5">
+                          <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] truncate mt-0.5">
                             {pt.community} • {pt.riverBasin || pt.district}
                           </p>
                         </div>
@@ -248,7 +248,7 @@ export default function Home() {
                           }`}>
                             {pt.metrics.turbidityNtu} NTU
                           </span>
-                          <span className="text-[9px] font-mono text-[#5f6368] dark:text-[#a3a3a3] block">
+                          <span className="text-[10px] font-mono text-[#4b5563] dark:text-[#cbd5e1] block">
                             {pt.upstreamMiningDistanceKm} km mine
                           </span>
                         </div>
@@ -308,13 +308,13 @@ export default function Home() {
             {/* Legal Redress Header */}
             <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-6 shadow-material dark:shadow-none">
               <div className="max-w-3xl space-y-2">
-                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-[4px] bg-amber-50 dark:bg-[#282119] text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-[#523215] font-bold">
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded-[4px] bg-amber-50 dark:bg-[#282119] text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-[#523215] font-bold">
                   STATUTORY ACCOUNTABILITY FRAMEWORK
                 </span>
-                <h3 className="text-xl font-bold tracking-tight text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-2xl dark:tracking-wide">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1f2124] dark:text-white font-sans">
                   Civic Legal Redress & Executive Mobilization Engine
                 </h3>
-                <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                   Information without statutory enforcement cannot protect Ghana’s rivers. AsuoSafi transforms verified citizen environmental audits into formal legal instruments with verifiable citations under Ghanaian constitutional and statutory law.
                 </p>
               </div>
@@ -329,10 +329,10 @@ export default function Home() {
                   <Scale className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1]">Act 522 (Water Resources)</h4>
-                  <p className="text-[11px] font-mono text-emerald-700 dark:text-[#a7f3d0] font-semibold mt-0.5">Section 24 & Section 29</p>
+                  <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">Act 522 (Water Resources)</h4>
+                  <p className="text-xs font-mono text-emerald-700 dark:text-[#a7f3d0] font-semibold mt-0.5">Section 24 & Section 29</p>
                 </div>
-                <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+                <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                   Grants statutory powers to prohibit the discharge of untreated industrial tailings, silt, or mining wash-water into national water bodies. Empowers District Assemblies to seal unlawful diversions.
                 </p>
               </div>
@@ -343,24 +343,24 @@ export default function Home() {
                   <ShieldAlert className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1]">Act 995 (Mining Amendment)</h4>
-                  <p className="text-[11px] font-mono text-amber-700 dark:text-[#fde68a] font-semibold mt-0.5">Section 99 & Section 100</p>
+                  <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">Act 995 (Mining Amendment)</h4>
+                  <p className="text-xs font-mono text-amber-700 dark:text-[#fde68a] font-semibold mt-0.5">Section 99 & Section 100</p>
                 </div>
-                <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+                <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                   Criminalizes dredging or mining within 100 meters of a water body without an EPA environmental permit. Prescribes mandatory prison sentences and confiscation of excavators to the State.
                 </p>
               </div>
 
               {/* Pillar 3: Whistleblower Protection */}
               <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-5 space-y-3 shadow-material dark:shadow-none">
-                <div className="h-9 w-9 rounded-[8px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-[#f5f5f1] border border-[#d2e3fc] dark:border-[#2a2a2a] flex items-center justify-center">
+                <div className="h-9 w-9 rounded-[8px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-white border border-[#d2e3fc] dark:border-[#2a2a2a] flex items-center justify-center">
                   <ShieldCheck className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1]">Act 720 (Whistleblower)</h4>
-                  <p className="text-[11px] font-mono text-[#1a73e8] dark:text-[#f5f5f1] font-semibold mt-0.5">Section 12 & Section 18</p>
+                  <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">Act 720 (Whistleblower)</h4>
+                  <p className="text-xs font-mono text-[#1a73e8] dark:text-[#cbd5e1] font-semibold mt-0.5">Section 12 & Section 18</p>
                 </div>
-                <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+                <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                   Guarantees full civil and criminal immunity to citizens reporting environmental degradation or public hazards to statutory authorities, protecting monitors from local cartel intimidation.
                 </p>
               </div>
@@ -370,10 +370,10 @@ export default function Home() {
             {/* Active Grievances List */}
             <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-5 space-y-4 shadow-material dark:shadow-none">
               <div className="flex items-center justify-between pb-3 border-b border-[#e0e2e6] dark:border-[#2a2a2a]">
-                <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1] dark:font-display dark:text-lg dark:tracking-wide">
+                <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">
                   Contaminated Basins Requiring Immediate Statutory Filing
                 </h4>
-                <span className="text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3] font-semibold">
+                <span className="text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1] font-semibold">
                   {waterPoints.filter(p => p.currentStatus === 'critical_toxic').length} Actions Pending
                 </span>
               </div>
@@ -386,12 +386,12 @@ export default function Home() {
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-xs text-[#1f2124] dark:text-[#f5f5f1]">{pt.name}</span>
+                        <span className="font-bold text-xs sm:text-sm text-[#1f2124] dark:text-white">{pt.name}</span>
                         <span className="text-[10px] font-mono text-red-800 dark:text-[#fca5a5] bg-red-100 dark:bg-[#3d1518] px-1.5 py-0.2 rounded-[3px] border border-red-200 dark:border-[#541e22] font-bold">
                           {pt.metrics.turbidityNtu} NTU
                         </span>
                       </div>
-                      <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] mt-0.5">
+                      <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] mt-0.5">
                         Target: District Chief Executive ({pt.district}, {pt.region} Region)
                       </p>
                     </div>
@@ -420,23 +420,23 @@ export default function Home() {
               <div className="h-8 w-8 rounded-[6px] dark:rounded-[4px] bg-emerald-50 dark:bg-[#172319] text-emerald-800 dark:text-[#a7f3d0] border border-emerald-200 dark:border-[#254228] flex items-center justify-center">
                 <Droplets className="h-4 w-4" />
               </div>
-              <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-base dark:tracking-wide">
+              <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">
                 Evidence-Based Water Peace
               </h4>
-              <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+              <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                 By substituting unverified social media rumors with decentralized, multi-witness chemical assays, AsuoSafi builds verifiable consensus between farmers, miners, and traditional councils.
               </p>
             </div>
 
             {/* Pillar 2: Pan-African Extractive Scalability */}
             <div className="bg-white dark:bg-[#1f1f1f] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-[12px] dark:rounded-[6px] p-5 space-y-2.5 shadow-material dark:shadow-none">
-              <div className="h-8 w-8 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-[#f5f5f1] border border-[#d2e3fc] dark:border-[#2a2a2a] flex items-center justify-center">
+              <div className="h-8 w-8 rounded-[6px] dark:rounded-[4px] bg-[#e8f0fe] dark:bg-[#181818] text-[#1a73e8] dark:text-white border border-[#d2e3fc] dark:border-[#2a2a2a] flex items-center justify-center">
                 <Globe2 className="h-4 w-4" />
               </div>
-              <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-base dark:tracking-wide">
+              <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">
                 Pan-African Scalability
               </h4>
-              <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+              <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                 The core ledger architecture seamlessly extends to artisanal mining basins across Africa: Katanga cobalt corridors in DR Congo, Zama Zama acid-mine drainage in South Africa, and Kadoma gold belts in Zimbabwe.
               </p>
             </div>
@@ -446,10 +446,10 @@ export default function Home() {
               <div className="h-8 w-8 rounded-[6px] dark:rounded-[4px] bg-amber-50 dark:bg-[#282119] text-amber-800 dark:text-[#fde68a] border border-amber-200 dark:border-[#523215] flex items-center justify-center">
                 <ShieldAlert className="h-4 w-4" />
               </div>
-              <h4 className="font-bold text-sm text-[#1f2124] dark:text-[#f5f5f1] font-sans dark:font-display dark:text-base dark:tracking-wide">
+              <h4 className="font-bold text-sm sm:text-base text-[#1f2124] dark:text-white font-sans">
                 Actionable Statutory Redress
               </h4>
-              <p className="text-xs text-[#5f6368] dark:text-[#a3a3a3] leading-relaxed">
+              <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] leading-relaxed">
                 1-click statutory petitions cite Ghana's Act 522 and Act 995, equipping citizens with formal legal instruments to demand prompt enforcement by District Assemblies and the EPA.
               </p>
             </div>
@@ -460,12 +460,12 @@ export default function Home() {
       </main>
 
       {/* 5. Institutional Footer */}
-      <footer className="border-t border-[#e0e2e6] dark:border-[#2a2a2a] bg-white dark:bg-[#141414] py-6 px-4 sm:px-6 text-xs text-[#5f6368] dark:text-[#a3a3a3] transition-colors duration-150">
+      <footer className="border-t border-[#e0e2e6] dark:border-[#2a2a2a] bg-white dark:bg-[#141414] py-6 px-4 sm:px-6 text-xs text-[#4b5563] dark:text-[#cbd5e1] transition-colors duration-150">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#5f6368] dark:text-[#a3a3a3]">
-            <strong className="text-[#1f2124] dark:text-[#f5f5f1]">AsuoSafi</strong> • National Extractive Water & Environmental Safety Ledger
+          <p className="text-[#4b5563] dark:text-[#cbd5e1]">
+            <strong className="text-[#1f2124] dark:text-white font-bold">AsuoSafi</strong> • National Extractive Water & Environmental Safety Ledger
           </p>
-          <p className="text-[11px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
+          <p className="text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1]">
             OSF × Andela Hackathon Capstone • Open Civic Data Standard v1.2
           </p>
         </div>

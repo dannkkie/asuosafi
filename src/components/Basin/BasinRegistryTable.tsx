@@ -123,13 +123,13 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
         
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="h-3.5 w-3.5 text-[#5f6368] dark:text-[#a3a3a3] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="h-3.5 w-3.5 text-[#4b5563] dark:text-[#cbd5e1] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search by community, river basin, or district..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-full dark:rounded-[4px] pl-9 pr-3.5 py-1.5 text-xs text-[#1f2124] dark:text-[#f5f5f1] placeholder-[#5f6368] dark:placeholder-[#a3a3a3] focus:outline-none focus:ring-1 focus:ring-[#1a73e8] dark:focus:ring-[#e50914] transition-all font-mono"
+            className="w-full bg-white dark:bg-[#141414] border border-[#e0e2e6] dark:border-[#2a2a2a] rounded-full dark:rounded-[4px] pl-9 pr-3.5 py-1.5 text-xs text-[#1f2124] dark:text-white placeholder-[#4b5563] dark:placeholder-[#94a3b8] focus:outline-none focus:ring-1 focus:ring-[#1a73e8] dark:focus:ring-[#e50914] transition-all font-sans"
           />
         </div>
 
@@ -141,10 +141,10 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
               <button
                 key={st}
                 onClick={() => setStatusFilter(st)}
-                className={`px-3.5 py-1 rounded-full dark:rounded-[3px] text-[11px] font-mono font-medium transition-all cursor-pointer ${
+                className={`px-3.5 py-1 rounded-full dark:rounded-[3px] text-xs font-mono font-medium transition-all cursor-pointer ${
                   statusFilter === st
                     ? 'bg-[#1a73e8] dark:bg-[#e50914] text-white shadow-material dark:shadow-none font-bold'
-                    : 'text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1]'
+                    : 'text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white'
                 }`}
               >
                 {st === 'all'
@@ -160,10 +160,10 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
 
           <button
             onClick={handleExportCsv}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full dark:rounded-[4px] text-xs font-mono font-medium bg-white dark:bg-[#141414] hover:bg-[#f8f9fa] dark:hover:bg-[#222222] text-[#1f2124] dark:text-[#f5f5f1] border border-[#e0e2e6] dark:border-[#2a2a2a] shadow-material dark:shadow-none transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full dark:rounded-[4px] text-xs font-mono font-medium bg-white dark:bg-[#141414] hover:bg-[#f8f9fa] dark:hover:bg-[#222222] text-[#1f2124] dark:text-white border border-[#e0e2e6] dark:border-[#2a2a2a] shadow-material dark:shadow-none transition-colors cursor-pointer"
             title="Export Ledger Dataset as CSV for journalism/research"
           >
-            <Download className="h-3.5 w-3.5 text-[#5f6368] dark:text-[#a3a3a3]" />
+            <Download className="h-3.5 w-3.5 text-[#4b5563] dark:text-[#cbd5e1]" />
             <span>Export CSV</span>
           </button>
         </div>
@@ -174,12 +174,12 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="border-b border-[#e0e2e6] dark:border-[#2a2a2a] bg-[#f8f9fa] dark:bg-[#181818] text-[#5f6368] dark:text-[#a3a3a3] text-[11px] uppercase tracking-wider font-mono font-semibold">
+            <tr className="border-b border-[#e0e2e6] dark:border-[#2a2a2a] bg-[#f8f9fa] dark:bg-[#181818] text-[#4b5563] dark:text-[#cbd5e1] text-xs uppercase tracking-wider font-mono font-semibold">
               <th className="py-3 px-4">Source / Basin</th>
               <th className="py-3 px-4">Location</th>
               <th className="py-3 px-4">Status & Signal</th>
               <th
-                className="py-3 px-4 cursor-pointer hover:text-[#1f2124] dark:hover:text-[#f5f5f1] select-none"
+                className="py-3 px-4 cursor-pointer hover:text-[#1f2124] dark:hover:text-white select-none"
                 onClick={() => {
                   if (sortField === 'turbidity') {
                     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -196,7 +196,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
               </th>
               <th className="py-3 px-4">pH Level</th>
               <th
-                className="py-3 px-4 cursor-pointer hover:text-[#1f2124] dark:hover:text-[#f5f5f1] select-none"
+                className="py-3 px-4 cursor-pointer hover:text-[#1f2124] dark:hover:text-white select-none"
                 onClick={() => {
                   if (sortField === 'miningDistance') {
                     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -231,23 +231,23 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                 >
                   {/* Source & Basin */}
                   <td className="py-3.5 px-4">
-                    <div className="font-semibold text-[#1f2124] dark:text-[#f5f5f1] flex items-center gap-1.5">
+                    <div className="font-bold text-sm text-[#1f2124] dark:text-white flex items-center gap-1.5 font-sans">
                       <span>{point.name}</span>
                       {isSelected && (
-                        <span className="text-[10px] text-[#1a73e8] dark:text-[#e50914] font-mono bg-[#e8f0fe] dark:bg-[#3d1518] px-1.5 py-0.5 rounded-full dark:rounded-[3px] border border-[#d2e3fc] dark:border-[#541e22] font-medium">
+                        <span className="text-[10px] text-[#1a73e8] dark:text-[#e50914] font-mono bg-[#e8f0fe] dark:bg-[#3d1518] px-1.5 py-0.5 rounded-full dark:rounded-[3px] border border-[#d2e3fc] dark:border-[#541e22] font-semibold">
                           Active
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3] font-mono mt-0.5">
+                    <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1] font-mono mt-0.5">
                       {point.riverBasin || 'Local Basin'} • {point.sourceType.toUpperCase()}
                     </p>
                   </td>
 
                   {/* Location */}
-                  <td className="py-3.5 px-4 text-[#1f2124] dark:text-[#f5f5f1]">
-                    <p className="font-medium">{point.community}</p>
-                    <p className="text-[11px] text-[#5f6368] dark:text-[#a3a3a3]">{point.district}, {point.region}</p>
+                  <td className="py-3.5 px-4 text-[#1f2124] dark:text-white">
+                    <p className="font-semibold text-xs sm:text-sm">{point.community}</p>
+                    <p className="text-xs text-[#4b5563] dark:text-[#cbd5e1]">{point.district}, {point.region}</p>
                   </td>
 
                   {/* Status & Signal */}
@@ -260,17 +260,17 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                         barCount={5}
                       />
                       {isCritical ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full dark:rounded-[3px] text-[10px] font-mono uppercase tracking-wide bg-red-100 dark:bg-[#3d1518] text-red-800 dark:text-[#fca5a5] border border-red-200 dark:border-[#541e22] font-semibold">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full dark:rounded-[3px] text-[11px] font-mono uppercase tracking-wide bg-red-100 dark:bg-[#3d1518] text-red-800 dark:text-[#fca5a5] border border-red-200 dark:border-[#541e22] font-bold">
                           <span className="h-1.5 w-1.5 rounded-full bg-[#d93025] dark:bg-[#e50914] animate-pulse" />
                           Critical Toxic
                         </span>
                       ) : isSafe ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full dark:rounded-[3px] text-[10px] font-mono uppercase tracking-wide bg-emerald-100 dark:bg-[#193220] text-emerald-800 dark:text-[#a7f3d0] border border-emerald-200 dark:border-[#254228] font-semibold">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full dark:rounded-[3px] text-[11px] font-mono uppercase tracking-wide bg-emerald-100 dark:bg-[#193220] text-emerald-800 dark:text-[#a7f3d0] border border-emerald-200 dark:border-[#254228] font-bold">
                           <span className="h-1.5 w-1.5 rounded-full bg-[#1e8e3e]" />
                           Potable Safe
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full dark:rounded-[3px] text-[10px] font-mono uppercase tracking-wide bg-amber-100 dark:bg-[#352516] text-amber-900 dark:text-[#fde68a] border border-amber-200 dark:border-[#523215] font-semibold">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full dark:rounded-[3px] text-[11px] font-mono uppercase tracking-wide bg-amber-100 dark:bg-[#352516] text-amber-900 dark:text-[#fde68a] border border-amber-200 dark:border-[#523215] font-bold">
                           <span className="h-1.5 w-1.5 rounded-full bg-[#f9ab00]" />
                           Caution
                         </span>
@@ -289,7 +289,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                         >
                           {point.metrics.turbidityNtu} NTU
                         </span>
-                        <span className="text-[10px] font-mono text-[#5f6368] dark:text-[#a3a3a3]">
+                        <span className="text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1]">
                           ({point.metrics.turbidityNtu > 50 ? `${Math.round(point.metrics.turbidityNtu / 5)}x WHO` : 'WHO OK'})
                         </span>
                       </div>
@@ -309,7 +309,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                   </td>
 
                   {/* pH Level */}
-                  <td className="py-3.5 px-4 font-mono text-[#1f2124] dark:text-[#f5f5f1] font-medium text-xs">
+                  <td className="py-3.5 px-4 font-mono text-[#1f2124] dark:text-white font-medium text-xs">
                     {point.metrics.phLevel}
                   </td>
 
@@ -317,7 +317,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                   <td className="py-3.5 px-4">
                     <span
                       className={`font-mono text-xs ${
-                        point.upstreamMiningDistanceKm < 1.0 ? 'text-amber-800 dark:text-amber-400 font-semibold' : 'text-[#5f6368] dark:text-[#a3a3a3]'
+                        point.upstreamMiningDistanceKm < 1.0 ? 'text-amber-800 dark:text-amber-400 font-semibold' : 'text-[#4b5563] dark:text-[#cbd5e1]'
                       }`}
                     >
                       {point.upstreamMiningDistanceKm} km
@@ -326,7 +326,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
 
                   {/* Attestations */}
                   <td className="py-3.5 px-4">
-                    <div className="flex items-center gap-1.5 text-[#1f2124] dark:text-[#f5f5f1] text-xs font-mono">
+                    <div className="flex items-center gap-1.5 text-[#1f2124] dark:text-white text-xs font-mono">
                       <ShieldCheck className="h-3.5 w-3.5 text-[#1e8e3e] dark:text-[#e50914]" />
                       <span>{point.verifiedByCount} Co-Signers</span>
                     </div>
@@ -340,7 +340,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                           onSelectWaterPoint(point);
                           onSwitchToMap();
                         }}
-                        className="p-1.5 rounded-full dark:rounded-[3px] hover:bg-[#f1f3f4] dark:hover:bg-[#2a2a2a] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1f2124] dark:hover:text-[#f5f5f1] transition-colors cursor-pointer"
+                        className="p-1.5 rounded-full dark:rounded-[3px] hover:bg-[#f1f3f4] dark:hover:bg-[#2a2a2a] text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1f2124] dark:hover:text-white transition-colors cursor-pointer"
                         title="Locate on Map"
                       >
                         <Navigation className="h-3.5 w-3.5" />
@@ -348,7 +348,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
 
                       <button
                         onClick={() => onOpenAuditTrail(point)}
-                        className="p-1.5 rounded-full dark:rounded-[3px] hover:bg-[#f1f3f4] dark:hover:bg-[#2a2a2a] text-[#5f6368] dark:text-[#a3a3a3] hover:text-[#1a73e8] dark:hover:text-[#e50914] transition-colors cursor-pointer"
+                        className="p-1.5 rounded-full dark:rounded-[3px] hover:bg-[#f1f3f4] dark:hover:bg-[#2a2a2a] text-[#4b5563] dark:text-[#cbd5e1] hover:text-[#1a73e8] dark:hover:text-[#e50914] transition-colors cursor-pointer"
                         title="View Cryptographic Audit Trail"
                       >
                         <ShieldCheck className="h-3.5 w-3.5 text-[#1a73e8] dark:text-[#e50914]" />
@@ -357,7 +357,7 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
                       {isCritical && (
                         <button
                           onClick={() => onOpenPetition(point)}
-                          className="px-2.5 py-1 rounded-full dark:rounded-[3px] bg-red-100 hover:bg-red-200 dark:bg-[#3d1518] dark:hover:bg-[#541e22] text-red-800 dark:text-[#fca5a5] border border-red-200 dark:border-[#541e22] text-[10px] font-mono font-semibold transition-colors cursor-pointer"
+                          className="px-2.5 py-1 rounded-full dark:rounded-[3px] bg-red-100 hover:bg-red-200 dark:bg-[#3d1518] dark:hover:bg-[#541e22] text-red-800 dark:text-[#fca5a5] border border-red-200 dark:border-[#541e22] text-xs font-mono font-semibold transition-colors cursor-pointer"
                           title="Generate Act 522 Legal Petition"
                         >
                           Petition
@@ -373,12 +373,12 @@ export const BasinRegistryTable: React.FC<BasinRegistryTableProps> = ({
       </div>
 
       {/* Table Footer */}
-      <div className="p-3 sm:px-5 border-t border-[#e0e2e6] dark:border-[#2a2a2a] bg-[#f8f9fa] dark:bg-[#181818] flex items-center justify-between text-xs text-[#5f6368] dark:text-[#a3a3a3]">
+      <div className="p-3 sm:px-5 border-t border-[#e0e2e6] dark:border-[#2a2a2a] bg-[#f8f9fa] dark:bg-[#181818] flex items-center justify-between text-xs text-[#4b5563] dark:text-[#cbd5e1]">
         <p>
-          Displaying <span className="text-[#1f2124] dark:text-[#f5f5f1] font-mono font-semibold">{filteredAndSortedPoints.length}</span> of{' '}
-          <span className="text-[#1f2124] dark:text-[#f5f5f1] font-mono font-semibold">{waterPoints.length}</span> monitored water points
+          Displaying <span className="text-[#1f2124] dark:text-white font-mono font-semibold">{filteredAndSortedPoints.length}</span> of{' '}
+          <span className="text-[#1f2124] dark:text-white font-mono font-semibold">{waterPoints.length}</span> monitored water points
         </p>
-        <span className="text-[11px] font-mono text-[#5f6368] dark:text-[#a3a3a3] hidden sm:inline">
+        <span className="text-xs font-mono text-[#4b5563] dark:text-[#cbd5e1] hidden sm:inline">
           SHA-256 Ledger Integrity Verified
         </span>
       </div>
