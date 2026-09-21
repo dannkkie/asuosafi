@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { WaterPoint, MiningConcession } from '@/types';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -22,8 +22,10 @@ export const WaterMap: React.FC<WaterMapProps> = ({
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
+  const tileLayerRef = useRef<L.TileLayer | null>(null);
   const markersRef = useRef<{ [id: string]: L.Marker }>({});
   const concessionLayersRef = useRef<L.LayerGroup | null>(null);
+  const [mapType, setMapType] = useState<'streets' | 'satellite'>('streets');
 
   // Initialize Map
   useEffect(() => {
@@ -41,12 +43,13 @@ export const WaterMap: React.FC<WaterMapProps> = ({
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // High quality OpenStreetMap carto tile layer
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+    // 100% Free, Open-Source & Watermark-Free OpenStreetMap Layer
+    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(map);
 
+    tileLayerRef.current = tileLayer;
     mapInstanceRef.current = map;
     concessionLayersRef.current = L.layerGroup().addTo(map);
 
@@ -55,6 +58,31 @@ export const WaterMap: React.FC<WaterMapProps> = ({
       mapInstanceRef.current = null;
     };
   }, []);
+
+  // Handle Map Type (Streets vs Satellite)
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    if (tileLayerRef.current) {
+      map.removeLayer(tileLayerRef.current);
+    }
+
+    if (mapType === 'satellite') {
+      tileLayerRef.current = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        {
+          attribution: '&copy; Esri World Imagery &mdash; Source: Esri, Maxar, Earthstar Geographics',
+          maxZoom: 19,
+        }
+      ).addTo(map);
+    } else {
+      tileLayerRef.current = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+      }).addTo(map);
+    }
+  }, [mapType]);
 
   // Update Markers
   useEffect(() => {
@@ -152,6 +180,30 @@ export const WaterMap: React.FC<WaterMapProps> = ({
     <div className="relative w-full h-full min-h-[420px] rounded-2xl overflow-hidden border border-slate-800 shadow-xl bg-slate-950">
       <div ref={mapContainerRef} className="w-full h-full" />
       
+      {/* Map Type Switcher (Streets vs Satellite) */}
+      <div className="absolute top-4 right-4 z-20 flex items-center bg-slate-900/95 backdrop-blur-md border border-slate-700/80 p-1 rounded-xl shadow-xl">
+        <button
+          onClick={() => setMapType('streets')}
+          className={`px-3 py-1 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${
+            mapType === 'streets'
+              ? 'bg-emerald-600 text-white shadow-sm'
+              : 'text-slate-400 hover:text-white'
+          }`}
+        >
+          Street Map
+        </button>
+        <button
+          onClick={() => setMapType('satellite')}
+          className={`px-3 py-1 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${
+            mapType === 'satellite'
+              ? 'bg-emerald-600 text-white shadow-sm'
+              : 'text-slate-400 hover:text-white'
+          }`}
+        >
+          Satellite
+        </button>
+      </div>
+
       {/* Map Overlay Legend */}
       <div className="absolute bottom-4 left-4 z-20 bg-slate-900/90 backdrop-blur-md border border-slate-800 p-3 rounded-xl shadow-lg text-[11px] text-white flex flex-col gap-1.5">
         <span className="font-extrabold uppercase tracking-wider text-slate-400 text-[9px]">
