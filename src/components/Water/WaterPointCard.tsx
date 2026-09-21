@@ -11,9 +11,14 @@ import {
   Copy,
   Check,
   ShieldCheck,
+  Activity,
+  Sparkles,
+  TrendingUp,
+  TrendingDown
 } from 'lucide-react';
 import { WaterPoint, SupportedLanguage } from '@/types';
 import { TRANSLATIONS } from '@/utils/translations';
+import { BarcodeSignalMeter } from '@/components/UI/BarcodeSignalMeter';
 
 interface WaterPointCardProps {
   waterPoint: WaterPoint;
@@ -38,6 +43,18 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
   // Synthetic cryptographic mock hash for quick demonstration
   const mockSha256 = `0x8f3b4c1298da5e149afbf4c8996fb92427ae41e4649b934ca495991b7852${waterPoint.id.slice(-4)}`;
 
+  // Synthetic 7-audit telemetry history (simulating real sensor recordings)
+  const currentNtu = waterPoint.metrics.turbidityNtu;
+  const historyAudits = [
+    { day: 'D-12', ntu: Math.max(3, Math.round(currentNtu * (isToxic ? 0.45 : 0.95))) },
+    { day: 'D-10', ntu: Math.max(4, Math.round(currentNtu * (isToxic ? 0.60 : 1.05))) },
+    { day: 'D-8',  ntu: Math.max(3, Math.round(currentNtu * (isToxic ? 0.72 : 0.90))) },
+    { day: 'D-6',  ntu: Math.max(4, Math.round(currentNtu * (isToxic ? 0.85 : 1.10))) },
+    { day: 'D-4',  ntu: Math.max(3, Math.round(currentNtu * (isToxic ? 0.78 : 0.98))) },
+    { day: 'D-2',  ntu: Math.max(4, Math.round(currentNtu * (isToxic ? 0.92 : 1.02))) },
+    { day: 'Latest', ntu: currentNtu },
+  ];
+
   const handleCopyHash = () => {
     navigator.clipboard.writeText(mockSha256);
     setCopiedHash(true);
@@ -61,8 +78,14 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           </span>
         </div>
 
-        {/* Hazard Level Badge */}
-        <div className="flex items-center gap-1.5">
+        {/* Hazard Level Badge & Barcode Signal */}
+        <div className="flex items-center gap-2">
+          <BarcodeSignalMeter
+            score={isSafe ? 5 : isToxic ? 1 : 3}
+            status={isSafe ? 'safe' : isToxic ? 'critical' : 'caution'}
+            height={14}
+          />
+
           {isToxic ? (
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-red-100 dark:bg-red-950/70 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800/60 font-semibold">
               <span className="h-1.5 w-1.5 rounded-full bg-red-600 dark:bg-red-400" />
@@ -83,7 +106,7 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
       </div>
 
       {/* Main Content Area */}
-      <div className="p-5 space-y-5">
+      <div className="p-5 space-y-4">
         
         {/* Title & Geospatial Coordinates */}
         <div>
@@ -195,6 +218,66 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
             </span>
           </div>
 
+        </div>
+
+        {/* 7-Audit Historical Telemetry Spectrum & AI Plume Risk Forecast */}
+        <div className="bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-800 dark:text-slate-200">
+              <Activity className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
+              <span>14-Day Turbidity History & AI Threat Trend</span>
+            </div>
+            <div className="flex items-center gap-1 text-[10px] font-mono font-semibold text-slate-500 dark:text-slate-400">
+              {isToxic ? (
+                <span className="text-red-600 dark:text-red-400 flex items-center gap-0.5 font-bold">
+                  <TrendingUp className="h-3 w-3" /> +55% Silt Runoff
+                </span>
+              ) : (
+                <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5 font-bold">
+                  <TrendingDown className="h-3 w-3" /> Stable &lt;5 NTU
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Equalizer Micro-Bars */}
+          <div className="flex items-end justify-between gap-1.5 h-12 pt-1 px-1">
+            {historyAudits.map((item, idx) => {
+              const barHeightPercent = Math.max(12, Math.min(100, (item.ntu / 1000) * 100));
+              const isDanger = item.ntu > 50;
+              return (
+                <div key={idx} className="flex-1 flex flex-col items-center gap-1 group relative">
+                  <div
+                    className={`w-full rounded-t transition-all ${
+                      isDanger ? 'bg-red-500/80 dark:bg-red-500' : 'bg-emerald-500/80 dark:bg-emerald-400'
+                    }`}
+                    style={{ height: `${barHeightPercent}%` }}
+                  />
+                  <span className="text-[8px] font-mono text-slate-400 dark:text-slate-500 truncate w-full text-center">
+                    {item.day}
+                  </span>
+
+                  {/* Micro Tooltip */}
+                  <div className="absolute bottom-full mb-1 hidden group-hover:flex flex-col items-center z-20 pointer-events-none">
+                    <div className="bg-slate-900 text-white text-[9px] font-mono rounded px-1.5 py-0.5 whitespace-nowrap shadow-md">
+                      {item.ntu} NTU
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* AI Plume Forecast Pill */}
+          <div className="flex items-center gap-2 p-2 rounded-lg bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-750 text-[11px]">
+            <Sparkles className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
+            <p className="text-slate-600 dark:text-slate-300 leading-snug">
+              <strong className="text-slate-900 dark:text-white font-semibold">AI Predictive Dispersion: </strong>
+              {isToxic
+                ? `Heavy upstream Changfa wash-water presents elevated contamination across downstream intake zones for 48h.`
+                : `Protected aquifer parameters verify zero heavy-metal percolation from distal mining corridors.`}
+            </p>
+          </div>
         </div>
 
         {/* Multi-Witness Cryptographic Attestation Block */}
