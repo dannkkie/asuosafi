@@ -45,18 +45,18 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm text-slate-900 transition-all">
+    <div className="bg-white dark:bg-[#121927] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm text-slate-900 dark:text-slate-100 transition-all">
       
       {/* Top Header / Hazard Status Strip */}
       <div className={`px-5 py-3.5 border-b flex items-center justify-between gap-3 ${
         isToxic
-          ? 'bg-red-50/70 border-red-200'
+          ? 'bg-red-50/70 dark:bg-red-950/30 border-red-200 dark:border-red-900/40'
           : isSafe
-          ? 'bg-emerald-50/70 border-emerald-200'
-          : 'bg-amber-50/70 border-amber-200'
+          ? 'bg-emerald-50/70 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/40'
+          : 'bg-amber-50/70 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/40'
       }`}>
         <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 font-semibold">
+          <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-semibold">
             {waterPoint.sourceType.toUpperCase()} • {waterPoint.riverBasin || 'LOCAL BASIN'}
           </span>
         </div>
@@ -64,18 +64,18 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         {/* Hazard Level Badge */}
         <div className="flex items-center gap-1.5">
           {isToxic ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-red-100 text-red-800 border border-red-200 font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-red-100 dark:bg-red-950/70 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800/60 font-semibold">
+              <span className="h-1.5 w-1.5 rounded-full bg-red-600 dark:bg-red-400" />
               WHO Class 4: Critical Hazard
             </span>
           ) : isSafe ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-emerald-100 text-emerald-800 border border-emerald-200 font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 font-semibold">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
               WHO Class 1: Potable
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-amber-100 text-amber-800 border border-amber-200 font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono uppercase tracking-wide bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 font-semibold">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-600 dark:bg-amber-400" />
               Caution / Turbid
             </span>
           )}
@@ -87,16 +87,16 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         
         {/* Title & Geospatial Coordinates */}
         <div>
-          <h3 className="text-xl font-bold tracking-tight text-slate-900 font-sans">
+          <h3 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white font-sans">
             {waterPoint.name}
           </h3>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-slate-600">
-            <span className="flex items-center gap-1 font-medium text-slate-700">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-slate-600 dark:text-slate-400">
+            <span className="flex items-center gap-1 font-medium text-slate-700 dark:text-slate-300">
               <MapPin className="h-3.5 w-3.5 text-slate-400" />
               {waterPoint.community}, {waterPoint.district} ({waterPoint.region} Region)
             </span>
-            <span className="text-slate-300">•</span>
-            <span className="font-mono text-slate-500">
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <span className="font-mono text-slate-500 dark:text-slate-400">
               {waterPoint.coordinates.latitude.toFixed(4)}° N, {Math.abs(waterPoint.coordinates.longitude).toFixed(4)}° W
             </span>
           </div>
@@ -104,21 +104,21 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
 
         {/* Critical Contamination Warning Notice if Toxic */}
         {isToxic && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3.5 flex items-start gap-3">
-            <AlertTriangle className="h-5 w-5 text-red-700 shrink-0 mt-0.5" />
+          <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/40 rounded-lg p-3.5 flex items-start gap-3">
+            <AlertTriangle className="h-5 w-5 text-red-700 dark:text-red-400 shrink-0 mt-0.5" />
             <div className="space-y-0.5">
-              <p className="text-xs font-bold text-red-900 uppercase tracking-wide">
+              <p className="text-xs font-bold text-red-900 dark:text-red-200 uppercase tracking-wide">
                 Severe Galamsey Silt & Chemical Danger Detected
               </p>
-              <p className="text-xs text-red-800/90 leading-relaxed">
-                Turbidity exceeds WHO drinking safety limits by <strong className="text-red-950 font-bold">{Math.round(waterPoint.metrics.turbidityNtu / 5)}x</strong>. Heavy silt, mercury, and cyanide wash-water render this source unsafe for drinking, domestic cooking, or bathing.
+              <p className="text-xs text-red-800/90 dark:text-red-300/90 leading-relaxed">
+                Turbidity exceeds WHO drinking safety limits by <strong className="text-red-950 dark:text-white font-bold">{Math.round(waterPoint.metrics.turbidityNtu / 5)}x</strong>. Heavy silt, mercury, and cyanide wash-water render this source unsafe for drinking, domestic cooking, or bathing.
               </p>
             </div>
           </div>
         )}
 
         {/* Narrative Description */}
-        <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-200">
+        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
           {waterPoint.description}
         </p>
 
@@ -126,16 +126,16 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           
           {/* Metric 1: Turbidity Gauge */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold block">
+          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg p-3">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-semibold block">
               Turbidity (NTU)
             </span>
             <span className={`text-xl font-bold font-mono tabular-nums block mt-0.5 ${
-              waterPoint.metrics.turbidityNtu > 50 ? 'text-red-700' : 'text-emerald-700'
+              waterPoint.metrics.turbidityNtu > 50 ? 'text-red-700 dark:text-red-400' : 'text-emerald-700 dark:text-emerald-400'
             }`}>
               {waterPoint.metrics.turbidityNtu}
             </span>
-            <div className="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
+            <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-2 overflow-hidden">
               <div
                 className={`h-full ${
                   waterPoint.metrics.turbidityNtu > 50 ? 'bg-red-600' : 'bg-emerald-600'
@@ -143,18 +143,18 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
                 style={{ width: `${Math.min(100, (waterPoint.metrics.turbidityNtu / 1000) * 100)}%` }}
               />
             </div>
-            <span className="text-[9px] text-slate-500 font-mono mt-1 block">WHO Safe: &lt;5 NTU</span>
+            <span className="text-[9px] text-slate-500 dark:text-slate-400 font-mono mt-1 block">WHO Safe: &lt;5 NTU</span>
           </div>
 
           {/* Metric 2: pH Acidity Strip */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold block">
+          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg p-3">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-semibold block">
               pH Acidity
             </span>
-            <span className="text-xl font-bold font-mono tabular-nums text-slate-900 block mt-0.5">
+            <span className="text-xl font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100 block mt-0.5">
               {waterPoint.metrics.phLevel}
             </span>
-            <div className="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
+            <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-2 overflow-hidden">
               <div
                 className={`h-full ${
                   waterPoint.metrics.phLevel < 6.5 ? 'bg-amber-600' : 'bg-emerald-600'
@@ -162,35 +162,35 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
                 style={{ width: `${(waterPoint.metrics.phLevel / 14) * 100}%` }}
               />
             </div>
-            <span className="text-[9px] text-slate-500 font-mono mt-1 block">Standard: 6.5–8.5</span>
+            <span className="text-[9px] text-slate-500 dark:text-slate-400 font-mono mt-1 block">Standard: 6.5–8.5</span>
           </div>
 
           {/* Metric 3: Upstream Mining Threat */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold block">
+          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg p-3">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-semibold block">
               Mining Proximity
             </span>
             <span className={`text-xl font-bold font-mono tabular-nums block mt-0.5 ${
-              waterPoint.upstreamMiningDistanceKm < 1.0 ? 'text-amber-800' : 'text-slate-800'
+              waterPoint.upstreamMiningDistanceKm < 1.0 ? 'text-amber-800 dark:text-amber-300' : 'text-slate-800 dark:text-slate-200'
             }`}>
               {waterPoint.upstreamMiningDistanceKm} km
             </span>
-            <span className="text-[9px] text-slate-500 mt-2 block font-medium">
+            <span className="text-[9px] text-slate-500 dark:text-slate-400 mt-2 block font-medium">
               {waterPoint.upstreamMiningDistanceKm < 1.0 ? '⚠️ Active Upstream' : 'Distal Basin'}
             </span>
           </div>
 
           {/* Metric 4: Chemical Residue Risk */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold block">
+          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg p-3">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 font-semibold block">
               Chemical Residue
             </span>
             <span className={`text-sm font-bold block mt-1.5 ${
-              waterPoint.metrics.chemicalRiskDetected ? 'text-red-700' : 'text-emerald-700'
+              waterPoint.metrics.chemicalRiskDetected ? 'text-red-700 dark:text-red-400' : 'text-emerald-700 dark:text-emerald-400'
             }`}>
               {waterPoint.metrics.chemicalRiskDetected ? 'Hazard Detected' : 'Clear / Negligible'}
             </span>
-            <span className="text-[9px] text-slate-500 mt-2 block font-mono">
+            <span className="text-[9px] text-slate-500 dark:text-slate-400 mt-2 block font-mono">
               {waterPoint.metrics.visualColor.replace('_', ' ').toUpperCase()}
             </span>
           </div>
@@ -198,19 +198,19 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
         </div>
 
         {/* Multi-Witness Cryptographic Attestation Block */}
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-3.5 space-y-2.5">
+        <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-lg p-3.5 space-y-2.5">
           <div className="flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 text-slate-700">
-              <ShieldCheck className="h-4 w-4 text-emerald-600" />
+            <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+              <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               <span className="font-semibold">{waterPoint.verifiedByCount} Verified Co-Signatories</span>
-              <span className="text-[10px] font-mono text-slate-500">
+              <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
                 ({waterPoint.verificationBadge.replace(/_/g, ' ')})
               </span>
             </div>
 
             <button
               onClick={() => onOpenAuditTrail(waterPoint)}
-              className="text-slate-700 hover:text-slate-900 text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+              className="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>{t.inspectAuditTrail}</span>
               <ExternalLink className="h-3 w-3" />
@@ -218,17 +218,17 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           </div>
 
           {/* Cryptographic SHA-256 Hash Display */}
-          <div className="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded px-2.5 py-1.5 text-[11px] font-mono text-slate-600">
+          <div className="flex items-center justify-between gap-2 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-750 rounded px-2.5 py-1.5 text-[11px] font-mono text-slate-600 dark:text-slate-400">
             <div className="flex items-center gap-1.5 truncate">
-              <span className="text-slate-400">SHA-256:</span>
-              <span className="truncate text-slate-700 font-medium">{mockSha256}</span>
+              <span className="text-slate-400 dark:text-slate-500">SHA-256:</span>
+              <span className="truncate text-slate-700 dark:text-slate-300 font-medium">{mockSha256}</span>
             </div>
             <button
               onClick={handleCopyHash}
-              className="p-1 hover:text-slate-900 transition-colors shrink-0 cursor-pointer"
+              className="p-1 hover:text-slate-900 dark:hover:text-white transition-colors shrink-0 cursor-pointer"
               title="Copy cryptographic audit hash"
             >
-              {copiedHash ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5 text-slate-400" />}
+              {copiedHash ? <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />}
             </button>
           </div>
         </div>
@@ -256,8 +256,8 @@ export const WaterPointCard: React.FC<WaterPointCardProps> = ({
           )}
 
           {isSafe && (
-            <div className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-xs font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 font-semibold">
-              <CheckCircle className="h-4 w-4 text-emerald-600" />
+            <div className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-xs font-mono text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 font-semibold">
+              <CheckCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               <span>Certified Potable Under Ghana Water Company Standards</span>
             </div>
           )}

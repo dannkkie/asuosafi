@@ -122,25 +122,25 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-white border border-slate-200 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-[#121927] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 dark:text-slate-100 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
-        <div className="bg-slate-50 border-b border-slate-200 p-4 sm:p-5 flex items-center justify-between">
+        <div className="bg-slate-50 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 p-4 sm:p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-sky-50 text-sky-800 border border-sky-200">
+            <div className="p-2.5 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800/60">
               <Bot className="h-5 w-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-base sm:text-lg text-slate-900 font-sans">
+                <h3 className="font-bold text-base sm:text-lg text-slate-900 dark:text-white font-sans">
                   AI Statutory & Environmental Counsel
                 </h3>
-                <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1 font-bold">
+                <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-1 font-bold">
                   <Sparkles className="h-3 w-3" />
                   Statutory Law Engine
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Grounded in Ghana Water Act (522), Mining Act (995) & WHO Guidelines
               </p>
             </div>
@@ -148,14 +148,14 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Message Thread */}
-        <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-3.5 bg-white text-xs sm:text-sm">
+        <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-3.5 bg-white dark:bg-[#121927] text-xs sm:text-sm">
           {messages.map((msg, i) => (
             <div
               key={i}
@@ -166,16 +166,16 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
               <div
                 className={`max-w-[88%] rounded-2xl p-3.5 leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-slate-900 text-white font-medium rounded-br-none shadow-sm'
-                    : 'bg-slate-50 border border-slate-200 text-slate-800 rounded-bl-none shadow-sm'
+                    ? 'bg-slate-900 dark:bg-emerald-700 text-white font-medium rounded-br-none shadow-sm'
+                    : 'bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-750 text-slate-800 dark:text-slate-200 rounded-bl-none shadow-sm'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{msg.content}</div>
 
                 {msg.role === 'assistant' && (
-                  <div className="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between gap-2 text-[10px] text-slate-500 font-mono">
+                  <div className="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2 text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                     <span className="flex items-center gap-1">
-                      <ShieldCheck className="h-3 w-3 text-emerald-600" />
+                      <ShieldCheck className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
                       {msg.source === 'gemini-1.5-flash'
                         ? 'Google Gemini 1.5 Grounded Engine'
                         : 'Ghana Environmental Law Knowledge Base'}
@@ -183,11 +183,11 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
 
                     <button
                       onClick={() => handleSpeak(msg.content, i)}
-                      className="text-slate-700 hover:text-slate-900 font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                      className="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-semibold flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       {speakingIndex === i ? (
                         <>
-                          <VolumeX className="h-3 w-3 text-red-700" />
+                          <VolumeX className="h-3 w-3 text-red-700 dark:text-red-400" />
                           <span>Stop</span>
                         </>
                       ) : (
@@ -204,21 +204,21 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
           ))}
 
           {loading && (
-            <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 p-3 rounded-lg max-w-[220px]">
-              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+            <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-3 rounded-lg max-w-[220px]">
+              <div className="h-2 w-2 rounded-full bg-emerald-600 dark:bg-emerald-400 animate-pulse" />
               <span>Analyzing Ghanaian environmental statutes...</span>
             </div>
           )}
         </div>
 
         {/* Quick Suggestion Chips */}
-        <div className="bg-slate-50 border-t border-slate-200 p-2.5 overflow-x-auto flex items-center gap-2">
+        <div className="bg-slate-50 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 p-2.5 overflow-x-auto flex items-center gap-2">
           {quickPrompts.map((p, idx) => (
             <button
               key={idx}
               type="button"
               onClick={() => handleSendQuestion(p.text)}
-              className="text-[11px] whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 shadow-sm transition-colors cursor-pointer shrink-0 font-medium"
+              className="text-[11px] whitespace-nowrap bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm transition-colors cursor-pointer shrink-0 font-medium"
             >
               {p.label}
             </button>
@@ -226,7 +226,7 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
         </div>
 
         {/* Input Bar */}
-        <div className="bg-white border-t border-slate-200 p-3 sm:p-4">
+        <div className="bg-white dark:bg-[#121927] border-t border-slate-200 dark:border-slate-800 p-3 sm:p-4">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -239,13 +239,13 @@ export const AiAdvisorModal: React.FC<AiAdvisorModalProps> = ({
               value={inputQuestion}
               onChange={(e) => setInputQuestion(e.target.value)}
               placeholder="Ask about water safety, galamsey penalties, or reporting rights..."
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-slate-400 focus:bg-white transition-colors"
+              className="flex-1 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg px-3.5 py-2 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-slate-400 dark:focus:border-slate-500 focus:bg-white dark:focus:bg-slate-800 transition-colors"
             />
 
             <button
               type="submit"
               disabled={loading || !inputQuestion.trim()}
-              className="p-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white shadow-sm transition-all cursor-pointer"
+              className="p-2.5 rounded-lg bg-slate-900 dark:bg-emerald-700 hover:bg-slate-800 dark:hover:bg-emerald-600 disabled:opacity-50 text-white shadow-sm transition-all cursor-pointer"
             >
               <Send className="h-4 w-4" />
             </button>

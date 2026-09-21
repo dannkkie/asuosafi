@@ -204,7 +204,7 @@ export const WaterMap: React.FC<WaterMapProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full min-h-[440px] rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
+    <div className="relative w-full h-full min-h-[440px] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-100 dark:bg-slate-900">
       <div ref={mapContainerRef} className="w-full h-full" />
       
       {/* Top Floating Controls Bar */}
@@ -213,20 +213,20 @@ export const WaterMap: React.FC<WaterMapProps> = ({
         {/* Reset View Button */}
         <button
           onClick={handleResetView}
-          className="p-2 rounded-lg bg-white/95 backdrop-blur border border-slate-200 text-slate-700 hover:text-slate-900 shadow-sm transition-colors cursor-pointer"
+          className="p-2 rounded-lg bg-white/95 dark:bg-[#121927]/95 backdrop-blur border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white shadow-sm transition-colors cursor-pointer"
           title="Reset to Ghana Mining Belt"
         >
           <Crosshair className="h-4 w-4" />
         </button>
 
         {/* Basemap Switcher Segmented Control */}
-        <div className="flex items-center bg-white/95 backdrop-blur border border-slate-200 p-1 rounded-lg shadow-sm">
+        <div className="flex items-center bg-white/95 dark:bg-[#121927]/95 backdrop-blur border border-slate-200 dark:border-slate-700 p-1 rounded-lg shadow-sm">
           <button
             onClick={() => setMapType('streets')}
             className={`px-2.5 py-1 text-[11px] font-medium rounded transition-colors cursor-pointer ${
               mapType === 'streets'
-                ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-slate-900 dark:bg-emerald-700 text-white font-semibold shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Street
@@ -235,8 +235,8 @@ export const WaterMap: React.FC<WaterMapProps> = ({
             onClick={() => setMapType('satellite')}
             className={`px-2.5 py-1 text-[11px] font-medium rounded transition-colors cursor-pointer ${
               mapType === 'satellite'
-                ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-slate-900 dark:bg-emerald-700 text-white font-semibold shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Satellite
@@ -247,40 +247,40 @@ export const WaterMap: React.FC<WaterMapProps> = ({
 
       {/* Floating Coordinate Telemetry HUD (Bottom Right) */}
       {selectedWaterPoint && (
-        <div className="absolute bottom-3 right-3 z-20 bg-white/95 backdrop-blur border border-slate-200 px-2.5 py-1.5 rounded-lg shadow-sm text-[10px] font-mono text-slate-600 hidden sm:flex items-center gap-2">
-          <span className="text-slate-400">LOC:</span>
-          <span className="text-slate-800 font-semibold">
+        <div className="absolute bottom-3 right-3 z-20 bg-white/95 dark:bg-[#121927]/95 backdrop-blur border border-slate-200 dark:border-slate-700 px-2.5 py-1.5 rounded-lg shadow-sm text-[10px] font-mono text-slate-600 dark:text-slate-400 hidden sm:flex items-center gap-2">
+          <span className="text-slate-400 dark:text-slate-500">LOC:</span>
+          <span className="text-slate-800 dark:text-slate-200 font-semibold">
             {selectedWaterPoint.coordinates.latitude.toFixed(4)}°N, {Math.abs(selectedWaterPoint.coordinates.longitude).toFixed(4)}°W
           </span>
         </div>
       )}
 
       {/* Bottom Floating Legend Drawer */}
-      <div className="absolute bottom-3 left-3 z-20 bg-white/95 backdrop-blur border border-slate-200 p-3 rounded-lg shadow-md text-xs text-slate-700 space-y-1.5 max-w-[260px]">
-        <div className="flex items-center justify-between pb-1 border-b border-slate-200">
-          <span className="font-mono text-[10px] uppercase tracking-wider text-slate-500 font-bold">
+      <div className="absolute bottom-3 left-3 z-20 bg-white/95 dark:bg-[#121927]/95 backdrop-blur border border-slate-200 dark:border-slate-700 p-3 rounded-lg shadow-md text-xs text-slate-700 dark:text-slate-300 space-y-1.5 max-w-[260px]">
+        <div className="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-700">
+          <span className="font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
             Ledger Ground Status
           </span>
         </div>
         
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-700 ring-2 ring-red-100" />
+          <span className="h-2.5 w-2.5 rounded-full bg-red-700 ring-2 ring-red-100 dark:ring-red-950" />
           <span>Critical Hazard / Toxic Silt (&gt;50 NTU)</span>
         </div>
         
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-600 ring-2 ring-amber-100" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-600 ring-2 ring-amber-100 dark:ring-amber-950" />
           <span>Caution / High Turbidity</span>
         </div>
         
         <div className="flex items-center gap-2 text-[11px]">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-700 ring-2 ring-emerald-100" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-700 ring-2 ring-emerald-100 dark:ring-emerald-950" />
           <span>Potable Tested Source (&lt;5 NTU)</span>
         </div>
 
         {showConcessions && (
-          <div className="flex items-center gap-2 pt-1 border-t border-slate-200 text-[10px] text-red-700 font-mono font-medium">
-            <span className="h-2 w-3 border border-dashed border-red-600 bg-red-100" />
+          <div className="flex items-center gap-2 pt-1 border-t border-slate-200 dark:border-slate-700 text-[10px] text-red-700 dark:text-red-400 font-mono font-medium">
+            <span className="h-2 w-3 border border-dashed border-red-600 dark:border-red-500 bg-red-100 dark:bg-red-950" />
             <span>Galamsey River Buffer Encroachment</span>
           </div>
         )}

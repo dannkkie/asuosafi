@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/Theme/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "AsuoSafi — Community Water Safety & Mining Concession Ledger",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#059669",
+  themeColor: "#15803d",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -25,9 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full bg-slate-950 text-slate-100">
-      <body className="min-h-full flex flex-col font-sans antialiased selection:bg-emerald-500 selection:text-white">
-        {children}
+    <html lang="en" suppressHydrationWarning className="h-full">
+      <body className="min-h-full flex flex-col font-sans antialiased bg-[#F8FAFC] dark:bg-[#0B0F17] text-slate-900 dark:text-slate-100 transition-colors duration-150">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
