@@ -37,3 +37,5 @@ next-env.d.ts
 # Hackathon internal dossier and implementation documents
 ASUOSAFI_IMPLEMENTATION_PLAN.md
 SUBMISSION_DOSSIER.md
+*.pptx
+PITCH_DECK.html
